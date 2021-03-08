@@ -15,7 +15,7 @@ public class ImageDao implements Dao<Image> {
 
   public ImageDao() {
     // placez une image test.jpg dans le dossier "src/main/resources" du projet
-    final ClassPathResource imgFile = new ClassPathResource("test.jpeg");
+    final ClassPathResource imgFile = new ClassPathResource("images/test.jpeg");
     byte[] fileContent;
     try {
       fileContent = Files.readAllBytes(imgFile.getFile().toPath());
