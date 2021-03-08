@@ -1,0 +1,34 @@
+Part I (backend)
+
+Besoin 1 => innit images
+            T.U.
+            
+Besoin 2 => terminaison GET /images  paufiner les données
+
+Besoin 3 => Part III
+
+Part II (backend)
+
+Besoin 4 => GET /images -> T.U.
+
+Besoin 5 => POST /images -> T.U.
+
+Besoin 6 => GET /images/{id} -> T.U.
+
+Besoin 7 => DELETE /images/{id} -> T.U.
+
+Besoin 8 => GET /images/{is}?opt + T.U.
+
+Part III (frontend)
+
+Beson 9 => galerie ou caroussel
+
+Besoin 10 => view img spec + opt
+
+Besoin 11 => download
+
+Besoin 12 => upload
+
+Besoin 13 => delete 
+
+Part VI (lib)
