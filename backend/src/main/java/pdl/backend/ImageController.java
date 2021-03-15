@@ -4,6 +4,11 @@ import java.io.IOException;
 
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+import java.awt.image.BufferedImage;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -81,7 +86,22 @@ public class ImageController {
       n.put("name", img.getName());
 
       //taille de l'image
-      n.put("size", img.getData().length);
+      int height = 0;
+      int width = 0;
+      InputStream in = new ByteArrayInputStream(img.getData());
+
+      BufferedImage buf;
+      try {
+        buf = ImageIO.read(in);
+        height = buf.getHeight();
+        width = buf.getWidth();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
+      n.put("size", height*width);
+
+      //n.put("poids", img.getData().length);
 
       //format
       n.put("format", FilenameUtils.getExtension(img.getName()));
@@ -126,7 +146,7 @@ public class ImageController {
         e.printStackTrace();
       }
 
-      n.put("size1", height*width);
+      n.put("size", height*width);
 */
 
 /*
@@ -145,10 +165,3 @@ import net.imglib2.view.Views;
 import net.imglib2.view.IntervalView;
 import net.imglib2.loops.LoopBuilder;
 */
-
-//import javax.imageio.ImageIO;
-
-//import java.io.InputStream;
-
-//import java.awt.image.BufferedImage;
-//import java.io.ByteArrayInputStream;
