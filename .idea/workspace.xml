@@ -28,15 +28,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1 - front besoin 8">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Peepshow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Peepshow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/http-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/http-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/importImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/importImg.vue" afterDir="false" />
-    </list>
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1 - front besoin 8" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,6 +162,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.serve" />
+        <item itemvalue="npm.serve" />
+        <item itemvalue="npm.serve" />
       </list>
     </recent_temporary>
   </component>
@@ -235,7 +229,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="front" />
+                        <option value="besoin_10" />
                       </list>
                     </value>
                   </entry>
