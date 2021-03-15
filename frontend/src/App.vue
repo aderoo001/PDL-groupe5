@@ -1,9 +1,5 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <Home/>
 </template>
 
 <style>
@@ -28,3 +24,9 @@
   color: #42b983;
 }
 </style>
+<script>
+import Home from "@/views/Home";
+export default {
+  components: {Home}
+}
+</script>
