@@ -26,13 +26,13 @@ export default class HttpApi {
   postImage(file) {
     let formData = new FormData();
     formData.append('file', file);
+    console.log(file);
 
     axios.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-        .then(value => {
-          console.log(value.status);
+        .then(() => {
         })
         .catch(error => {
-          console.log(error.status);
+            this.error = error;
         });
   }
 

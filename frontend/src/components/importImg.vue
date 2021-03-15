@@ -11,7 +11,7 @@
         <input id="file" ref="file" type="file" v-on:change="handleFileUpload"/>
       </label>
       <div class="imp-btn">
-        <button v-on:click="uploadImge">Importer</button>
+        <button v-on:click="uploadImg">Importer</button>
       </div>
     </div>
   </div>
@@ -22,7 +22,6 @@ export default {
   name: "importImg",
   data() {
     return {
-      httpApi: this.$parent.httpApi,
       file: '',
       filename: '',
     }
@@ -33,12 +32,11 @@ export default {
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
-      this
     },
-    uploadImge() {
+    uploadImg() {
       if (this.file !== '') {
-        this.httpApi.postImage(this.file);
-        this.httpApi.init();
+        this.$parent.httpApi.postImage(this.file);
+        this.$parent.httpApi.init();
       }
       this.close();
     },

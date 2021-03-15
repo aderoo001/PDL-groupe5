@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Optional;
 
 @RestController
@@ -49,8 +50,8 @@ public class ImageController {
 
   @RequestMapping(value = "/images", method = RequestMethod.POST)
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
-      RedirectAttributes redirectAttributes) throws IOException {
-    Image image = new Image(file.getName(), file.getBytes());
+                                    RedirectAttributes redirectAttributes) throws IOException {
+    Image image = new Image(file.getOriginalFilename(), file.getBytes());
     this.imageDao.create(image);
     redirectAttributes.addAttribute("id", image.getId());
     return new ResponseEntity<>(HttpStatus.OK);
