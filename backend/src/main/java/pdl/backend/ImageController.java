@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-//alt+shift+o
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Optional;
 
 @RestController
 public class ImageController {
@@ -64,8 +65,8 @@ public class ImageController {
 
   @RequestMapping(value = "/images", method = RequestMethod.POST)
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
-      RedirectAttributes redirectAttributes) throws IOException {
-    Image image = new Image(file.getName(), file.getBytes());
+                                    RedirectAttributes redirectAttributes) throws IOException {
+    Image image = new Image(file.getOriginalFilename(), file.getBytes());
     this.imageDao.create(image);
     redirectAttributes.addAttribute("id", image.getId());
     return new ResponseEntity<>(HttpStatus.OK);

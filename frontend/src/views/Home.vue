@@ -1,35 +1,63 @@
 <template>
   <div class="home">
-    <button v-on:click="swapView">Swap</button>
-    {{ swap }}
-    <div v-if="swap">
-      <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-if="impImg">
+      <ImportImg ref="importImg"
+                 :imageId="imageId"
+                 :imageUrl="imageUrl"
+                 v-on:update="impImg = $event; this.httpApi.init()"/>
     </div>
-    <div v-else>
-      <Peepshow/>
+    <div v-if="editImg">
+      <EditImg ref="editImg"
+               :imageId="imageId"
+               :imageUrl="imageUrl"/>
     </div>
+    <Peepshow ref="peepshow"
+              :imageId="imageId"
+              :imageUrl="imageUrl"/>
+    <button v-on:click="impImg = true;">Importer</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 import Peepshow from '@/components/Peepshow.vue'
+import ImportImg from "@/components/importImg";
+import EditImg from "@/components/EditImg";
+import HttpApi from "@/components/http-api";
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+    EditImg,
+    ImportImg,
     Peepshow
   },
   data() {
     return {
-      swap: false
+      httpApi: new HttpApi("home"),
+      imageUrl: "http://localhost:8080/images/0",
+      imageId: 0,
+      impImg: false,
+      editImg: false,
+      updateImg: false,
     }
   },
+  mounted() {
+    this.httpApi.init();
+  },
   methods: {
-    swapView() {
-      this.swap = !this.swap;
+    update(comp, id) {
+      this.httpApi.init();
+      this.imageId = id;
+      this.imageUrl = this.httpApi.getImage(id);
+      switch (comp) {
+        case "impImg":
+          this.impImg = !this.impImg;
+          break;
+        case "edtImg":
+          this.editImg = !this.editImg;
+          break;
+      }
     }
   }
 }
