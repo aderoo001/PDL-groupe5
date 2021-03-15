@@ -16,6 +16,14 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
+	<repositories>
+    	<repository>
+      	<id>scijava.public</id>
+      		<url>https://maven.scijava.org/content/groups/public</url>
+    	</repository>
+  	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -27,18 +35,27 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-test-autoconfigure</artifactId>
 		</dependency>
+
+		<dependency>
+      		<groupId>commons-io</groupId>
+      		<artifactId>commons-io</artifactId>
+      		<version>2.8.0</version>
+   		</dependency>
 	</dependencies>
 
 	<build>
