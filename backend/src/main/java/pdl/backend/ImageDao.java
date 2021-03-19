@@ -1,6 +1,7 @@
 package pdl.backend;
 
 import java.io.IOException;
+import java.io.File;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -14,15 +15,28 @@ public class ImageDao implements Dao<Image> {
   private final Map<Long, Image> images = new HashMap<>();
 
   public ImageDao() {
-    // placez une image test.jpg dans le dossier "src/main/resources" du projet
-    final ClassPathResource imgFile = new ClassPathResource("images/test.jpeg");
-    byte[] fileContent;
-    try {
-      fileContent = Files.readAllBytes(imgFile.getFile().toPath());
-      Image img = new Image("logo.jpeg", fileContent);
-      images.put(img.getId(), img);
-    } catch (final IOException e) {
-      e.printStackTrace();
+    File dir = new File("src/main/resources/images");
+    
+    //test, renvoie de l'erreur içi ?
+    if(!dir.exists()){
+      System.out.println("test1: does not exist");
+    }
+    if(dir.listFiles() == null || dir.listFiles().length == 0){
+      System.out.println("test2: is empty");
+    }
+
+    int fileCount = dir.listFiles().length;
+
+    for(int i=0; i<fileCount; i++){
+      final ClassPathResource imgFile = new ClassPathResource("images/default"+i+".jpeg");
+      byte[] fileContent;
+      try {
+        fileContent = Files.readAllBytes(imgFile.getFile().toPath());
+        Image img = new Image(imgFile.getFilename(), fileContent);
+        images.put(img.getId(), img);
+      } catch (final IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 
