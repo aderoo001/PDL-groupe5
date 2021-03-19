@@ -1,6 +1,6 @@
 <template>
   <div class="edt-bg">
-    <img ref="img" alt="" v-bind:src="$parent.imageUrl" v-on:change="handleFileUpload">
+    <img ref="img" alt="" v-bind:src="imageUrl" v-on:change="handleFileUpload">
     <div style="position: fixed; bottom: 0; width: 100%;">
       <div class="edt-navbar">
         <span>
@@ -20,28 +20,32 @@ export default {
     return {
       display: true,
       file: '',
+      httpApi: this.$parent.httpApi,
+      imageUrl: this.$parent.imageUrl,
+      imageId: this.$parent.imageId,
     }
   },
   methods: {
     close() {
-      this.$parent.update('edtImg', this.$parent.imageId);
+      this.$parent.update('edtImg', this.imageId);
+      this.print();
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
     },
     uploadImge() {
       if (this.file !== '') {
-        this.$parent.httpApi.postImage(this.file);
+        this.httpApi.postImage(this.file);
       }
     },
     deleteImage() {
-      this.$parent.httpApi.deleteImage(this.$parent.imageId);
-      this.$parent.imageId = this.$parent.httpApi.response[0].id;
-      this.$parent.imageUrl = this.$parent.httpApi.getImage(this.$parent.imageId);
+      this.httpApi.deleteImage(this.imageId);
+      this.imageId = this.httpApi.response[0].id;
+      this.imageUrl = this.httpApi.getImage(this.imageId);
       this.close();
     },
     print() {
-      console.log(this.$parent.imageId);
+      console.log(this.imageId);
     },
   },
 }

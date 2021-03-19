@@ -3,13 +3,13 @@
     <div class="peep-img-box">
       <img alt=""
            class="peep-img"
-           v-bind:src="$parent.imageUrl"
-           v-on:click="$parent.update('edtImg', $parent.imageId)">
+           v-bind:src="imageUrl"
+           v-on:click="$parent.update('edtImg', imageId); print();">
     </div>
     <div class="peep-selector">
-      <div v-for="image in $parent.httpApi.response"
+      <div v-for="image in httpApi.response"
            :key="image.id" class="peep-selector-btn-box">
-        <button v-if="$parent.imageId === image.id"
+        <button v-if="imageId === image.id"
                 class="peep-selector-btn-selected"
                 v-on:click="getImageUrl(image.id)">
         </button>
@@ -25,13 +25,20 @@
 <script>
 export default {
   name: "Peepshow",
+  data() {
+    return {
+      httpApi: this.$parent.httpApi,
+      imageUrl: this.$parent.imageUrl,
+      imageId: this.$parent.imageId,
+    }
+  },
   methods: {
     getImageUrl(id) {
-      this.$parent.imageId = id;
-      this.$parent.imageUrl = this.$parent.httpApi.getImage(id);
+      this.imageId = id;
+      this.imageUrl = this.httpApi.getImage(id);
     },
     print() {
-      console.log(this.$parent.imageId);
+      console.log(this.imageId);
     },
   }
 }
