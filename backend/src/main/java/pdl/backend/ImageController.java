@@ -1,24 +1,17 @@
 package pdl.backend;
 
-import java.util.Optional;
-
-import javax.imageio.ImageIO;
-
 import java.awt.image.BufferedImage;
-
+import java.util.Optional;
+import javax.imageio.ImageIO;
 import org.apache.commons.io.FilenameUtils;
-
 import java.util.Arrays;
 import java.util.Optional;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -68,7 +61,7 @@ public class ImageController {
   @RequestMapping(value = "/images", method = RequestMethod.POST)
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
                                     RedirectAttributes redirectAttributes) throws IOException {
-    Image image = new Image(file.getOriginalFilename(), file.getBytes());
+    Image image = new Image(file.getOriginalFilename(), file.getBytes(), FilenameUtils.getExtension(file.getOriginalFilename()));
     this.imageDao.create(image);
     redirectAttributes.addAttribute("id", image.getId());
     return new ResponseEntity<>(HttpStatus.OK);
@@ -104,13 +97,9 @@ public class ImageController {
       }
 
       n.put("size", height*width);
-      img.setSize(height*width);
 
       //format
-      String format = FilenameUtils.getExtension(img.getName());
-      
-      n.put("format", format);
-      img.setFormat(format);
+      n.put("format", img.getFormat());
 
       //url
       n.put("url", "http://localhost:8080/images/"+img.getId());

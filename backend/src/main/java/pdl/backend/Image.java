@@ -3,25 +3,21 @@ package pdl.backend;
 public class Image {
   private static Long count = Long.valueOf(0);
   private final Long id;
-  private long size;
   private String name;
   private String format;
   private final byte[] data;
 
   //constructor
-  public Image(final String name, final byte[] data) {
+  public Image(final String name, final byte[] data, final String format) {
     id = count++;
     this.name = name;
     this.data = data;
+    this.format = format;
   }
 
   //getters
   public long getId() {
     return id;
-  }
-
-  public long getSize() {
-    return size;
   }
 
   public String getName() {
@@ -37,15 +33,7 @@ public class Image {
   }
 
   //setters
-  public void setSize(final long size) {
-    this.size = size;
-  }
-
   public void setName(final String name) {
     this.name = name;
-  }
-
-  public void setFormat(final String format) {
-    this.format = format;
   }
 }
