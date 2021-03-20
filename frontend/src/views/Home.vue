@@ -43,6 +43,7 @@ export default {
     }
   },
   mounted() {
+    // TODO
     this.httpApi.init();
     if (this.httpApi.response.length > 0) {
       this.imageId = this.httpApi.response[0].id;
