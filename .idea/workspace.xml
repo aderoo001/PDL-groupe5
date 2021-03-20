@@ -23,19 +23,58 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:front" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:besoin_10" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1 - front besoin 8">
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1 - front-besoin10">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/BackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/Dao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/Image.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.35f9e773.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.35f9e773.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.90b284f2.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.90b284f2.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.34a1c5cc.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.34a1c5cc.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.7d2d1fa6.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.7d2d1fa6.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.897b5ce3.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.897b5ce3.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.e2116904.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.e2116904.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/BackendApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/BackendApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HelloWorld.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Peepshow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Peepshow.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/http-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/http-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/importImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/importImg.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/custom-assertions/elementCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/custom-assertions/elementCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/custom-commands/customExecute.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/custom-commands/customExecute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/custom-commands/openHomepage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/custom-commands/openHomepage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/custom-commands/openHomepageClass.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/custom-commands/openHomepageClass.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/globals.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/globals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/page-objects/homepage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/page-objects/homepage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/specs/test-with-pageobjects.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/specs/test-with-pageobjects.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/e2e/specs/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/e2e/specs/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/example.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tests/unit/example.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +84,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="besoin_10" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,6 +116,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/backend" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -84,8 +126,12 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/src/main/resources/images" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend" />
+      <recent name="$PROJECT_DIR$/backend/src/main/java/pdl/backend" />
+    </key>
   </component>
-  <component name="RunManager" selected="Maven.[--projects,backend,spring-boot:run]">
+  <component name="RunManager" selected="npm.serve">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -152,6 +198,13 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="pdl.backend.BackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/frontend/package.json" />
       <command value="run" />
@@ -166,9 +219,12 @@
       <item itemvalue="Maven.[clean,install]" />
       <item itemvalue="Maven.[--projects,backend,spring-boot:run]" />
       <item itemvalue="npm.serve" />
+      <item itemvalue="Spring Boot.BackendApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.serve" />
+        <item itemvalue="npm.serve" />
         <item itemvalue="npm.serve" />
       </list>
     </recent_temporary>
@@ -182,6 +238,9 @@
       <option name="presentableId" value="Default" />
       <updated>1615213216670</updated>
       <workItem from="1615213217706" duration="3601000" />
+      <workItem from="1615975676517" duration="702000" />
+      <workItem from="1616168164070" duration="449000" />
+      <workItem from="1616174409713" duration="3436000" />
     </task>
     <task id="LOCAL-00001" summary="innit commit">
       <created>1615213335713</created>
@@ -218,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615817723945</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="v1 - front-besoin10">
+      <created>1615824403478</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1615824403478</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,7 +301,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="front" />
+                        <option value="besoin_10" />
                       </list>
                     </value>
                   </entry>
@@ -256,33 +322,38 @@
     <MESSAGE value="v0" />
     <MESSAGE value="v1 - front" />
     <MESSAGE value="v1 - front besoin 8" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1 - front besoin 8" />
+    <MESSAGE value="v1 - front-besoin10" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615818040383">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615818040383" />
-    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl" timestamp="1615822276830">
+    <state x="1973" y="291" width="530" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616178337022">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615822276830" />
-    <state width="939" height="288" key="GridCell.Tab.0.bottom" timestamp="1615823062595">
+    <state x="1973" y="291" width="530" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616178337022" />
+    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl" timestamp="1616177845076">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="288" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615823062595" />
-    <state width="939" height="288" key="GridCell.Tab.0.center" timestamp="1615823062595">
+    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616177845076" />
+    <state width="939" height="354" key="GridCell.Tab.0.bottom" timestamp="1616197090816">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="288" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615823062595" />
-    <state width="939" height="288" key="GridCell.Tab.0.left" timestamp="1615823062594">
+    <state width="939" height="354" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616197090816" />
+    <state width="939" height="354" key="GridCell.Tab.0.center" timestamp="1616197090815">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="288" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615823062594" />
-    <state width="939" height="288" key="GridCell.Tab.0.right" timestamp="1615823062595">
+    <state width="939" height="354" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616197090815" />
+    <state width="939" height="354" key="GridCell.Tab.0.left" timestamp="1616197090815">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="288" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615823062595" />
+    <state width="939" height="354" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616197090815" />
+    <state width="939" height="354" key="GridCell.Tab.0.right" timestamp="1616197090816">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state width="939" height="354" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616197090815" />
     <state width="1878" height="435" key="GridCell.Tab.1.bottom" timestamp="1615215307592">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -299,9 +370,13 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state width="1878" height="435" key="GridCell.Tab.1.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615215307592" />
-    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1615817733053">
+    <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog" timestamp="1616174490770">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615817733053" />
+    <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
+    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1616174779469">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174779469" />
   </component>
 </project>

@@ -1,55 +1,59 @@
 import axios from "axios";
 
 export default class HttpApi {
-  message = "";
-  response = [];
-  error = [];
+    response = [];
+    image = [];
+    error = [];
 
-  constructor(message) {
-    this.message = message;
-  }
+    constructor() {
+    }
 
-  async init() {
-    await new Promise(() =>
-        axios.get(`images`)
-            .then((response) => {
-              // JSON responses are automatically parsed.
-              this.response = response.data;
-            }));
-    throw new Error('Oops');
-  }
+    getId(pos) {
+        if ( this.response.length > pos) {
+            return this.response[pos].id;
+        }
+        throw new Error("Out of range => response");
+    }
 
-  getImage(id) {
-    return "http://localhost:8080/images/" + id;
-  }
+    getImageUrl(id) {
+        return "http://localhost:8080/images/" + id;
+    }
 
-  postImage(file) {
-    let formData = new FormData();
-    formData.append('file', file);
-    console.log(file);
+    async init() {
+        await new Promise(() =>
+            axios.get(`images`)
+                .then((response) => {
+                    // JSON responses are automatically parsed.
+                    this.response = response.data;
+                }));
+        throw new Error('Oops');
+    }
 
-    axios.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-        .then(() => {
-        })
-        .catch(error => {
-            this.error = error;
-        });
-  }
 
-  async deleteImage(id) {
-    await new Promise(() =>
-        axios.delete(`images/` + id)
-            .then((response) => {
-              // JSON responses are automatically parsed.
-              this.response = response.data;
-            })
-            .catch((error) => {
-              this.error = error;
-            }));
-    throw new Error('Oops');
-  }
+    async postImage(file) {
+        let formData = new FormData();
+        formData.append('file', file);
 
-  updateImage(file, id) {
-    console.log(id);
-  }
+        await new Promise(() =>
+            axios.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+                .then(value => {
+                    console.log(value.status);
+                })
+                .catch(error => {
+                    console.log(error.status);
+                }));
+    }
+
+    async deleteImage(id) {
+        await new Promise(() =>
+            axios.delete(`images/` + id)
+                .then((response) => {
+                    // JSON responses are automatically parsed.
+                    this.response = response.data;
+                })
+                .catch((error) => {
+                    this.error = error;
+                }));
+        throw new Error('Oops');
+    }
 }
