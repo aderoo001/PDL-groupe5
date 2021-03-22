@@ -8,17 +8,19 @@
         <outputRelativeToContentRoot value="true" />
         <module name="backend" />
         <module name="frontend" />
+        <module name="client-serveur" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="backend" target="11" />
-      <module name="client-serveur" target="1.5" />
+      <module name="client-serveur" target="11" />
       <module name="frontend" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="backend" options="-parameters" />
+      <module name="client-serveur" options="-parameters" />
     </option>
   </component>
 </project>

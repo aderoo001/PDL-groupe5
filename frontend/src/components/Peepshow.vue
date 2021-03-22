@@ -28,10 +28,10 @@ export default {
   methods: {
     getImageUrl(id) {
       this.$parent.imageId = id;
-      this.$parent.imageUrl = this.$parent.httpApi.getImage(id);
+      this.$parent.imageUrl = this.$parent.httpApi.getImageUrl(id);
     },
     print() {
-      console.log(this.$parent.imageId);
+      console.log(this.imageId);
     },
   }
 }
