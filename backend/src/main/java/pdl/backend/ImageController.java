@@ -45,17 +45,7 @@ public class ImageController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-  
-    @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
-        Optional<Image> image = this.imageDao.retrieve(id);
-        if (image.isPresent()) {
-            this.imageDao.delete(image.get());
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-  
+
   @RequestMapping(value = "/images", method = RequestMethod.POST)
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
                                     RedirectAttributes redirectAttributes) throws IOException {
