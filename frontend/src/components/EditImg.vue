@@ -41,7 +41,7 @@
               <label>
                 <input type="range"
                        min="0"
-                       max="360"
+                       max="359"
                        value="0"
                        ref="color"
                        v-on:mouseup="processImage">
@@ -67,18 +67,20 @@
             </div>
           </div>
           <div class="edt-btn-grp">
-            <button class="edt-btn edt-btn-left"
-                    v-on:click="deleteImage">Del
-            </button>
-            <div>
-
+            <div class="edt-btn edt-btn-left"
+                 v-on:click="deleteImage">
+              Del
             </div>
-            <button class="edt-btn"
-                    v-on:click="saveImage">Save
-            </button>
-            <button class="edt-btn edt-btn-right edt-btn-danger"
-                    v-on:click="close">Exit
-            </button>
+
+            <div class="edt-btn"
+                 v-on:click="saveImage">
+              Save
+            </div>
+
+            <div class="edt-btn edt-btn-right edt-btn-danger"
+                 v-on:click="close">
+              Exit
+            </div>
           </div>
         </div>
       </div>
@@ -95,9 +97,13 @@ export default {
       imageUrl: this.$parent.imageUrl,
       imageId: this.$parent.imageId,
       algorithm: 'none',
+      img : '',
     }
   },
   methods: {
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
     close() {
       this.$parent.update('edtImg', this.imageId);
     },
@@ -159,10 +165,20 @@ export default {
           break;
       }
     },
-    saveImage() {
-      File.download(this.imageUrl)
-          .then((link) => { link.click() })
-      // TODO
+    async saveImage() {
+      const img = await this.$parent.httpApi.getImage(this.imageUrl);
+      let link = document.createElement('a')
+      link.href = img;
+      let filename = 'image.jpeg';
+      this.$parent.httpApi.response.forEach(value => {
+        if (value.id === this.imageId) {
+          filename = value.name;
+        }
+      });
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     },
     deleteImage() {
       let tmp = 0;
@@ -186,6 +202,11 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 img {
   position: absolute;
   margin: auto;
@@ -256,7 +277,7 @@ select {
 
 .edt-btn-grp {
   position: absolute;
-  display: inline;
+  display: inline-flex;
   right: 25px;
 }
 
@@ -271,9 +292,7 @@ select {
 }
 
 .edt-btn {
-  margin: 0;
-  padding: 0;
-  height: 30px;
+  height: 27px;
   width: 40px;
   background-color: white;
   border: solid 1px grey;

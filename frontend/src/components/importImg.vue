@@ -37,7 +37,7 @@ export default {
     uploadImge() {
       if (this.file !== '') {
         this.httpApi.postImage(this.file);
-        this.httpApi.init();
+        this.httpApi.getImagesList();
       }
       this.close();
     },
