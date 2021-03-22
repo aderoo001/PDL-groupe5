@@ -20,11 +20,11 @@
             <div v-if="algorithm === 'increaseLuminosity'">
               <label>
                 <input type="range"
-                       min="0"
+                       min="-256"
                        max="255"
                        value="0"
                        ref="increaseLuminosity"
-                       v-on:mousemove="processImage">
+                       v-on:mouseup="processImage">
               </label>
             </div>
 
@@ -39,11 +39,12 @@
 
             <div v-if="algorithm === 'color'">
               <label>
-                <select ref="color" v-on:change="processImage">
-                  <option value="red">Rouge</option>
-                  <option value="green">Vert</option>
-                  <option value="blue">Bleu</option>
-                </select>
+                <input type="range"
+                       min="0"
+                       max="360"
+                       value="0"
+                       ref="color"
+                       v-on:mouseup="processImage">
               </label>
             </div>
 
@@ -90,14 +91,14 @@ export default {
       httpApi: this.$parent.httpApi,
       imageUrl: this.$parent.imageUrl,
       imageId: this.$parent.imageId,
-      algorithm: '',
+      algorithm: 'none',
     }
   },
   methods: {
     close() {
       this.$parent.update('edtImg', this.imageId);
     },
-    makeUrl(algorithm, opt1 = '', opt2 = '') {
+    makeUrl(algorithm = '', opt1 = '', opt2 = '') {
       let url = this.imageUrl.split("?")[0];
       if (algorithm !== ''){
         url += "?algorithm="
@@ -154,7 +155,6 @@ export default {
               );
           break;
       }
-      console.log(this.imageUrl);
     },
     saveImage() {
       File.download(this.imageUrl)

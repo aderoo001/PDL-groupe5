@@ -22,19 +22,18 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/main" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1 - front-besoin10">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageChanger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/Image.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +43,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="besoin_10" />
+        <entry key="$PROJECT_DIR$" value="juju" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,7 +74,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/src/main/java/pdl/backend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -83,15 +82,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src/main/java/pdl/backend" />
+      <recent name="$PROJECT_DIR$/backend" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/src/main/resources/images" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/backend" />
-      <recent name="$PROJECT_DIR$/backend/src/main/java/pdl/backend" />
-    </key>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="Maven.[--projects,backend,spring-boot:run]">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -259,7 +258,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="besoin_10" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -296,22 +295,22 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429311737" />
-    <state width="939" height="209" key="GridCell.Tab.0.bottom" timestamp="1616429621114">
+    <state width="1499" height="158" key="GridCell.Tab.0.bottom" timestamp="1616432242105">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="209" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429621114" />
-    <state width="939" height="209" key="GridCell.Tab.0.center" timestamp="1616429621114">
+    <state width="1499" height="158" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242105" />
+    <state width="1499" height="158" key="GridCell.Tab.0.center" timestamp="1616432242105">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="209" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429621114" />
-    <state width="939" height="209" key="GridCell.Tab.0.left" timestamp="1616429621114">
+    <state width="1499" height="158" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242105" />
+    <state width="1499" height="158" key="GridCell.Tab.0.left" timestamp="1616432242104">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="209" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429621114" />
-    <state width="939" height="209" key="GridCell.Tab.0.right" timestamp="1616429621114">
+    <state width="1499" height="158" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242104" />
+    <state width="1499" height="158" key="GridCell.Tab.0.right" timestamp="1616432242105">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="939" height="209" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429621114" />
+    <state width="1499" height="158" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242105" />
     <state width="1878" height="435" key="GridCell.Tab.1.bottom" timestamp="1615215307592">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
