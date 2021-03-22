@@ -70,6 +70,9 @@
             <button class="edt-btn edt-btn-left"
                     v-on:click="deleteImage">Del
             </button>
+            <div>
+
+            </div>
             <button class="edt-btn"
                     v-on:click="saveImage">Save
             </button>

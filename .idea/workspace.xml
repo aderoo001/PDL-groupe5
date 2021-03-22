@@ -29,11 +29,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1 - front-besoin10">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageChanger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageConverter.java" afterDir="false" />
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="be or not to be ? final">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/images/cheval2.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615824403478</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="be or not to be ? final">
+      <created>1616432765251</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1616432765251</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +285,8 @@
     <MESSAGE value="v1 - front" />
     <MESSAGE value="v1 - front besoin 8" />
     <MESSAGE value="v1 - front-besoin10" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="be or not to be ? final" />
+    <option name="LAST_COMMIT_MESSAGE" value="be or not to be ? final" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615818040383">
@@ -295,22 +301,22 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429311737" />
-    <state width="1499" height="158" key="GridCell.Tab.0.bottom" timestamp="1616432242105">
+    <state width="1499" height="158" key="GridCell.Tab.0.bottom" timestamp="1616439191742">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1499" height="158" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242105" />
-    <state width="1499" height="158" key="GridCell.Tab.0.center" timestamp="1616432242105">
+    <state width="1499" height="158" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616439191742" />
+    <state width="1499" height="158" key="GridCell.Tab.0.center" timestamp="1616439191742">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1499" height="158" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242105" />
-    <state width="1499" height="158" key="GridCell.Tab.0.left" timestamp="1616432242104">
+    <state width="1499" height="158" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616439191742" />
+    <state width="1499" height="158" key="GridCell.Tab.0.left" timestamp="1616439191742">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1499" height="158" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242104" />
-    <state width="1499" height="158" key="GridCell.Tab.0.right" timestamp="1616432242105">
+    <state width="1499" height="158" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616439191742" />
+    <state width="1499" height="158" key="GridCell.Tab.0.right" timestamp="1616439191742">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1499" height="158" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432242105" />
+    <state width="1499" height="158" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616439191742" />
     <state width="1878" height="435" key="GridCell.Tab.1.bottom" timestamp="1615215307592">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -331,9 +337,9 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
-    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1616174779469">
+    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1616432766734">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174779469" />
+    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616432766734" />
   </component>
 </project>
