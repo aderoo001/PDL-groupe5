@@ -2,18 +2,8 @@ package pdl.backend;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import io.scif.Reader;
-import io.scif.SCIFIO;
-import io.scif.config.SCIFIOConfig;
-import io.scif.img.ImgOpener;
-import io.scif.img.ImgSaver;
-import io.scif.img.SCIFIOImgPlus;
-import net.imglib2.Cursor;
-import net.imglib2.img.Img;
-import net.imglib2.img.array.ArrayImg;
-import net.imglib2.img.array.ArrayImgFactory;
-import net.imglib2.img.basictypeaccess.array.ByteArray;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.util.Optional;
+
 
 import static net.imglib2.img.array.ArrayImgs.unsignedBytes;
 //********** */
@@ -210,31 +203,65 @@ public class ImageController {
     //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
-
-  @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
-    Optional<Image> image = this.imageDao.retrieve(id);
-    if (image.isPresent()) {
-      this.imageDao.delete(image.get());
-      return new ResponseEntity<>(HttpStatus.OK);
+    @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
+        Optional<Image> image = this.imageDao.retrieve(id);
+        if (image.isPresent()) {
+            this.imageDao.delete(image.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  }
 
-  @RequestMapping(value = "/images", method = RequestMethod.POST)
-  public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
-                                    RedirectAttributes redirectAttributes) throws IOException {
-    Image image = new Image(file.getName(), file.getBytes());
-    this.imageDao.create(image);
-    redirectAttributes.addAttribute("id", image.getId());
-    return new ResponseEntity<>(HttpStatus.OK);
-  }
+    @RequestMapping(value = "/images", method = RequestMethod.POST)
+    public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
+                                      RedirectAttributes redirectAttributes) throws IOException {
+        Image image = new Image(file.getOriginalFilename(), file.getBytes(), FilenameUtils.getExtension(file.getOriginalFilename()));
+        this.imageDao.create(image);
+        redirectAttributes.addAttribute("id", image.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-  @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-  @ResponseBody
-  public ArrayNode getImageList() {
-    ArrayNode nodes = mapper.createArrayNode();
-    this.imageDao.retrieveAll().forEach(nodes::addPOJO);
-    return nodes;
-  }
+    @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ArrayNode getImageList() throws IOException {
+
+        ArrayNode nodes = mapper.createArrayNode();
+
+        this.imageDao.retrieveAll().forEach(img -> {
+            ObjectNode n = mapper.createObjectNode();
+
+            //Identifiant
+            n.put("id", img.getId());
+
+            //Nom de fichier
+            n.put("name", img.getName());
+
+            //taille de l'image
+            int height = 0;
+            int width = 0;
+            InputStream in = new ByteArrayInputStream(img.getData());
+            BufferedImage buf;
+
+            try {
+                buf = ImageIO.read(in);
+                height = buf.getHeight();
+                width = buf.getWidth();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            n.put("size", height * width);
+
+            //format
+            n.put("format", img.getFormat());
+
+            //url
+            n.put("url", "http://localhost:8080/images/" + img.getId());
+
+            nodes.add(n);
+        });
+
+        return nodes;
+    }
 }

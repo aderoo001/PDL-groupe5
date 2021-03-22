@@ -8,12 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="backend" />
         <module name="frontend" />
-        <module name="client-serveur" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="backend" target="11" />
-      <module name="client-serveur" target="11" />
+      <module name="client-serveur" target="1.5" />
       <module name="frontend" target="1.5" />
     </bytecodeTargetLevel>
   </component>

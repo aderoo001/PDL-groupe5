@@ -34,7 +34,7 @@ export default {
   },
   data() {
     return {
-      httpApi: new HttpApi("home"),
+      httpApi: new HttpApi(),
       imageUrl: "http://localhost:8080/images/0",
       imageId: 0,
       impImg: false,
@@ -43,13 +43,18 @@ export default {
     }
   },
   mounted() {
+    // TODO
     this.httpApi.init();
+    if (this.httpApi.response.length > 0) {
+      this.imageId = this.httpApi.response[0].id;
+      this.imageUrl = this.httpApi.getImageUrl(this.imageId);
+    }
   },
   methods: {
     update(comp, id) {
       this.httpApi.init();
       this.imageId = id;
-      this.imageUrl = this.httpApi.getImage(id);
+      this.imageUrl = this.httpApi.getImageUrl(id);
       switch (comp) {
         case "impImg":
           this.impImg = !this.impImg;
