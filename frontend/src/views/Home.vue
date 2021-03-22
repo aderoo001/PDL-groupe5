@@ -4,7 +4,7 @@
       <ImportImg ref="importImg"
                  :imageId="imageId"
                  :imageUrl="imageUrl"
-                 v-on:update="impImg = $event; this.httpApi.init()"/>
+                 v-on:update="impImg = $event; this.httpApi.getImagesList()"/>
     </div>
     <div v-if="editImg">
       <EditImg ref="editImg"
@@ -42,17 +42,16 @@ export default {
       updateImg: false,
     }
   },
-  mounted() {
-    // TODO
-    this.httpApi.init();
-    if (this.httpApi.response.length > 0) {
-      this.imageId = this.httpApi.response[0].id;
-      this.imageUrl = this.httpApi.getImageUrl(this.imageId);
+  async mounted() {
+    const list = await this.httpApi.init();
+    if (list.length > 0) {
+      this.imageId = list[0].id;
+      this.imageUrl = list[0].url;
     }
   },
   methods: {
     update(comp, id) {
-      this.httpApi.init();
+      this.httpApi.getImagesList();
       this.imageId = id;
       this.imageUrl = this.httpApi.getImageUrl(id);
       switch (comp) {

@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default class HttpApi {
     response = [];
-    image = [];
     error = [];
 
     constructor() {
@@ -19,41 +18,61 @@ export default class HttpApi {
         return "http://localhost:8080/images/" + id;
     }
 
-    async init() {
-        await new Promise(() =>
-            axios.get(`images`)
+    init() {
+        return axios.get(`images`)
                 .then((response) => {
                     // JSON responses are automatically parsed.
                     this.response = response.data;
-                }));
-        throw new Error('Oops');
+                    return this.response;
+                }).catch(error => {
+                    this.error = error.status;
+                });
     }
 
+    async getImagesList() {
+        await axios.get(`images`)
+                .then((response) => {
+                    // JSON responses are automatically parsed.
+                    this.response = response.data;
+                    return this.response;
+                }).catch(error => {
+                    this.error = error.status;
+                });
+    }
+
+    getImage(url) {
+        return axios.get(
+            url.split("http://localhost:8080/")[1],
+            {
+                responseType: 'arraybuffer'
+            }).then((response) => {
+                const base64 =  btoa(new Uint8Array(response.data)
+                    .reduce(
+                        (data, byte) => data + String.fromCharCode(byte), ''
+                    ));
+                return "data:image/jpeg;base64," + base64;
+            }).catch(error => {
+                this.error = error.status;
+            });
+    }
 
     async postImage(file) {
         let formData = new FormData();
         formData.append('file', file);
 
-        await new Promise(() =>
-            axios.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-                .then(value => {
-                    console.log(value.status);
-                })
-                .catch(error => {
-                    console.log(error.status);
-                }));
+        await axios.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}}
+            ).catch(error => {
+                this.error = error.status;
+            });
     }
 
     async deleteImage(id) {
-        await new Promise(() =>
-            axios.delete(`images/` + id)
+        await axios.delete(`images/` + id)
                 .then((response) => {
                     // JSON responses are automatically parsed.
                     this.response = response.data;
-                })
-                .catch((error) => {
-                    this.error = error;
-                }));
-        throw new Error('Oops');
+                }).catch((error) => {
+                    this.error = error.status;
+                });
     }
 }
