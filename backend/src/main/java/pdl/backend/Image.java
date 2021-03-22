@@ -21,9 +21,9 @@ public class Image {
     return id;
   }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
   public String getFormat() {
     return format;
@@ -38,7 +38,4 @@ public class Image {
     this.name = name;
   }
 
-    public byte[] getData() {
-        return data;
-    }
 }
