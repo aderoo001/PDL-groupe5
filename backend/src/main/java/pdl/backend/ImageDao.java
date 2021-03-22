@@ -1,11 +1,11 @@
 package pdl.backend;
 
+import java.nio.file.Files;
+import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 import java.io.File;
-import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
@@ -14,29 +14,30 @@ public class ImageDao implements Dao<Image> {
 
   private final Map<Long, Image> images = new HashMap<>();
 
-  public ImageDao() {
+  public ImageDao(){
     File dir = new File("src/main/resources/images");
     
-    //test, renvoie de l'erreur içi ?
-    if(!dir.exists()){
-      System.out.println("test1: does not exist");
-    }
-    if(dir.listFiles() == null || dir.listFiles().length == 0){
-      System.out.println("test2: is empty");
-    }
+    //check if file exists
+    try{
+      if(!dir.exists()) throw new NullPointerException();
 
-    int fileCount = dir.listFiles().length;
+      int fileCount = dir.listFiles().length;
 
-    for(int i=0; i<fileCount; i++){
-      final ClassPathResource imgFile = new ClassPathResource("images/default"+i+".jpeg");
-      byte[] fileContent;
-      try {
+      for(int i=0; i<fileCount; i++){
+        final ClassPathResource imgFile = new ClassPathResource("images/" + dir.list()[i]);
+        byte[] fileContent;
+  
+
         fileContent = Files.readAllBytes(imgFile.getFile().toPath());
-        Image img = new Image(imgFile.getFilename(), fileContent);
+        Image img = new Image(imgFile.getFilename(), fileContent, FilenameUtils.getExtension(imgFile.getFilename()));
         images.put(img.getId(), img);
-      } catch (final IOException e) {
-        e.printStackTrace();
       }
+    }
+    catch(NullPointerException e){
+      e.printStackTrace();
+    }
+    catch (final IOException e) {
+      e.printStackTrace();
     }
   }
 
