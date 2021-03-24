@@ -142,13 +142,13 @@ public class ImageController {
       break;
 
       case "blur":
-      //?algorithm=blur&opt1=[0,1]&opt2=[0,+∞[
+      //?algorithm=blur&opt1=["M","G"]&opt2=[0,+∞[
         
         System.out.println(Integer.parseInt(opt1, 10));
         System.out.println(Integer.parseInt(opt2, 10));
-        if(   !(0<=Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
+        /*if(   !(0<=Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        }*/
 
         try{
           ImageChanger.Blured(input,opt1,Integer.parseInt(opt2, 10));

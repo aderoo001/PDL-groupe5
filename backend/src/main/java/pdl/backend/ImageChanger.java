@@ -15,6 +15,18 @@ import net.imglib2.view.Views;
 import net.imglib2.view.IntervalView;
 import net.imglib2.loops.LoopBuilder;
 
+/************* */
+import static java.lang.StrictMath.pow;
+
+
+import net.imglib2.algorithm.neighborhood.Neighborhood;
+import net.imglib2.algorithm.neighborhood.RectangleShape;
+import net.imglib2.view.ExtendedRandomAccessibleInterval;
+
+//import java.util.ArrayList;
+//import java.util.List;
+
+
 public class ImageChanger{
 
 //besoin 14:
@@ -102,14 +114,69 @@ public class ImageChanger{
     La convolution est appliquée sur les trois canaux R, G et B.
      */
     public static void Blured(Img<UnsignedByteType> input,String choix,int size){
+
+        int[][] kernel = {
+            {1, 2, 3, 2, 1},
+            {2, 6, 8, 6, 2},
+            {3, 8, 10, 8, 3},
+            {2, 6, 8, 6, 2},
+            {1, 2, 3, 2, 1}
+        };
         if(choix.equals("M")){//filtre moyen.
-
+            kernel = new int[size][size];
+            for (int x = 0; x < size; x++) {
+                for (int y = 0; y < size; y++) {
+                    kernel[x][y] = 1;
+                }
+            }
         }
-        if(choix.equals("G")){
+        convolution(input, input, kernel);
 
-        }
+
+
 
     }
+
+    public static void convolution(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output,
+								   int[][] kernel) {
+
+		System.out.println("--convolution--");
+		float time = System.nanoTime();
+		int size = kernel.length;
+		int i = 0;
+		int j = 0;
+		int div = 0;
+		for (int[] ints : kernel) {
+			for (int y = 0; y < kernel.length; y++) {
+				div += ints[y];
+			}
+		}
+
+		IntervalView<UnsignedByteType> intervalIn = Views.expandMirrorDouble(input, size / 2, size / 2);
+		IntervalView<UnsignedByteType> intervalOut = Views.expandMirrorDouble(output, size / 2, size / 2);
+		final Cursor<UnsignedByteType> outC = Views.iterable(intervalOut).cursor();
+		final RectangleShape shape = new RectangleShape(size / 2, false);
+
+		for (Neighborhood<UnsignedByteType> localNeighborhood : shape.neighborhoods(intervalIn)) {
+			int sum = 0;
+			for (UnsignedByteType value : localNeighborhood) {
+				sum += value.get() * kernel[i][j];
+				j++;
+				if (j == kernel.length) {
+					j = 0;
+					i++;
+				}
+				if (i == kernel.length) i = 0;
+			}
+			sum = sum / div;
+			if (outC.hasNext()) {
+				outC.next().set(sum);
+			}
+		}
+		time = (float) ((System.nanoTime() - time) / pow(10, 9));
+		System.out.println("Temps d'execution -> " + time + "");
+		System.out.println();
+	}
 
 
     //besoin 18 :
@@ -121,9 +188,25 @@ public class ImageChanger{
      */
     public static void Outline(Img<UnsignedByteType> input){
         FromRGBtoG(input);
+        Sobel(input);
         
     }
     public static void Sobel(Img<UnsignedByteType> input){
+        final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
+        final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(img, 2, 1);
+        final IntervalView<UnsignedByteType> inputB = Views.hyperSlice(img, 2, 2);
+        
+        LoopBuilder.setImages(inputR,inputG,inputB).forEachPixel(
+            (r,g,b) -> { 
+				r.get();
+                g.get();
+                b.get();
+                
+                //r.set();
+                //g.set();
+                //b.set();
+            }  
+        );
 
     }
     
