@@ -22,7 +22,6 @@ export default {
   name: "importImg",
   data() {
     return {
-      httpApi: this.$parent.httpApi,
       file: '',
       filename: '',
     }
@@ -36,8 +35,7 @@ export default {
     },
     uploadImge() {
       if (this.file !== '') {
-        this.httpApi.postImage(this.file);
-        this.httpApi.getImagesList();
+        this.$parent.httpApi.postImage(this.file);
       }
       this.close();
     },
