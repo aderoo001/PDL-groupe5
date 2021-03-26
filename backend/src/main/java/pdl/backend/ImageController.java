@@ -196,9 +196,14 @@ public class ImageController {
     public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
                                       RedirectAttributes redirectAttributes) throws IOException {
         Image image = new Image(file.getOriginalFilename(), file.getBytes(), FilenameUtils.getExtension(file.getOriginalFilename()));
-        this.imageDao.create(image);
-        redirectAttributes.addAttribute("id", image.getId());
-        return new ResponseEntity<>(HttpStatus.OK);
+        if(image.getFormat().equals("jpeg") || image.getFormat().equals("tif")){
+            this.imageDao.create(image);
+            redirectAttributes.addAttribute("id", image.getId());
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        }
     }
 
     @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
