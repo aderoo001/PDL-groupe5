@@ -28,8 +28,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1-front polished">
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1-besoin8-front polished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,16 +92,45 @@
       <recent name="$PROJECT_DIR$/backend/src/main/resources/images" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.serve">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Maven.[clean,install]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImageControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pdl.backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pdl.backend" />
+      <option name="MAIN_CLASS_NAME" value="pdl.backend.ImageControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImageControllerTests.getImageListShouldReturnSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pdl.backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pdl.backend" />
+      <option name="MAIN_CLASS_NAME" value="pdl.backend.ImageControllerTests" />
+      <option name="METHOD_NAME" value="getImageListShouldReturnSuccess" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -176,9 +210,13 @@
       <item itemvalue="Maven.[--projects,backend,spring-boot:run]" />
       <item itemvalue="npm.serve" />
       <item itemvalue="Spring Boot.BackendApplication" />
+      <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
+      <item itemvalue="JUnit.ImageControllerTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ImageControllerTests" />
+        <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
         <item itemvalue="npm.serve" />
         <item itemvalue="npm.serve" />
         <item itemvalue="npm.serve" />
@@ -197,7 +235,8 @@
       <workItem from="1615975676517" duration="702000" />
       <workItem from="1616168164070" duration="449000" />
       <workItem from="1616174409713" duration="3436000" />
-      <workItem from="1616687794665" duration="17643000" />
+      <workItem from="1616687794665" duration="17945000" />
+      <workItem from="1616767580589" duration="5935000" />
     </task>
     <task id="LOCAL-00001" summary="innit commit">
       <created>1615213335713</created>
@@ -248,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616705444714</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="v1-besoin8-front polished">
+      <created>1616707743456</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1616707743456</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,13 +334,14 @@
     <MESSAGE value="v1 - front besoin 8" />
     <MESSAGE value="v1 - front-besoin10" />
     <MESSAGE value="v1-front polished" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1-front polished" />
+    <MESSAGE value="v1-besoin8-front polished" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1-besoin8-front polished" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615818040383">
+    <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616772690533">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615818040383" />
+    <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616772690533" />
     <state x="1973" y="291" width="530" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616695872538">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -303,22 +350,22 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429311737" />
-    <state width="1878" height="218" key="GridCell.Tab.0.bottom" timestamp="1616706468441">
+    <state width="1487" height="620" key="GridCell.Tab.0.bottom" timestamp="1616773588160">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="218" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616706468441" />
-    <state width="1878" height="218" key="GridCell.Tab.0.center" timestamp="1616706468441">
+    <state width="1487" height="620" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
+    <state width="1487" height="620" key="GridCell.Tab.0.center" timestamp="1616773588160">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="218" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616706468441" />
-    <state width="1878" height="218" key="GridCell.Tab.0.left" timestamp="1616706468441">
+    <state width="1487" height="620" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
+    <state width="1487" height="620" key="GridCell.Tab.0.left" timestamp="1616773588160">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="218" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616706468441" />
-    <state width="1878" height="218" key="GridCell.Tab.0.right" timestamp="1616706468441">
+    <state width="1487" height="620" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
+    <state width="1487" height="620" key="GridCell.Tab.0.right" timestamp="1616773588160">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="218" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616706468441" />
+    <state width="1487" height="620" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
     <state width="1878" height="435" key="GridCell.Tab.1.bottom" timestamp="1615215307592">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -339,10 +386,10 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
-    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1616705496734">
+    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1616707745282">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616705496734" />
+    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616707745282" />
     <state x="1377" y="100" width="1726" height="883" key="dock-window-1" timestamp="1616697824152">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>

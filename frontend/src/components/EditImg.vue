@@ -70,7 +70,7 @@
             <div v-if="algorithm === 'blur'">
               <label>
                 <select ref="blur_1"
-                        style="margin-right: 5px; margin-left: 5px;">
+                        style="margin-right: 5px;">
                   <option value="M">Moyen</option>
                   <option value="G">Gaussien</option>
                 </select>
@@ -285,6 +285,8 @@ select {
   left: 155px;
   width: fit-content;
   height: 30px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .edt-opt .edt-range {
@@ -297,8 +299,6 @@ select {
   top: -2px;
   display: inline-flex;
   width: 50px;
-  margin-right: 5px;
-  margin-left: 5px;
 }
 
 .edt-filter {
