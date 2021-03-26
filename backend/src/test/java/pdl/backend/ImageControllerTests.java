@@ -139,5 +139,5 @@ public class ImageControllerTests {
 //            System.out.println(e.getMessage());
 //            throw new Exception(e);
 //        }
-//    }
+    }
 }
