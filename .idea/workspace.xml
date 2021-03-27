@@ -22,20 +22,22 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:v1-besoin8" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/v1-besoin8" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1-besoin8-front polished">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/images/face.tif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/images/test.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/importImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/importImg.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/Home.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +78,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/src/main/java/pdl/backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -92,18 +94,7 @@
       <recent name="$PROJECT_DIR$/backend/src/main/resources/images" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.[clean,install]">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="npm.serve">
     <configuration name="ImageControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
@@ -206,18 +197,18 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
+      <item itemvalue="JUnit.ImageControllerTests" />
       <item itemvalue="Maven.[clean,install]" />
       <item itemvalue="Maven.[--projects,backend,spring-boot:run]" />
       <item itemvalue="npm.serve" />
       <item itemvalue="Spring Boot.BackendApplication" />
-      <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
-      <item itemvalue="JUnit.ImageControllerTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.serve" />
         <item itemvalue="JUnit.ImageControllerTests" />
         <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
-        <item itemvalue="npm.serve" />
         <item itemvalue="npm.serve" />
         <item itemvalue="npm.serve" />
       </list>
@@ -237,6 +228,10 @@
       <workItem from="1616174409713" duration="3436000" />
       <workItem from="1616687794665" duration="17945000" />
       <workItem from="1616767580589" duration="5935000" />
+      <workItem from="1616776810111" duration="28000" />
+      <workItem from="1616785250643" duration="1844000" />
+      <workItem from="1616795449142" duration="673000" />
+      <workItem from="1616863978796" duration="685000" />
     </task>
     <task id="LOCAL-00001" summary="innit commit">
       <created>1615213335713</created>
@@ -338,50 +333,50 @@
     <option name="LAST_COMMIT_MESSAGE" value="v1-besoin8-front polished" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616772690533">
+    <state x="1748" y="253" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616776220980">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1748" y="253" width="1206" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616772690533" />
+    <state x="1748" y="253" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616776220980" />
     <state x="1973" y="291" width="530" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616695872538">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1973" y="291" width="530" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616695872538" />
-    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl" timestamp="1616429311737">
+    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl" timestamp="1616796120552">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616429311737" />
-    <state width="1487" height="620" key="GridCell.Tab.0.bottom" timestamp="1616773588160">
+    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616796120552" />
+    <state width="1481" height="356" key="GridCell.Tab.0.bottom" timestamp="1616864449625">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1487" height="620" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
-    <state width="1487" height="620" key="GridCell.Tab.0.center" timestamp="1616773588160">
+    <state width="1481" height="356" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616864449625" />
+    <state width="1481" height="356" key="GridCell.Tab.0.center" timestamp="1616864449625">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1487" height="620" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
-    <state width="1487" height="620" key="GridCell.Tab.0.left" timestamp="1616773588160">
+    <state width="1481" height="356" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616864449625" />
+    <state width="1481" height="356" key="GridCell.Tab.0.left" timestamp="1616864449624">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1487" height="620" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
-    <state width="1487" height="620" key="GridCell.Tab.0.right" timestamp="1616773588160">
+    <state width="1481" height="356" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616864449624" />
+    <state width="1481" height="356" key="GridCell.Tab.0.right" timestamp="1616864449625">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1487" height="620" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616773588160" />
-    <state width="1878" height="435" key="GridCell.Tab.1.bottom" timestamp="1615215307592">
+    <state width="1481" height="356" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616864449625" />
+    <state width="939" height="356" key="GridCell.Tab.1.bottom" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="435" key="GridCell.Tab.1.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615215307592" />
-    <state width="1878" height="435" key="GridCell.Tab.1.center" timestamp="1615215307592">
+    <state width="939" height="356" key="GridCell.Tab.1.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616776792134" />
+    <state width="939" height="356" key="GridCell.Tab.1.center" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="435" key="GridCell.Tab.1.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615215307592" />
-    <state width="1878" height="435" key="GridCell.Tab.1.left" timestamp="1615215307592">
+    <state width="939" height="356" key="GridCell.Tab.1.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616776792134" />
+    <state width="939" height="356" key="GridCell.Tab.1.left" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="435" key="GridCell.Tab.1.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615215307592" />
-    <state width="1878" height="435" key="GridCell.Tab.1.right" timestamp="1615215307592">
+    <state width="939" height="356" key="GridCell.Tab.1.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616776792134" />
+    <state width="939" height="356" key="GridCell.Tab.1.right" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="435" key="GridCell.Tab.1.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1615215307592" />
+    <state width="939" height="356" key="GridCell.Tab.1.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616776792134" />
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog" timestamp="1616174490770">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>

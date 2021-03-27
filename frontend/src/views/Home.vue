@@ -2,16 +2,16 @@
   <div class="home">
     <div v-if="impImg">
       <ImportImg ref="importImg"
-                 v-on:update="update('impImg', $event)"/>
+                 v-on:update="impImg = false;"/>
     </div>
     <div v-if="editImg">
       <EditImg ref="editImg"
                :imageId="image.id"
                :imageUrl="image.url"
-               v-on:update="update('editImg', $event)"/>
+               v-on:update="editImg = false"/>
     </div>
     <Peepshow ref="peepshow"
-              v-on:update="update('editImg', $event)"/>
+              v-on:update="editImg = true;"/>
     <button v-on:click="impImg = true;">Importer</button>
   </div>
 </template>
@@ -62,6 +62,7 @@ export default {
       if (list.length > 0) {
         this.image = list[index];
       }
+      location.reload();
     },
     getPreviousImage() {
       let tmp = this.httpApi.getImageIndex(this.image);

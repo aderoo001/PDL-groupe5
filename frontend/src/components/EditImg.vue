@@ -199,7 +199,7 @@ export default {
             if (value.id !== this.imageId) this.$parent.image = value;
           });
       this.httpApi.deleteImage(this.imageId);
-      this.close();
+      this.$parent.update('editImg', false);
     },
     print() {
       console.log(this.$parent.image);

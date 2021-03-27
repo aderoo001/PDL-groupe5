@@ -37,7 +37,7 @@ export default {
       if (this.file !== '') {
         this.$parent.httpApi.postImage(this.file);
       }
-      this.close();
+      this.$parent.update('impImg', false);
     },
   },
 }
