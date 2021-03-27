@@ -17,6 +17,7 @@
                 <option value="color">Colorisation</option>
                 <option value="blur">Flou</option>
                 <option value="outline" v-on:click="processImage">Contour</option>
+                <option value="grayLevel" v-on:click="processImage">Lv Gris</option>
               </select>
             </label>
           </div>
@@ -177,6 +178,12 @@ export default {
               );
           break;
         case "outline":
+          this.imageUrl =
+              this.makeUrl(
+                  this.algorithm
+              );
+          break;
+        case "grayLevel":
           this.imageUrl =
               this.makeUrl(
                   this.algorithm
