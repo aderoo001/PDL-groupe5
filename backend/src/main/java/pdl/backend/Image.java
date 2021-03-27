@@ -25,11 +25,6 @@ public class Image {
         return name;
     }
 
-    //setters
-    public void setName(final String name) {
-        this.name = name;
-    }
-
     public String getFormat() {
         return format;
     }
@@ -38,4 +33,8 @@ public class Image {
         return data;
     }
 
+    //setters
+    public void setName(final String name) {
+        this.name = name;
+    }
 }

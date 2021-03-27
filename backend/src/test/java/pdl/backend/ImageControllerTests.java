@@ -11,11 +11,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.core.io.ClassPathResource;
+import java.nio.file.Files;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,10 +36,12 @@ public class ImageControllerTests {
 
     @Test
     @Order(1)
-    public void getImageListShouldReturnSuccess() throws Exception {
+    //test besoin 4, images par défaut présentes ?
+    public void getImageListShouldReturnCorrectValues() throws Exception {
         System.out.println("--- Test getImageList ---");
+        String tmp = "[{'id':0,'name':'test.jpeg','size':50362,'format':'jpeg','url':'http://localhost:8080/images/0'},{'id':1,'name':'cheval2.jpeg','size':50424,'format':'jpeg','url':'http://localhost:8080/images/1'}]";
         try {
-            this.mockMvc.perform(get("/images")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images")).andExpect(content().json(tmp));
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -40,10 +51,11 @@ public class ImageControllerTests {
 
     @Test
     @Order(2)
+    //test besoin 6, 404 not found
     public void getImageShouldReturnNotFound() throws Exception {
         System.out.println("--- Test getImageShouldReturnNotFound ---");
         try {
-            this.mockMvc.perform(get("/images/15")).andExpect(status().isNotFound());
+            this.mockMvc.perform(get("/images/50")).andExpect(status().isNotFound());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -53,6 +65,7 @@ public class ImageControllerTests {
 
     @Test
     @Order(3)
+    //test besoin 6, 200 ok
     public void getImageShouldReturnSuccess() throws Exception {
         System.out.println("--- Test getImageShouldReturnSuccess ---");
         try {
@@ -66,36 +79,47 @@ public class ImageControllerTests {
 
     @Test
     @Order(4)
-    public void deleteImageShouldReturnBadRequest() throws Exception {
-        System.out.println("--- Test deleteImageShouldReturnBadRequest ---");
-        try {
-            this.mockMvc.perform(delete("/images/george")).andExpect(status().isBadRequest());
-            System.out.println("Ok ✓");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new Exception(e);
-        }
+    //test besoin 5, 201 created
+    public void createImageShouldReturnSuccess() throws Exception {
+		System.out.println("--- Test createImageShouldReturnSuccess ---");
+        final ClassPathResource imgFile = new ClassPathResource("images/reconnues/aube.jpeg");
+        byte[] fileContent;
+        fileContent = Files.readAllBytes(imgFile.getFile().toPath());
+        MockMultipartFile tmp = new MockMultipartFile("file", "mock.jpeg", "image/jpeg", fileContent);
+		try {
+            this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(tmp)).andExpect(status().isCreated());
+			System.out.println("Ok ✓");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new Exception(e);
+		}
     }
 
     @Test
     @Order(5)
-    public void deleteImageShouldReturnNotFound() throws Exception {
-        System.out.println("--- Test deleteImageShouldReturnNotFound ---");
-        try {
-            this.mockMvc.perform(delete("/images/15")).andExpect(status().isNotFound());
-            System.out.println("Ok ✓");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new Exception(e);
-        }
+    //test besoin 5, 415 unsupported media type
+    public void createImageShouldReturnUnsupportedMediaType() throws Exception {
+        System.out.println("--- Test createImageShouldReturnUnsupportedMediaType ---");
+        final ClassPathResource imgFile = new ClassPathResource("images/non_reconnues/image.txt");
+        byte[] fileContent;
+        fileContent = Files.readAllBytes(imgFile.getFile().toPath());
+        MockMultipartFile tmp = new MockMultipartFile("file", "mock.txt", "text/plain", fileContent);
+		try {
+            this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(tmp)).andExpect(status().isUnsupportedMediaType());
+			System.out.println("Ok ✓");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new Exception(e);
+		}
     }
 
     @Test
     @Order(6)
-    public void deleteImageShouldReturnSuccess() throws Exception {
-        System.out.println("--- Test deleteImageShouldReturnSuccess ---");
+    //test besoin 7, 404 not found
+    public void deleteImageShouldReturnNotFound() throws Exception {
+        System.out.println("--- Test deleteImageShouldReturnNotFound ---");
         try {
-            this.mockMvc.perform(delete("/images/0")).andExpect(status().isOk());
+            this.mockMvc.perform(delete("/images/50")).andExpect(status().isNotFound());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -105,30 +129,16 @@ public class ImageControllerTests {
 
     @Test
     @Order(7)
-    public void createImageShouldReturnSuccess() throws Exception {
-        // TODO
-//		System.out.println("--- Test createImageShouldReturnSuccess ---");
-//		try {
-//			this.mockMvc.perform(post("/images")).andExpect(status().isOk());
-//			System.out.println("Ok ✓");
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			throw new Exception(e);
-//		}
-    }
-
-    @Test
-    @Order(8)
-    public void createImageShouldReturnUnsupportedMediaType() throws Exception {
-        // TODO
-//		System.out.println("--- Test createImageShouldReturnUnsupportedMediaType ---");
-//		try {
-//			this.mockMvc.perform(post("/images")).andExpect(status().isUnsupportedMediaType());
-//			System.out.println("Ok ✓");
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			throw new Exception(e);
-//		}
+    //test besoin 7, 200 ok
+    public void deleteImageShouldReturnSucces() throws Exception {
+        System.out.println("--- Test deleteImageShouldReturnSuccess ---");
+        try {
+            this.mockMvc.perform(delete("/images/0")).andExpect(status().isOk());
+            System.out.println("Ok ✓");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new Exception(e);
+        }
     }
 
     // Test  Get /images/{id} et get /images/{id}?opt [9-19]
@@ -642,7 +652,7 @@ public class ImageControllerTests {
         System.out.println("--- Test getTiffWithGrayLevelShouldRetourn500 ---");
 
         try {
-            this.mockMvc.perform(get("/images/1?algorithm=grayLevek"))
+            this.mockMvc.perform(get("/images/1?algorithm=grayLevel"))
                     .andExpect(status().isInternalServerError());
             System.out.println("Ok ✓");
         } catch (Exception e) {
