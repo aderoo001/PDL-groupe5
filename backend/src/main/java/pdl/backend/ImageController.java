@@ -65,9 +65,9 @@ public class ImageController {
   @RequestParam(value = "opt2",defaultValue = "null") String opt2
   ) {
 
-    System.out.println(algorithm.compareTo("increaseLuminosity") );
+    //System.out.println(algorithm.compareTo("increaseLuminosity") );
     //System.out.println("increaseLuminosity".getClass());
-    System.out.println(algorithm);
+    //System.out.println(algorithm);
 
     Optional<Image> image = this.imageDao.retrieve(id);
 
@@ -79,9 +79,9 @@ public class ImageController {
       
       try{
         input = ImageConverter.imageFromJPEGBytes(image.get().getData());
-        System.out.println("no error 1 ");
+        ///System.out.println("no error 1 ");
       }catch (Exception e) {
-        System.out.println("error 1 catch");
+        //System.out.println("error 1 catch");
       }
     }else{
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -91,16 +91,16 @@ public class ImageController {
     switch (algorithm) {
       case "increaseLuminosity":
       //?algorithm=increaseLuminosity&opt1=[0,255]
-      System.out.println(Integer.parseInt(opt1, 10));
+      //System.out.println(Integer.parseInt(opt1, 10));
       if(!(0<Integer.parseInt(opt1, 10) && Integer.parseInt(opt1, 10)<255)){
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
 
       try {
       ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
-      System.out.println("no error editLuminosityRGB ");
+      //System.out.println("no error editLuminosityRGB ");
       } catch (Exception e) {
-        System.out.println("error editLuminosityRGB  catch");
+        //System.out.println("error editLuminosityRGB  catch");
         
       }
       break;
@@ -117,9 +117,9 @@ public class ImageController {
 
         try{
           ImageChanger.HistoHSV(input,opt1);
-          System.out.println("no error histograme ");
+          // System.out.println("no error histograme ");
         }catch(Exception e){
-          System.out.println("error histograme  catch");
+          //System.out.println("error histograme  catch");
         }
 
       break;
@@ -127,16 +127,16 @@ public class ImageController {
       case "color":
       //?algorithm=color&opt1=[red,green,blue]
         
-        System.out.println(opt1);
+        //System.out.println(opt1);
         if(!(0<= Float.parseFloat(opt1) ) ){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         try{
           ImageChanger.Colored(input,Float.parseFloat(opt1));
-          System.out.println("no error color ");
+          //System.out.println("no error color ");
         }catch(Exception e){
-          System.out.println("error color catch");
+          //System.out.println("error color catch");
         }
 
       break;

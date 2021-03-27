@@ -139,9 +139,6 @@ public class ImageChanger{
 
     public static void convolution(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output,
 								   int[][] kernel) {
-
-		System.out.println("--convolution--");
-		float time = System.nanoTime();
 		int size = kernel.length;
 		int i = 0;
 		int j = 0;
@@ -173,9 +170,7 @@ public class ImageChanger{
 				outC.next().set(sum);
 			}
 		}
-		time = (float) ((System.nanoTime() - time) / pow(10, 9));
-		System.out.println("Temps d'execution -> " + time + "");
-		System.out.println();
+		
 	}
 
 
@@ -192,23 +187,53 @@ public class ImageChanger{
         
     }
     public static void Sobel(Img<UnsignedByteType> input){
-        final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
-        final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(img, 2, 1);
-        final IntervalView<UnsignedByteType> inputB = Views.hyperSlice(img, 2, 2);
-        
-        LoopBuilder.setImages(inputR,inputG,inputB).forEachPixel(
-            (r,g,b) -> { 
-				r.get();
-                g.get();
-                b.get();
-                
-                //r.set();
-                //g.set();
-                //b.set();
-            }  
-        );
+        Img<UnsignedByteType> horizontale = input;
+        Img<UnsignedByteType> verticale = input;
+        int[][] kernel_H1 = {
+            {-1, 0, 1},
+            {-2, 0, 2},
+            {-1, 0, 1}
+            };
+        int[][] kernel_H2 = {
+            {-1, -2, -1},
+            { 0,  0,  0},
+            { 1,  2,  1}
+            };
+
+        convolution(input,verticale,kernel_H1);
+        convolution(input,horizontale,kernel_H2);
+
 
     }
+
+    public static void Fusion(Img<UnsignedByteType> img1,Img<UnsignedByteType> img2){
+        final RandomAccess<UnsignedByteType> r1 = img1.randomAccess();
+        final RandomAccess<UnsignedByteType> r2 = img2.randomAccess();
+        //final RandomAccess<UnsignedByteType> F = outpout.randomAccess();
+
+
+
+        final int iw = (int) img1.max(0);
+        final int ih = (int) img1.max(1);
+        
+        // les valeurs sur les canaux rouge et vert sont mises à 0
+        for (int channel = 0; channel < 3; channel++) {
+            for (int y = 0; y <= ih; ++y) {
+                for (int x = 0; x <= iw; ++x) {
+                    r1.setPosition(x, 0);
+                    r1.setPosition(y, 1);
+                    r1.setPosition(channel, 2);
+                    r2.setPosition(x, 0);
+                    r2.setPosition(y, 1);
+                    r2.setPosition(channel, 2);
+                    
+                    r1.get().set(r1.get().get() + r2.get().get());
+                }
+            }
+        }
+    }
+    
+
     
     public static void rgbToHsv(int r, int g, int b, float[] hsv){
 		
