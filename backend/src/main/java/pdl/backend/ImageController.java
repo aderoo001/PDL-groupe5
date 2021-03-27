@@ -203,7 +203,7 @@ public class ImageController {
 
     @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ArrayNode getImageList() throws IOException {
+    public ArrayNode getImageList() {
 
         ArrayNode nodes = mapper.createArrayNode();
 

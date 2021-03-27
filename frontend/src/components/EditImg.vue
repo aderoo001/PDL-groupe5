@@ -53,7 +53,7 @@
               <div>
                 <span style="position: absolute; left: 0">0</span>
                 <span>180</span>
-                <span style="position: absolute; right: 0">359</span>
+                <span style="position: absolute; right: 0">360</span>
               </div>
               <div>
                 <label>
@@ -70,7 +70,7 @@
             <div v-if="algorithm === 'blur'">
               <label>
                 <select ref="blur_1"
-                        style="margin-right: 5px; margin-left: 5px;">
+                        style="margin-right: 5px;">
                   <option value="M">Moyen</option>
                   <option value="G">Gaussien</option>
                 </select>
@@ -78,9 +78,9 @@
               <label>
                 <input ref="blur_2"
                        min="0"
-                       style="width: 50px; margin-right: 5px; margin-left: 5px;"
                        type="number"
                        value="0"
+                       class="edt-number-input"
                        v-on:change="processImage">
               </label>
             </div>
@@ -199,7 +199,7 @@ export default {
             if (value.id !== this.imageId) this.$parent.image = value;
           });
       this.httpApi.deleteImage(this.imageId);
-      this.close();
+      this.$parent.update('editImg', false);
     },
     print() {
       console.log(this.$parent.image);
@@ -259,7 +259,7 @@ select {
   background-color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  height: 50px;
+  height: 60px;
   width: 500px;
   margin: 0 auto;
 }
@@ -282,11 +282,23 @@ select {
 
 .edt-opt {
   position: absolute;
-  display: inline;
-  bottom: 0;
-  top: 0;
   left: 155px;
   width: fit-content;
+  height: 30px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.edt-opt .edt-range {
+  position: absolute;
+  top: -3px;
+}
+
+.edt-opt .edt-number-input {
+  position: absolute;
+  top: -2px;
+  display: inline-flex;
+  width: 50px;
 }
 
 .edt-filter {
