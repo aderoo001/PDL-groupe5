@@ -145,7 +145,7 @@ export default {
               this.makeUrl(
                   this.algorithm,
                   this.$refs.blur_1.value,
-                  this.$refs.blur_2.value
+                  this.$refs.blur_2.value*2+1
               );
           break;
         case "outline":

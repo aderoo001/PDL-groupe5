@@ -144,9 +144,9 @@ public class ImageController {
       case "blur":
       //?algorithm=blur&opt1=["M","G"]&opt2=[0,+∞[
         
-        System.out.println(Integer.parseInt(opt1, 10));
-        System.out.println(Integer.parseInt(opt2, 10));
-        /if(   !(0<=Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
+        //System.out.println(Integer.parseInt(opt1, 10));
+        //System.out.println(Integer.parseInt(opt2, 10));
+        if(!(0<Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -154,7 +154,7 @@ public class ImageController {
           ImageChanger.Blured(input,opt1,Integer.parseInt(opt2, 10));
           System.out.println("no error blur ");
         }catch(Exception e){
-          System.out.println("error blur catch");
+          e.printStackTrace();
         }
 
       break;
@@ -166,7 +166,8 @@ public class ImageController {
           ImageChanger.Outline(input);
           System.out.println("no error outline ");
         }catch(Exception e){
-          System.out.println("error outline  catch");
+          e.printStackTrace();
+          //System.out.println("error outline  catch");
         }
 
       break;
