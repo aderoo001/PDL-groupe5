@@ -109,7 +109,7 @@ public class ImageController {
       //?algorithm=histogram&opt1=[value,saturation]
 
         System.out.println(opt1);
-        if(!(opt1 == "value" || opt1 == "saturation" ) ){
+        if(!(opt1.equals("value") ||opt1.equals("saturation") ) ){
           System.out.println("errooooooorrrr");
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
           
@@ -119,6 +119,7 @@ public class ImageController {
           ImageChanger.HistoHSV(input,opt1);
           // System.out.println("no error histograme ");
         }catch(Exception e){
+          e.printStackTrace();
           //System.out.println("error histograme  catch");
         }
 
@@ -142,32 +143,50 @@ public class ImageController {
       break;
 
       case "blur":
-      //?algorithm=blur&opt1=["M","G"]&opt2=[0,+∞[
-        
-        //System.out.println(Integer.parseInt(opt1, 10));
-        //System.out.println(Integer.parseInt(opt2, 10));
-        if(!(0<Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
-          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        //?algorithm=blur&opt1=["M","G"]&opt2=[0,+∞[
+
+        if (!(0 <= Integer.parseInt(opt2, 10))
+                || !(opt1.equals("M")
+                || opt1.equals("G"))) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        try{
-          ImageChanger.Blured(input,opt1,Integer.parseInt(opt2, 10));
-          System.out.println("no error blur ");
-        }catch(Exception e){
-          e.printStackTrace();
+        try {
+            int size = Integer.parseInt(opt2, 10);
+            int[][] kernel = ImageChanger.gaussien();
+            if (opt2.equals("M")) {
+                kernel = ImageChanger.average(size);
+            }
+            switch (image.get().getFormat()) {
+                case "jpeg":
+                    ImageChanger.blured(input, input, kernel, 3);
+                    break;
+                case "tif":
+                    ImageChanger.blured(input, input, kernel, 1);
+                    break;
+            }
+            System.out.println("no error blur ");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
       break;
 
-      case "outline" :
-      //?algorithm=outline
-
-        try{
-          ImageChanger.Outline(input);
-          System.out.println("no error outline ");
-        }catch(Exception e){
-          e.printStackTrace();
-          //System.out.println("error outline  catch");
+      case "outline":
+        //?algorithm=outline
+        try {
+            switch (image.get().getFormat()) {
+                case "jpeg":
+                    assert input != null;
+                    ImageChanger.Outline(input, 3);
+                    break;
+                case "tif":
+                    assert input != null;
+                    ImageChanger.Outline(input, 1);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
       break;

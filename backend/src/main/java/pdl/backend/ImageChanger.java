@@ -106,37 +106,7 @@ public class ImageChanger{
         
 
     }
-    //besoin 17 :
-    /*
-    L’utilisateur peut appliquer un flou à l’image sélectionnée. 
-    Il peut définir le filtre appliqué (moyen ou gaussien) et 
-    choisir le niveau de flou. 
-    La convolution est appliquée sur les trois canaux R, G et B.
-     */
-    public static void Blured(Img<UnsignedByteType> input,String choix,int size){
-
-        int[][] kernel = {
-            {1, 2, 3, 2, 1},
-            {2, 6, 8, 6, 2},
-            {3, 8, 10, 8, 3},
-            {2, 6, 8, 6, 2},
-            {1, 2, 3, 2, 1}
-        };
-        if(choix.equals("M")){//filtre moyen.
-            kernel = new int[size][size];
-            for (int x = 0; x < size; x++) {
-                for (int y = 0; y < size; y++) {
-                    kernel[x][y] = 1;
-                }
-            }
-        }
-        //FromRGBtoG(input);
-        convolution_Color(input, input, kernel);
-
-
-
-
-    }
+    
 
     public static void convolution(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output,
 								   int[][] kernel) {
@@ -182,56 +152,76 @@ public class ImageChanger{
     Le résultat sera issu d’une convolution par le filtre de Sobel. 
     La convolution sera appliquée sur la version en niveaux de gris de l’image.
      */
-    public static void Outline(Img<UnsignedByteType> input){
-        FromRGBtoG(input);
-        Sobel(input);
-        
+    public static void Outline(Img<UnsignedByteType> input,
+                               int depth){
+        convolution_Gray(input, depth);
     }
-    public static void Sobel(Img<UnsignedByteType> input){
-        Img<UnsignedByteType> horizontale = input;
-        Img<UnsignedByteType> verticale = input;
+
+    public static void convolution_Gray(final Img<UnsignedByteType> output,
+                                        int depth) {
+        if (depth > 1) FromRGBtoG(output);
+        Img<UnsignedByteType> input = output.copy();
+
         int[][] kernel_H1 = {
-            {-1, 0, 1},
-            {-2, 0, 2},
-            {-1, 0, 1}
-            };
+                {-1, 0, 1},
+                {-2, 0, 2},
+                {-1, 0, 1}
+        };
         int[][] kernel_H2 = {
-            {-1, -2, -1},
-            { 0,  0,  0},
-            { 1,  2,  1}
-            };
+                {-1, -2, -1},
+                {0, 0, 0},
+                {1, 2, 1}
+        };
+        int size = 3;
+        int n= (size/2);
 
-        convolution_Gray(verticale,input,kernel_H1);
-        convolution_Gray(verticale,input,kernel_H2);
-        //Fusion(verticale,horizontale);
-    }
+        final IntervalView<UnsignedByteType> expandedView = Views.expandMirrorDouble(input, size, size,3);
+        final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
+        final RandomAccess<UnsignedByteType> r1 = output.randomAccess();
 
-    public static void Fusion(Img<UnsignedByteType> img1,Img<UnsignedByteType> img2){
-        final RandomAccess<UnsignedByteType> r1 = img1.randomAccess();
-        final RandomAccess<UnsignedByteType> r2 = img2.randomAccess();
-        //final RandomAccess<UnsignedByteType> F = outpout.randomAccess();
-
-
-
-        final int iw = (int) img1.max(0);
-        final int ih = (int) img1.max(1);
-        
-        // les valeurs sur les canaux rouge et vert sont mises à 0
-        for (int channel = 0; channel < 3; channel++) {
+        final int iw = (int) input.max(0);
+        final int ih = (int) output.max(1);
+    
+        for (int x = 0; x <= iw; ++x) {
             for (int y = 0; y <= ih; ++y) {
-                for (int x = 0; x <= iw; ++x) {
-                    r1.setPosition(x, 0);
-                    r1.setPosition(y, 1);
-                    r1.setPosition(channel, 2);
-                    r2.setPosition(x, 0);
-                    r2.setPosition(y, 1);
-                    r2.setPosition(channel, 2);
-                    
-                    r1.get().set(r1.get().get() + r2.get().get());
+                r.setPosition(x, 0);
+                r.setPosition(y, 1);
+                r1.setPosition(x, 0);
+                r1.setPosition(y, 1);
+                int i=0;
+                int j = 0;
+                int meanH = 0;
+                int meanV = 0;
+                
+                for (int u= -n; u<=n; ++u){
+                    for(int v= -n; v<=n; ++v){
+                        r.setPosition(x+u, 0);
+                        r.setPosition(y+v, 1);
+                        meanH += r.get().get() * kernel_H1[i][j];
+                        meanV += r.get().get() * kernel_H2[i][j];
+
+                        if (i<size ) i++;
+                        if(i==size) i=0;
+                    }
+                    if (j < size) j++;
+                    if (j == size) j = 0;
                 }
+
+                double tmp = Math.sqrt(
+                        meanH*meanH + meanV*meanV
+                );
+
+                for (int chan = 0; chan < depth; chan++) {
+                    if (depth > 1) r1.setPosition(chan, 2);
+                    r1.get().set((int) tmp);
+                }
+
             }
         }
     }
+
+    
+
     
 
     
@@ -440,6 +430,8 @@ public class ImageChanger{
 
         final int iw = (int) input.max(0);
         final int ih = (int) input.max(1);
+        r.setPosition(0, 2);
+        r1.setPosition(0, 2);
     
         for (int x = 0; x <= iw; ++x) {
             for (int y = 1; y <= ih; ++y) {
@@ -450,47 +442,86 @@ public class ImageChanger{
                 final UnsignedByteType val = r1.get();
                 int i=0;
                 int j=0;   
-                
+                int mean =0;
                 for (int u= -n; u<=n; ++u){
                     for(int v= -n; v<=n; ++v){
-                        
                         r.setPosition(x+u, 0);
                         r.setPosition(y+v, 1);
-                        final UnsignedByteType val1 = r.get();
-                        //if((kernelcount(kernel))
-                        
-                        int mean = val1.get()*kernel[i][j]/size;
-                        
-                        val.set(val.get()+mean);
-                        if (i<size ){
-                            i++;
+                        mean += r.get().get()*kernel[i][j];
+
+                        if (i<size) i++;
+                        if(i==size) i=0;
                         }
-                        if(i==size){
-                            i=0;
-                        }
-                        
-                        
-                    }
-                    if (j<size){
-                        j++;
-                    }
-                    if(j==size){
-                        j=0;
-                    }
-                    
+                    if (j<size) j++;
+                    if(j==size) j=0;
                 }
+                if(mean >= 255){
+                    r1.get().set(255);
+                    r.setPosition(1, 2);
+                    r1.setPosition(1, 2);
+                    r1.get().set(255);
+                    r.setPosition(2, 2);
+                    r1.setPosition(2, 2);
+                    r1.get().set(255);
+                    r.setPosition(0, 2);
+                    r1.setPosition(0, 2);
+                }
+                else{
+                    r1.get().set(0);
+                    r.setPosition(1, 2);
+                    r1.setPosition(1, 2);
+                    r1.get().set(0);
+                    r.setPosition(2, 2);
+                    r1.setPosition(2, 2);
+                    r1.get().set(0);
+                    r.setPosition(0, 2);
+                    r1.setPosition(0, 2);
+                }
+                   
+                    
+                    
+
                     
             }
         }
     }
 
-    public static void convolution_Color(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output, int[][] kernel) {
+    //    Kernels
+    public static int[][] average(int size) {
+        int[][] kernel = new int[size][size];
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                kernel[x][y] = 1;
+            }
+        }
+        return kernel;
+    }
+
+    public static int[][] gaussien() {
+        int[][] kernel = {
+            {1, 2, 3, 2, 1},
+            {2, 6, 8, 6, 2},
+            {3, 8, 10, 8, 3},
+            {2, 6, 8, 6, 2},
+            {1, 2, 3, 2, 1}
+        };
+        return kernel;
+    }
+    
+
+    public static void blured(
+            final Img<UnsignedByteType> input,
+            final Img<UnsignedByteType> output,
+            int[][] kernel,
+            int depth) {
+
         int size= kernel.length;
         int n= (size/2);
         System.out.println(size);
 
 
-        final IntervalView<UnsignedByteType> expandedView = Views.expandMirrorDouble(input,size,size,3 );
+        final IntervalView<UnsignedByteType> expandedView =
+                Views.expandMirrorDouble(input,size, size, size);
         //final ExtendedRandomAccessibleInterval<UnsignedByteType, Img<UnsignedByteType>> extIn = Views.extendZero(input);
 
         final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
@@ -498,59 +529,45 @@ public class ImageChanger{
 
         //pour le filtre moyenneur
         System.out.println(kernel.length);
-        int tmp = r.get
-        
-        
 
         // pour le gros du truc
 
         final int iw = (int) input.max(0);
         final int ih = (int) input.max(1);
-        for (int channel = 0;channel <=2;channel ++){
-            r.setPosition(channel, 2);
-            r1.setPosition(channel, 2);
-            for (int x = 1; x <= iw; ++x) {
-                for (int y = 1; y <= ih; ++y) {
+        for (int channel = 0;channel < depth;channel ++){
+            if (depth > 1) {
+                r.setPosition(channel, 2);
+                r1.setPosition(channel, 2);
+            }
+            for (int x = 0; x <= iw; ++x) {
+                for (int y = 0; y <= ih; ++y) {
                     r.setPosition(x, 0);
                     r.setPosition(y, 1);
                     r1.setPosition(x, 0);
                     r1.setPosition(y, 1);
-                    
-                    final UnsignedByteType val = r1.get();
+
                     int i=0;
-                    int j=0;    
+                    int j=0;
                     int mean = 0;
+
                     for (int u= -n; u<=n; ++u){
                         for(int v= -n; v<=n; ++v){
-                            
                             r.setPosition(x+u, 0);
                             r.setPosition(y+v, 1);
-                            final UnsignedByteType val1 = r.get();
-                            mean += val1.get()*kernel[i][j];
-                            
-                            if (i<size ){
-                                i++;
-                            }
-                            if(i==size){
-                                i=0;
-                            }
-                            
-                            
+                            mean += r.get().get()*kernel[i][j];
+
+                            if (i<size) i++;
+                            if(i==size) i=0;
                         }
-                        if (j<size){
-                            j++;
-                        }
-                        if(j==size){
-                            j=0;
-                        }
-                        
+                        if (j<size) j++;
+                        if(j==size) j=0;
                     }
                     mean = mean /(kernelcount(kernel));
-                    val.set(val.get()+mean);
+                    r1.get().set(mean);
                     if(mean > 255){
                         System.out.println(mean);
                     }
-                        
+
                 }
             }
         }
