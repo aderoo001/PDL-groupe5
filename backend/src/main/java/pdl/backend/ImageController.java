@@ -76,41 +76,42 @@ public class ImageController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
 
-      try {
-      ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
-      //System.out.println("no error editLuminosityRGB ");
-      } catch (Exception e) {
-        //System.out.println("error editLuminosityRGB  catch");
-        
-      }
-      break;
+          try {
+              assert input != null;
+              ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
+              //System.out.println("no error editLuminosityRGB ");
+          } catch (Exception e) {
+              //System.out.println("error editLuminosityRGB  catch");
 
-      case "histogram":
-      //?algorithm=histogram&opt1=[value,saturation]
+          }
+          break;
 
-        System.out.println(opt1);
-        if(!(opt1 == "value" || opt1 == "saturation" ) ){
-          System.out.println("errooooooorrrr");
-          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-          
-        }
+        case "histogram":
+            //?algorithm=histogram&opt1=[value,saturation]
 
-        try{
-          ImageChanger.HistoHSV(input,opt1);
-          // System.out.println("no error histograme ");
-        }catch(Exception e){
-          //System.out.println("error histograme  catch");
-        }
+            System.out.println(opt1);
+            if (!(opt1.equals("value") || opt1.equals("saturation"))) {
+                System.out.println("errooooooorrrr");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-      break;
+            }
 
-      case "color":
-      //?algorithm=color&opt1=[red,green,blue]
-        
-        //System.out.println(opt1);
-        if(!(0<= Float.parseFloat(opt1) ) ){
-          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+            try {
+                ImageChanger.HistoHSV(input, opt1);
+                // System.out.println("no error histograme ");
+            } catch (Exception e) {
+                //System.out.println("error histograme  catch");
+            }
+
+            break;
+
+        case "color":
+            //?algorithm=color&opt1=[red,green,blue]
+
+            //System.out.println(opt1);
+            if (!(0 <= Float.parseFloat(opt1))) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
 
         try{
             ImageChanger.Colored(input, Float.parseFloat(opt1));
@@ -132,15 +133,17 @@ public class ImageController {
 
             try {
                 int size = Integer.parseInt(opt2, 10);
-                int[][] kernel = ImageChanger.gaussien();
+                int[][] kernel = ImageChanger.gaussien(size);
                 if (opt2.equals("M")) {
                     kernel = ImageChanger.average(size);
                 }
                 switch (image.get().getFormat()) {
                     case "jpeg":
+                        assert input != null;
                         ImageChanger.blured(input, input, kernel, 3);
                         break;
                     case "tif":
+                        assert input != null;
                         ImageChanger.blured(input, input, kernel, 1);
                         break;
                 }
@@ -153,46 +156,54 @@ public class ImageController {
 
         case "outline":
             //?algorithm=outline
+            try {
+                switch (image.get().getFormat()) {
+                    case "jpeg":
+                        assert input != null;
+                        ImageChanger.Outline(input, 3);
+                        break;
+                    case "tif":
+                        assert input != null;
+                        ImageChanger.Outline(input, 1);
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-            try{
-          ImageChanger.Outline(input);
-          System.out.println("no error outline ");
-        }catch(Exception e){
-                System.out.println("error outline  catch");
-        }
+            break;
 
+        case "grayLevel":
+            //?algorithm=grayLevel
+
+            try {
+                ImageChanger.FromRGBtoG(input);
+                System.out.println("no error GrayLevel");
+            } catch (Exception e) {
+                System.out.println("error GrayLevel  catch");
+            }
       break;
 
-      case "grayLevel":
-      //?algorithm=grayLevel
+        case "":
 
-        try{
-        ImageChanger.FromRGBtoG(input);
-        System.out.println("no error GrayLevel");
-        }catch(Exception e){
-          System.out.println("error GrayLevel  catch");
-        }
-      break;
+            break;
 
-      case "":
+        default:
 
-      break;
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-      default:
 
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-      
     }
-      try{
-        tab = ImageConverter.imageToJPEGBytes(input);
+      try {
+          assert input != null;
+          tab = ImageConverter.imageToJPEGBytes(input);
       } catch (Exception e) {
-        System.out.println("error 2 catch");
+          System.out.println("error 2 catch");
       }
       return ResponseEntity.ok()
               .contentType(MediaType.IMAGE_JPEG)
               .body(tab);
-    //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
     @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
@@ -216,7 +227,7 @@ public class ImageController {
 
     @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ArrayNode getImageList() throws IOException {
+    public ArrayNode getImageList() {
 
         ArrayNode nodes = mapper.createArrayNode();
 

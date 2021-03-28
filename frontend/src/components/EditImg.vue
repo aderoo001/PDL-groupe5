@@ -13,6 +13,7 @@
                 <option value="color">Colorisation</option>
                 <option value="blur">Flou</option>
                 <option value="outline" v-on:click="processImage">Contour</option>
+                <option value="grayLevel" v-on:click="processImage">Gris</option>
               </select>
             </label>
           </div>
