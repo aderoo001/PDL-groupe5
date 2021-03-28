@@ -109,11 +109,11 @@ public class ImageController {
       //?algorithm=histogram&opt1=[value,saturation]
 
         System.out.println(opt1);
-        /*if(!(opt1 == "value" || opt1 == "saturation" ) ){
+        if(!(opt1 == "value" || opt1 == "saturation" ) ){
           System.out.println("errooooooorrrr");
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
           
-        }*/
+        }
 
         try{
           ImageChanger.HistoHSV(input,opt1);
@@ -146,9 +146,9 @@ public class ImageController {
         
         System.out.println(Integer.parseInt(opt1, 10));
         System.out.println(Integer.parseInt(opt2, 10));
-        /*if(   !(0<=Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
+        /if(   !(0<=Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }*/
+        }
 
         try{
           ImageChanger.Blured(input,opt1,Integer.parseInt(opt2, 10));
