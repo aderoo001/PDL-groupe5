@@ -39,10 +39,16 @@ public class ImageChanger{
         while (inC.hasNext()) {
         inC.fwd();
         outC.fwd();
-        if (inC.get().get() < 255 - delta) {
-            outC.get().set(inC.get().get() + delta);
-        } else {
+        if (inC.get().get() +delta >=255) {
             outC.get().set(255);
+            
+        } else {
+            if(inC.get().get() +delta <=0){
+                outC.get().set(0);
+            }
+            else{
+                outC.get().set(inC.get().get() + delta);
+            }
         }
         }
     }
@@ -384,13 +390,23 @@ public class ImageChanger{
         return tab;
     }
 
-    public static float histogrammeCumule(Img<UnsignedByteType> img, int k,int SorV){
-        float[] tab= histogramme(img,SorV);
+    public static float[] histogrammeCumule(Img<UnsignedByteType> img, int k,int SorV){
+        float[] histo= histogramme(img,SorV);
+        float[] tab = new float[101];
         float sum = 0;
-        for(int i=0; i<k; i++){
-            sum = sum + tab[i];
+        for(int j = 0;j<101;j++){
+            tab[j] = 0;
         }
-        return sum;
+
+        for(int j = 0;j<101;j++){
+            sum = 0;
+            for(int i=0; i<=j; i++){
+                sum = sum + histo[i];
+            }
+            tab[j]= sum;
+
+        }
+        return tab;
     }
 
     public static float[] histogramme(Img<UnsignedByteType> img,int SorV){

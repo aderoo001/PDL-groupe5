@@ -86,7 +86,7 @@ public class ImageController {
 
     switch (algorithm) {
       case "increaseLuminosity":
-      if(!(0<Integer.parseInt(opt1, 10) && Integer.parseInt(opt1, 10)<255)){
+      if(!(-255<=Integer.parseInt(opt1, 10) && Integer.parseInt(opt1, 10)<=255)){
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
 
