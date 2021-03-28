@@ -222,10 +222,7 @@ public static int[][] average(int size) {
      */
     public static void Outline(Img<UnsignedByteType> input,
                                int depth){
-        if (depth > 1) FromRGBtoG(input);
-        Img<UnsignedByteType> tmp = input.copy();
-
-        convolution_Gray(tmp, input, depth);
+        convolution_Gray(input, depth);
     }
 
     public static void Fusion(
@@ -452,9 +449,10 @@ public static int[][] average(int size) {
         return tab;
     }
 
-    public static void convolution_Gray(final Img<UnsignedByteType> input,
-                                        final Img<UnsignedByteType> output,
+    public static void convolution_Gray(final Img<UnsignedByteType> output,
                                         int depth) {
+        if (depth > 1) FromRGBtoG(output);
+        Img<UnsignedByteType> input = output.copy();
 
         int[][] kernel_H1 = {
                 {-1, 0, 1},
@@ -473,7 +471,7 @@ public static int[][] average(int size) {
         final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
         final RandomAccess<UnsignedByteType> r1 = output.randomAccess();
 
-        final int iw = (int) output.max(0);
+        final int iw = (int) input.max(0);
         final int ih = (int) output.max(1);
     
         for (int x = 0; x <= iw; ++x) {

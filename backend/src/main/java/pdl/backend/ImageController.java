@@ -182,7 +182,7 @@ public class ImageController {
             } catch (Exception e) {
                 System.out.println("error GrayLevel  catch");
             }
-      break;
+          break;
 
         case "":
 
