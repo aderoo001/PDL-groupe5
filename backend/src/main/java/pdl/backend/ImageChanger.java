@@ -130,7 +130,7 @@ public class ImageChanger{
                 }
             }
         }
-        convolution(input, input, kernel);
+        convolution_Color(input, input, kernel);
 
 
 
@@ -200,10 +200,9 @@ public class ImageChanger{
             { 1,  2,  1}
             };
 
-        convolution(input,verticale,kernel_H1);
-        convolution(input,horizontale,kernel_H2);
-
-
+        convolution_Gray(input,verticale,kernel_H1);
+        convolution_Gray(input,horizontale,kernel_H2);
+        Fusion(verticale,horizontale);
     }
 
     public static void Fusion(Img<UnsignedByteType> img1,Img<UnsignedByteType> img2){
@@ -422,4 +421,131 @@ public class ImageChanger{
         );
         return tab;
     }
+
+    public static void convolution_Gray(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output, int[][] kernel) {
+        final IntervalView<UnsignedByteType> expandedView = Views.expandMirrorDouble(input, 1, 1 );
+        final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
+        final RandomAccess<UnsignedByteType> r1 = output.randomAccess();
+
+        //pour le filtre moyenneur
+
+        int size=kernel.length;
+        int n= (size/2);
+        
+
+        // pour le gros du truc
+
+        final int iw = (int) input.max(0);
+        final int ih = (int) input.max(1);
+    
+        for (int x = 0; x <= iw; ++x) {
+            for (int y = 1; y <= ih; ++y) {
+                r.setPosition(x, 0);
+                r.setPosition(y, 1);
+                r1.setPosition(x, 0);
+                r1.setPosition(y, 1);
+                final UnsignedByteType val = r1.get();
+                int i=0;
+                int j=0;    
+                
+                for (int u= -n; u<=n; ++u){
+                    for(int v= -n; v<=n; ++v){
+                        
+                        r.setPosition(x+u, 0);
+                        r.setPosition(y+v, 1);
+                        final UnsignedByteType val1 = r.get();
+                        int mean = val1.get()*kernel[i][j]/(kernelcount(kernel));
+                        val.set(val.get()+mean);
+                        if (i<size ){
+                            i++;
+                        }
+                        if(i==size){
+                            i=0;
+                        }
+                        
+                        
+                    }
+                    if (j<size){
+                        j++;
+                    }
+                    if(j==size){
+                        j=0;
+                    }
+                    
+                }
+                    
+            }
+        }
+    }
+
+    public static void convolution_Color(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output, int[][] kernel) {
+        final IntervalView<UnsignedByteType> expandedView = Views.expandMirrorDouble(input, 1, 1 );
+        final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
+        final RandomAccess<UnsignedByteType> r1 = output.randomAccess();
+
+        //pour le filtre moyenneur
+
+        int size=kernel.length;
+        int n= (size/2);
+        
+
+        // pour le gros du truc
+
+        final int iw = (int) input.max(0);
+        final int ih = (int) input.max(1);
+        for (int channel = 0;channel <3;channel ++)
+        for (int x = 0; x <= iw; ++x) {
+            for (int y = 1; y <= ih; ++y) {
+                r.setPosition(x, 0);
+                r.setPosition(y, 1);
+                r1.setPosition(x, 0);
+                r1.setPosition(y, 1);
+                r.setPosition(channel, 2);
+                r1.setPosition(channel, 2);
+                final UnsignedByteType val = r1.get();
+                int i=0;
+                int j=0;    
+                
+                for (int u= -n; u<=n; ++u){
+                    for(int v= -n; v<=n; ++v){
+                        
+                        r.setPosition(x+u, 0);
+                        r.setPosition(y+v, 1);
+                        final UnsignedByteType val1 = r.get();
+                        int mean = val1.get()*kernel[i][j]/(kernelcount(kernel));
+                        val.set(val.get()+mean);
+                        if (i<size ){
+                            i++;
+                        }
+                        if(i==size){
+                            i=0;
+                        }
+                        
+                        
+                    }
+                    if (j<size){
+                        j++;
+                    }
+                    if(j==size){
+                        j=0;
+                    }
+                    
+                }
+                    
+            }
+        }
+    }
+
+    public static int kernelcount(int[][] kernel){
+        int size=kernel.length;
+        int count = 0;
+        for(int i = 0;i<size;i++){
+            for(int j = 0;j<size;j++){
+                count = count +kernel[i][j];
+            
+            }
+        }
+        return count ;
+    }
+
 }
