@@ -326,105 +326,101 @@ public class ImageChanger{
 	}
 
     //*********************************************************************************** */
-    public static void aplanir_histograme_HSV(Img<UnsignedByteType> img,int SorV) {//3.3
+    public static void aplanir_histograme_HSV(Img<UnsignedByteType> img, int SorV) {//3.3
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
         final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(img, 2, 1);
         final IntervalView<UnsignedByteType> inputB = Views.hyperSlice(img, 2, 2);
-        float hsv[] = new float[3];
-        int rgb[] = new int[3];
+        float[] hsv = new float[3];
+        int[] rgb = new int[3];
 
-        final int iw = (int) img.max(0);
-        final int ih = (int) img.max(1);
-        float[] tab = LUT_histoHSV(img,SorV);
-        float bottom = 0;
-        float top = 100;
+        int[] tab = histogrammeCumule(img, SorV);
+//        float bottom = 0;
+//        float top = 100;
 
-        LoopBuilder.setImages(inputR,inputG,inputB).forEachPixel(
-                (r,g,b) -> { 
-                    rgbToHsv(r.get(),g.get(),b.get(),hsv);
-
-                    float val = hsv[SorV+1];
-
-                    if(tab[(int) val] > top){
-                        val = top;
-                    }else{
-                        if(tab[(int) val] < bottom){
-                            val =bottom ;
-                        }
-                        else{
-                            val = tab[(int) val];
-                        }
+        LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
+                (r, g, b) -> {
+                    rgbToHsv(r.get(), g.get(), b.get(), hsv);
+                    for (float val: hsv
+                         ) {
+                        System.out.println(val);
                     }
-                    //modification de l'image
-                    hsvToRgb(hsv[0], hsv[1], hsv[2], rgb);
-                    r.set((int) rgb[0]);
-                    g.set((int) rgb[1]);
-                    b.set((int) rgb[2]);
-                }  
-            );
+
+                    if (SorV == 0) {
+                        hsvToRgb(hsv[0], (float) (tab[Math.round(hsv[1])*100]*100)/100, hsv[2], rgb);
+                    }
+                    if (SorV == 1) {
+//                        System.out.println((tab[Math.round(hsv[2])*100]*100)/100);
+                        hsvToRgb(hsv[0], hsv[1], (float) (tab[Math.round(hsv[2])*100]*100)/100, rgb);
+                    }
+
+//                    float val = hsv[SorV + 1];
+//
+//                    if (tab[(int) val] > top) {
+//                        val = top;
+//                    } else {
+//                        if (tab[(int) val] < bottom) {
+//                            val = bottom;
+//                        } else {
+//                            val = tab[(int) val];
+//                        }
+//                    }
+
+                    r.set(rgb[0]);
+                    g.set(rgb[1]);
+                    b.set(rgb[2]);
+                }
+        );
     }
 
+    public static int[] LUT_histoHSV(Img<UnsignedByteType> img, int SorV) {
+        int[] tab = new int[101];
+        for (int i = 0; i < 101; i++) tab[i] = 0;
+        int[] C = histogrammeCumule(img, SorV);
 
-
-
-
-
-
-    public static float[] LUT_histoHSV(Img<UnsignedByteType> img,int SorV){
-        float[] tab = new float[101];
-        final int w = (int) img.max(0);
-        final int h = (int) img.max(1);
-        int n = w * h;
-        for(int i=0; i<101; i++){
-            float new_color = ((histogrammeCumule(img, i,SorV) * 100) / n);
-            if(new_color > 100){
+        for (int i = 0; i < 101; i++) {
+            int new_color = (C[i] * 100) / 100;
+            System.out.println(new_color);
+            if (new_color > 100) {
                 tab[i] = 100;
-            }
-            else if(new_color < 0){
-                tab[i] = 0;
-            }
-            else{
-                tab[i] = new_color;
-            }
+            } else tab[i] = Math.max(new_color, 0);
+        }
+        for (int val: tab
+             ) {
+            System.out.println(val);
         }
         return tab;
     }
 
-    public static float[] histogrammeCumule(Img<UnsignedByteType> img, int k,int SorV){
-        float[] histo= histogramme(img,SorV);
-        float[] tab = new float[101];
-        float sum = 0;
-        for(int j = 0;j<101;j++){
-            tab[j] = 0;
-        }
+    public static int[] histogrammeCumule(Img<UnsignedByteType> img, int SorV) {
+        int[] tab = histogramme(img, SorV);
+        int[] C = new int[101];
+		for (int n = 0; n < 101; n++) C[n] = 0;
 
-        for(int j = 0;j<101;j++){
-            sum = 0;
-            for(int i=0; i<=j; i++){
-                sum = sum + histo[i];
-            }
-            tab[j]= sum;
-
-        }
-        return tab;
+		for (int i = 0; i < 101; i++) {
+			for (int j = 0; j <= i; j++) {
+				C[i] = C[i] + tab[j];
+			}
+		}
+        return C;
     }
 
-    public static float[] histogramme(Img<UnsignedByteType> img,int SorV){
+    public static int[] histogramme(Img<UnsignedByteType> img, int SorV) {
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
         final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(img, 2, 1);
         final IntervalView<UnsignedByteType> inputB = Views.hyperSlice(img, 2, 2);
-        float[] tab= new float[101];
-        float hsv[] = new float[3];
+        int[] tab = new int[101];
+        for (int i = 0; i < 101; i++) tab[i] = 0;
+        float[] hsv = new float[3];
 
-        LoopBuilder.setImages(inputR,inputG,inputB).forEachPixel(
-            (r,g,b) -> { 
-                rgbToHsv(r.get(),g.get(),b.get(),hsv);
+        LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
+                (r, g, b) -> {
+                    rgbToHsv(r.get(), g.get(), b.get(), hsv);
 
-                float color = hsv[SorV+1];//devient sois le S ou le V de la valeur HSV de limage
-                //color=[0,100]
-                tab[(int) color] =tab[(int) color] + 1;
-                
-            }  
+                    float color = hsv[SorV + 1] * 100;//devient sois le S ou le V de la valeur HSV de limage
+//color=[0,100]
+                    tab[Math.round(color)] = tab[Math.round(color)] + 1;
+
+                }
         );
         return tab;
     }
