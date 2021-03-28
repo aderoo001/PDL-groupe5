@@ -420,14 +420,7 @@ public class ImageChanger{
         final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
         final RandomAccess<UnsignedByteType> r1 = output.randomAccess();
 
-        //pour le filtre moyenneur
-
         int K_count = kernelcount(kernel);
-
-        System.out.println(K_count);
-
-        // pour le gros du truc
-
         final int iw = (int) input.max(0);
         final int ih = (int) input.max(1);
         r.setPosition(0, 2);
@@ -517,7 +510,6 @@ public class ImageChanger{
 
         int size= kernel.length;
         int n= (size/2);
-        System.out.println(size);
 
 
         final IntervalView<UnsignedByteType> expandedView =
@@ -526,11 +518,6 @@ public class ImageChanger{
 
         final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
         final RandomAccess<UnsignedByteType> r1 = output.randomAccess();
-
-        //pour le filtre moyenneur
-        System.out.println(kernel.length);
-
-        // pour le gros du truc
 
         final int iw = (int) input.max(0);
         final int ih = (int) input.max(1);
@@ -564,9 +551,6 @@ public class ImageChanger{
                     }
                     mean = mean /(kernelcount(kernel));
                     r1.get().set(mean);
-                    if(mean > 255){
-                        System.out.println(mean);
-                    }
 
                 }
             }
@@ -586,28 +570,5 @@ public class ImageChanger{
         return count  ;
     }
 
-    /*public static void fromGtoRGB(final Img<UnsignedByteType> input){
-        final RandomAccess<UnsignedByteType> r = img.randomAccess();
-
-		final int iw = (int) img.max(0);
-		final int ih = (int) img.max(1);
-
-		for (int x = 0; x <= iw; ++x) {
-			for (int y = 0; y <= ih; ++y) {
-				r.setPosition(x, 0);
-				r.setPosition(y, 1);
-				final UnsignedByteType val = r.get();
-				if (val.get()+t > 255 )
-				    val.set(255);
-				else{
-					if(val.get()+t < 0)
-						val.set(0);
-					else
-					val.set(val.get()+t);
-				}					
-			}
-		}
-
-    }*/
 
 }

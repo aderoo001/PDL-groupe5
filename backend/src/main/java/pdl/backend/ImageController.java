@@ -65,10 +65,6 @@ public class ImageController {
   @RequestParam(value = "opt2",defaultValue = "null") String opt2
   ) {
 
-    //System.out.println(algorithm.compareTo("increaseLuminosity") );
-    //System.out.println("increaseLuminosity".getClass());
-    //System.out.println(algorithm);
-
     Optional<Image> image = this.imageDao.retrieve(id);
 
     SCIFIOImgPlus<UnsignedByteType> input = null;
@@ -79,9 +75,9 @@ public class ImageController {
       
       try{
         input = ImageConverter.imageFromJPEGBytes(image.get().getData());
-        ///System.out.println("no error 1 ");
       }catch (Exception e) {
-        //System.out.println("error 1 catch");
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
       }
     }else{
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -90,61 +86,47 @@ public class ImageController {
 
     switch (algorithm) {
       case "increaseLuminosity":
-      //?algorithm=increaseLuminosity&opt1=[0,255]
-      //System.out.println(Integer.parseInt(opt1, 10));
       if(!(0<Integer.parseInt(opt1, 10) && Integer.parseInt(opt1, 10)<255)){
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
 
       try {
       ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
-      //System.out.println("no error editLuminosityRGB ");
       } catch (Exception e) {
-        //System.out.println("error editLuminosityRGB  catch");
-        
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
       }
       break;
 
       case "histogram":
-      //?algorithm=histogram&opt1=[value,saturation]
-
-        System.out.println(opt1);
         if(!(opt1.equals("value") ||opt1.equals("saturation") ) ){
-          System.out.println("errooooooorrrr");
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
           
         }
-
         try{
           ImageChanger.HistoHSV(input,opt1);
-          // System.out.println("no error histograme ");
         }catch(Exception e){
           e.printStackTrace();
-          //System.out.println("error histograme  catch");
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
       break;
 
       case "color":
-      //?algorithm=color&opt1=[red,green,blue]
-        
-        //System.out.println(opt1);
         if(!(0<= Float.parseFloat(opt1) ) ){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         try{
           ImageChanger.Colored(input,Float.parseFloat(opt1));
-          //System.out.println("no error color ");
         }catch(Exception e){
-          //System.out.println("error color catch");
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
       break;
 
       case "blur":
-        //?algorithm=blur&opt1=["M","G"]&opt2=[0,+∞[
-
         if (!(0 <= Integer.parseInt(opt2, 10))
                 || !(opt1.equals("M")
                 || opt1.equals("G"))) {
@@ -154,7 +136,7 @@ public class ImageController {
         try {
             int size = Integer.parseInt(opt2, 10);
             int[][] kernel = ImageChanger.gaussien();
-            if (opt2.equals("M")) {
+            if (opt1.equals("M")) {
                 kernel = ImageChanger.average(size);
             }
             switch (image.get().getFormat()) {
@@ -165,15 +147,14 @@ public class ImageController {
                     ImageChanger.blured(input, input, kernel, 1);
                     break;
             }
-            System.out.println("no error blur ");
         } catch (Exception e) {
-            e.printStackTrace();
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
       break;
 
       case "outline":
-        //?algorithm=outline
         try {
             switch (image.get().getFormat()) {
                 case "jpeg":
@@ -187,18 +168,18 @@ public class ImageController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
       break;
 
       case "grayLevel":
-      //?algorithm=grayLevel
-
         try{
         ImageChanger.FromRGBtoG(input);
-        System.out.println("no error GrayLevel");
+        
         }catch(Exception e){
-          System.out.println("error GrayLevel  catch");
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
       break;
 
@@ -215,12 +196,12 @@ public class ImageController {
       try{
         tab = ImageConverter.imageToJPEGBytes(input);
       } catch (Exception e) {
-        System.out.println("error 2 catch");
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
       }
       return ResponseEntity.ok()
               .contentType(MediaType.IMAGE_JPEG)
               .body(tab);
-    //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
     @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
