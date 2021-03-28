@@ -3,6 +3,8 @@ package pdl.backend;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.scif.img.SCIFIOImgPlus;
+import net.imglib2.type.numeric.integer.UnsignedByteType;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,28 +20,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
-
-
-import static net.imglib2.img.array.ArrayImgs.unsignedBytes;
-//********** */
-import io.scif.img.SCIFIOImgPlus;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
-
-/******** */
-import net.imglib2.RandomAccess;
-import net.imglib2.img.Img;
-import net.imglib2.img.array.ArrayImgFactory;
-import io.scif.SCIFIO;
-import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
-import io.scif.img.ImgSaver;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.exception.IncompatibleTypeException;
-import net.imglib2.Cursor;
-import java.io.File;
-import net.imglib2.view.Views;
-import net.imglib2.view.IntervalView;
-import net.imglib2.loops.LoopBuilder;
 
 
 @RestController
@@ -133,41 +113,52 @@ public class ImageController {
         }
 
         try{
-          ImageChanger.Colored(input,Float.parseFloat(opt1));
-          //System.out.println("no error color ");
-        }catch(Exception e){
-          //System.out.println("error color catch");
+            ImageChanger.Colored(input, Float.parseFloat(opt1));
+            //System.out.println("no error color ");
+        } catch (Exception e) {
+            //System.out.println("error color catch");
         }
 
-      break;
+          break;
 
-      case "blur":
-      //?algorithm=blur&opt1=["M","G"]&opt2=[0,+∞[
-        
-        //System.out.println(Integer.parseInt(opt1, 10));
-        //System.out.println(Integer.parseInt(opt2, 10));
-        if(!(0<Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G")) ){
-          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        case "blur":
+            //?algorithm=blur&opt1=["M","G"]&opt2=[0,+∞[
 
-        try{
-          ImageChanger.Blured(input,opt1,Integer.parseInt(opt2, 10));
-          System.out.println("no error blur ");
-        }catch(Exception e){
-          e.printStackTrace();
-        }
+            if (!(0 <= Integer.parseInt(opt2, 10))
+                    || !(opt1.equals("M")
+                    || opt1.equals("G"))) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
 
-      break;
+            try {
+                int size = Integer.parseInt(opt2, 10);
+                int[][] kernel = ImageChanger.gaussien();
+                if (opt2.equals("M")) {
+                    kernel = ImageChanger.average(size);
+                }
+                switch (image.get().getFormat()) {
+                    case "jpeg":
+                        ImageChanger.blured(input, input, kernel, 3);
+                        break;
+                    case "tif":
+                        ImageChanger.blured(input, input, kernel, 1);
+                        break;
+                }
+                System.out.println("no error blur ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-      case "outline" :
-      //?algorithm=outline
+            break;
 
-        try{
+        case "outline":
+            //?algorithm=outline
+
+            try{
           ImageChanger.Outline(input);
           System.out.println("no error outline ");
         }catch(Exception e){
-          e.printStackTrace();
-          //System.out.println("error outline  catch");
+                System.out.println("error outline  catch");
         }
 
       break;

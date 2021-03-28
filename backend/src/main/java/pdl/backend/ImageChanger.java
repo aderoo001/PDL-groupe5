@@ -2,26 +2,17 @@ package pdl.backend;
 
 import net.imglib2.RandomAccess;
 import net.imglib2.img.Img;
-import net.imglib2.img.array.ArrayImgFactory;
-import io.scif.SCIFIO;
-import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
-import io.scif.img.ImgSaver;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.exception.IncompatibleTypeException;
 import net.imglib2.Cursor;
-import java.io.File;
 import net.imglib2.view.Views;
 import net.imglib2.view.IntervalView;
 import net.imglib2.loops.LoopBuilder;
 
 /************* */
-import static java.lang.StrictMath.pow;
 
 
 import net.imglib2.algorithm.neighborhood.Neighborhood;
 import net.imglib2.algorithm.neighborhood.RectangleShape;
-import net.imglib2.view.ExtendedRandomAccessibleInterval;
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -113,7 +104,10 @@ public class ImageChanger{
     choisir le niveau de flou. 
     La convolution est appliquée sur les trois canaux R, G et B.
      */
-    public static void Blured(Img<UnsignedByteType> input,String choix,int size){
+    public static void Blured(
+            Img<UnsignedByteType> input,
+            String choix,
+            int size) {
 
         int[][] kernel = {
             {1, 2, 3, 2, 1},
@@ -130,13 +124,32 @@ public class ImageChanger{
                 }
             }
         }
-        //FromRGBtoG(input);
-        convolution_Color(input, input, kernel);
-
-
-
-
+//        blured(input, input, kernel);
     }
+
+//    Kernels
+    public static int[][] average(int size) {
+        int[][] kernel = new int[size][size];
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                kernel[x][y] = 1;
+            }
+        }
+        return kernel;
+    }
+
+    public static int[][] gaussien() {
+        int[][] kernel = {
+            {1, 2, 3, 2, 1},
+            {2, 6, 8, 6, 2},
+            {3, 8, 10, 8, 3},
+            {2, 6, 8, 6, 2},
+            {1, 2, 3, 2, 1}
+        };
+        return kernel;
+    }
+
+
 
     public static void convolution(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output,
 								   int[][] kernel) {
@@ -150,8 +163,8 @@ public class ImageChanger{
 			}
 		}
 
-		IntervalView<UnsignedByteType> intervalIn = Views.expandMirrorDouble(input, size , size ,size);
-		IntervalView<UnsignedByteType> intervalOut = Views.expandMirrorDouble(output,size , size ,size);
+		IntervalView<UnsignedByteType> intervalIn = Views.expandMirrorDouble(input, size / 2, size / 2, size/2);
+		IntervalView<UnsignedByteType> intervalOut = Views.expandMirrorDouble(output, size / 2, size / 2, size/2);
 		final Cursor<UnsignedByteType> outC = Views.iterable(intervalOut).cursor();
 		final RectangleShape shape = new RectangleShape(size / 2, false);
 
@@ -449,7 +462,7 @@ public class ImageChanger{
                 r1.setPosition(y, 1);
                 final UnsignedByteType val = r1.get();
                 int i=0;
-                int j=0;   
+                int j=0;
                 
                 for (int u= -n; u<=n; ++u){
                     for(int v= -n; v<=n; ++v){
@@ -458,9 +471,9 @@ public class ImageChanger{
                         r.setPosition(y+v, 1);
                         final UnsignedByteType val1 = r.get();
                         //if((kernelcount(kernel))
-                        
+
                         int mean = val1.get()*kernel[i][j]/size;
-                        
+
                         val.set(val.get()+mean);
                         if (i<size ){
                             i++;
@@ -484,13 +497,19 @@ public class ImageChanger{
         }
     }
 
-    public static void convolution_Color(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output, int[][] kernel) {
+    public static void blured(
+            final Img<UnsignedByteType> input,
+            final Img<UnsignedByteType> output,
+            int[][] kernel,
+            int depth) {
+
         int size= kernel.length;
         int n= (size/2);
         System.out.println(size);
 
 
-        final IntervalView<UnsignedByteType> expandedView = Views.expandMirrorDouble(input,size,size,3 );
+        final IntervalView<UnsignedByteType> expandedView =
+                Views.expandMirrorDouble(input,size, size, size);
         //final ExtendedRandomAccessibleInterval<UnsignedByteType, Img<UnsignedByteType>> extIn = Views.extendZero(input);
 
         final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
@@ -498,59 +517,45 @@ public class ImageChanger{
 
         //pour le filtre moyenneur
         System.out.println(kernel.length);
-        int tmp = r.get
-        
-        
 
         // pour le gros du truc
 
         final int iw = (int) input.max(0);
         final int ih = (int) input.max(1);
-        for (int channel = 0;channel <=2;channel ++){
-            r.setPosition(channel, 2);
-            r1.setPosition(channel, 2);
-            for (int x = 1; x <= iw; ++x) {
-                for (int y = 1; y <= ih; ++y) {
+        for (int channel = 0;channel < depth;channel ++){
+            if (depth > 1) {
+                r.setPosition(channel, 2);
+                r1.setPosition(channel, 2);
+            }
+            for (int x = 0; x <= iw; ++x) {
+                for (int y = 0; y <= ih; ++y) {
                     r.setPosition(x, 0);
                     r.setPosition(y, 1);
                     r1.setPosition(x, 0);
                     r1.setPosition(y, 1);
-                    
-                    final UnsignedByteType val = r1.get();
+
                     int i=0;
-                    int j=0;    
+                    int j=0;
                     int mean = 0;
+
                     for (int u= -n; u<=n; ++u){
                         for(int v= -n; v<=n; ++v){
-                            
                             r.setPosition(x+u, 0);
                             r.setPosition(y+v, 1);
-                            final UnsignedByteType val1 = r.get();
-                            mean += val1.get()*kernel[i][j];
-                            
-                            if (i<size ){
-                                i++;
-                            }
-                            if(i==size){
-                                i=0;
-                            }
-                            
-                            
+                            mean += r.get().get()*kernel[i][j];
+
+                            if (i<size) i++;
+                            if(i==size) i=0;
                         }
-                        if (j<size){
-                            j++;
-                        }
-                        if(j==size){
-                            j=0;
-                        }
-                        
+                        if (j<size) j++;
+                        if(j==size) j=0;
                     }
                     mean = mean /(kernelcount(kernel));
-                    val.set(val.get()+mean);
+                    r1.get().set(mean);
                     if(mean > 255){
                         System.out.println(mean);
                     }
-                        
+
                 }
             }
         }
@@ -566,7 +571,7 @@ public class ImageChanger{
             
             }
         }
-        return count  ;
+        return count ;
     }
 
     /*public static void fromGtoRGB(final Img<UnsignedByteType> input){
@@ -587,7 +592,7 @@ public class ImageChanger{
 						val.set(0);
 					else
 					val.set(val.get()+t);
-				}					
+				}
 			}
 		}
 
