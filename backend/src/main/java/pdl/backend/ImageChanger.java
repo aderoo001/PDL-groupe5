@@ -23,16 +23,13 @@ import net.imglib2.algorithm.neighborhood.Neighborhood;
 import net.imglib2.algorithm.neighborhood.RectangleShape;
 import net.imglib2.view.ExtendedRandomAccessibleInterval;
 
-//import java.util.ArrayList;
-//import java.util.List;
+
 
 
 public class ImageChanger{
 
 //besoin 14:
-/*
 
- */
     public static void EditLuminosityRGB(Img<UnsignedByteType> input, Img<UnsignedByteType> output, int delta) {
         final Cursor<UnsignedByteType> inC = input.localizingCursor();
         final Cursor<UnsignedByteType> outC = output.localizingCursor();
@@ -112,44 +109,6 @@ public class ImageChanger{
         
 
     }
-    
-
-    public static void convolution(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output,
-								   int[][] kernel) {
-		int size = kernel.length;
-		int i = 0;
-		int j = 0;
-		int div = 0;
-		for (int[] ints : kernel) {
-			for (int y = 0; y < kernel.length; y++) {
-				div += ints[y];
-			}
-		}
-
-		IntervalView<UnsignedByteType> intervalIn = Views.expandMirrorDouble(input, size , size ,size);
-		IntervalView<UnsignedByteType> intervalOut = Views.expandMirrorDouble(output,size , size ,size);
-		final Cursor<UnsignedByteType> outC = Views.iterable(intervalOut).cursor();
-		final RectangleShape shape = new RectangleShape(size / 2, false);
-
-		for (Neighborhood<UnsignedByteType> localNeighborhood : shape.neighborhoods(intervalIn)) {
-			int sum = 0;
-			for (UnsignedByteType value : localNeighborhood) {
-				sum += value.get() * kernel[i][j];
-				j++;
-				if (j == kernel.length) {
-					j = 0;
-					i++;
-				}
-				if (i == kernel.length) i = 0;
-			}
-			sum = sum / div;
-			if (outC.hasNext()) {
-				outC.next().set(sum);
-			}
-		}
-		
-	}
-
 
     //besoin 18 :
     /*
@@ -225,11 +184,6 @@ public class ImageChanger{
             }
         }
     }
-
-    
-
-    
-
     
     public static void rgbToHsv(int r, int g, int b, float[] hsv){
 		
@@ -425,6 +379,8 @@ public class ImageChanger{
         return tab;
     }
 
+
+    //sert pour outline
     public static void convolution_Gray(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output, int[][] kernel) {
         int size=kernel.length;
         int n= (size/2);
@@ -491,7 +447,7 @@ public class ImageChanger{
         }
     }
 
-    //    Kernels
+    //  fonction pour créé ou appeler les  Kernels
     public static int[][] average(int size) {
         int[][] kernel = new int[size][size];
         for (int x = 0; x < size; x++) {
@@ -513,7 +469,13 @@ public class ImageChanger{
         return kernel;
     }
     
-
+    /*Besoin 17:*/
+    /**
+     *L’utilisateur peut appliquer un flou à l’image sélectionnée.
+      Il peut définir le filtre appliqué (moyen ou gaussien) et 
+      choisir le niveau de flou.
+      La convolution est appliquée sur les trois canaux R, G et B.
+     * / */
     public static void blured(
             final Img<UnsignedByteType> input,
             final Img<UnsignedByteType> output,
@@ -526,8 +488,6 @@ public class ImageChanger{
 
         final IntervalView<UnsignedByteType> expandedView =
                 Views.expandMirrorDouble(input,size, size, size);
-        //final ExtendedRandomAccessibleInterval<UnsignedByteType, Img<UnsignedByteType>> extIn = Views.extendZero(input);
-
         final RandomAccess<UnsignedByteType> r = expandedView.randomAccess();
         final RandomAccess<UnsignedByteType> r1 = output.randomAccess();
 
