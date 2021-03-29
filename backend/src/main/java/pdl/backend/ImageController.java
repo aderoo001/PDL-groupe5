@@ -221,6 +221,9 @@ public class ImageController {
             //Nom de fichier
             n.put("name", img.getName());
 
+            //format
+            n.put("format", img.getFormat());
+
             //taille de l'image
             int height = 0;
             int width = 0;
@@ -235,10 +238,14 @@ public class ImageController {
                 e.printStackTrace();
             }
 
-            n.put("size", height * width);
-
-            //format
-            n.put("format", img.getFormat());
+            if(img.getFormat().equals("jpeg")){
+                String msg = Integer.toString(height)+'*'+Integer.toString(width)+"*3";
+                n.put("size", msg);
+            }
+            else{
+                String msg = Integer.toString(height)+'*'+Integer.toString(width)+"*1";
+                n.put("size", msg);
+            }
 
             //url
             n.put("url", "http://localhost:8080/images/" + img.getId());
