@@ -3,20 +3,16 @@
     <div class="peep-img-box">
       <img alt=""
            class="peep-img"
-           v-bind:src="$parent.imageUrl"
-           v-on:click="$parent.update('edtImg', $parent.imageId)">
+           v-bind:src="$parent.image.url"
+           v-on:click="$emit('update', true);">
     </div>
     <div class="peep-selector">
-      <div v-for="image in $parent.httpApi.response"
-           :key="image.id" class="peep-selector-btn-box">
-        <button v-if="$parent.imageId === image.id"
-                class="peep-selector-btn-selected"
-                v-on:click="getImageUrl(image.id)">
-        </button>
-        <button v-else
-                class="peep-selector-btn"
-                v-on:click="getImageUrl(image.id)">
-        </button>
+      <div class="btn-grp">
+        <div class="btn" v-on:click="$parent.getPreviousImage">Prev</div>
+        <div class="display-nav">
+          {{ $parent.httpApi.getImageIndex($parent.image) + 1 }}/{{ $parent.httpApi.response.length }}
+        </div>
+        <div class="btn" v-on:click="$parent.getNextImage">Next</div>
       </div>
     </div>
   </div>
@@ -24,20 +20,15 @@
 
 <script>
 export default {
-  name: "Peepshow",
-  methods: {
-    getImageUrl(id) {
-      this.$parent.imageId = id;
-      this.$parent.imageUrl = this.$parent.httpApi.getImageUrl(id);
-    },
-    print() {
-      console.log(this.imageId);
-    },
-  }
+  name: "Peepshow"
 }
 </script>
 
 <style scoped>
+img:hover {
+  opacity: 75%;
+}
+
 h3 {
   margin: 40px 0 0;
 }
@@ -76,32 +67,9 @@ a {
   height: 10vh;
 }
 
-.peep-selector-btn-box {
-  display: inline;
-  margin-top: 5vh;
-  margin-inline: 1vh;
-  width: 10px;
-  height: 5vh
-}
-
-.peep-selector-btn {
-  height: 17px;
-  width: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.peep-selector-btn:hover {
-  background-color: darkslategrey;
-}
-
-.peep-selector-btn-selected {
-  height: 17px;
-  width: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: grey;
+.display-nav {
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 </style>

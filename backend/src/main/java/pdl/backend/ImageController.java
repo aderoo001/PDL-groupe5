@@ -3,6 +3,8 @@ package pdl.backend;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.scif.img.SCIFIOImgPlus;
+import net.imglib2.type.numeric.integer.UnsignedByteType;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,28 +20,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
-
-
-import static net.imglib2.img.array.ArrayImgs.unsignedBytes;
-//********** */
-import io.scif.img.SCIFIOImgPlus;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
-
-/******** */
-import net.imglib2.RandomAccess;
-import net.imglib2.img.Img;
-import net.imglib2.img.array.ArrayImgFactory;
-import io.scif.SCIFIO;
-import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
-import io.scif.img.ImgSaver;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.exception.IncompatibleTypeException;
-import net.imglib2.Cursor;
-import java.io.File;
-import net.imglib2.view.Views;
-import net.imglib2.view.IntervalView;
-import net.imglib2.loops.LoopBuilder;
 
 
 @RestController
@@ -101,7 +81,6 @@ public class ImageController {
       }
     }else{
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
     }
 
     switch (algorithm) {
@@ -130,8 +109,7 @@ public class ImageController {
           e.printStackTrace();
           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-      break;
+         break;
 
       case "color":
         if(!(0<= Float.parseFloat(opt1) ) ){
@@ -144,8 +122,6 @@ public class ImageController {
           e.printStackTrace();
           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-      break;
 
       case "blur":
         if (!(0 <= Integer.parseInt(opt2, 10))
@@ -172,8 +148,8 @@ public class ImageController {
           e.printStackTrace();
           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        break;
 
-      break;
 
       case "outline":
         try {
@@ -191,8 +167,7 @@ public class ImageController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-      break;
+        break;
 
       case "grayLevel":
         try{
@@ -206,13 +181,23 @@ public class ImageController {
 
       case "":
 
-      break;
+                break;
 
-      default:
+            default:
 
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-      
+
+        }
+        try {
+            tab = ImageConverter.imageToJPEGBytes(input);
+        } catch (Exception e) {
+            System.out.println("error 2 catch");
+        }
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(tab);
+        //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
       try{
         tab = ImageConverter.imageToJPEGBytes(input);
@@ -224,6 +209,7 @@ public class ImageController {
               .contentType(MediaType.IMAGE_JPEG)
               .body(tab);
   }
+
 
     @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
@@ -239,14 +225,19 @@ public class ImageController {
     public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
                                       RedirectAttributes redirectAttributes) throws IOException {
         Image image = new Image(file.getOriginalFilename(), file.getBytes(), FilenameUtils.getExtension(file.getOriginalFilename()));
-        this.imageDao.create(image);
-        redirectAttributes.addAttribute("id", image.getId());
-        return new ResponseEntity<>(HttpStatus.OK);
+        if(image.getFormat().equals("jpeg") || image.getFormat().equals("tif")){
+            this.imageDao.create(image);
+            redirectAttributes.addAttribute("id", image.getId());
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        }
     }
 
     @RequestMapping(value = "/images", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ArrayNode getImageList() throws IOException {
+    public ArrayNode getImageList() {
 
         ArrayNode nodes = mapper.createArrayNode();
 
@@ -258,6 +249,9 @@ public class ImageController {
 
             //Nom de fichier
             n.put("name", img.getName());
+
+            //format
+            n.put("format", img.getFormat());
 
             //taille de l'image
             int height = 0;
@@ -273,10 +267,14 @@ public class ImageController {
                 e.printStackTrace();
             }
 
-            n.put("size", height * width);
-
-            //format
-            n.put("format", img.getFormat());
+            if(img.getFormat().equals("jpeg")){
+                String msg = Integer.toString(height)+'*'+Integer.toString(width)+"*3";
+                n.put("size", msg);
+            }
+            else{
+                String msg = Integer.toString(height)+'*'+Integer.toString(width)+"*1";
+                n.put("size", msg);
+            }
 
             //url
             n.put("url", "http://localhost:8080/images/" + img.getId());
