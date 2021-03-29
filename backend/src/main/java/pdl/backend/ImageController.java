@@ -56,7 +56,27 @@ public class ImageController {
     this.imageDao = imageDao;
   }
 
-  
+  /*
+  la fonction GetImage 
+  prend des information dans un URL 
+  et modifie une image presente dans l'ImageDao 
+  que l'on trouve grace a son Id
+  elle prend en paramettre :
+  -un entier id (pour retrouver l'Image a modifier)
+  -un String algorithm 
+  (pour trouver l'algorithme de modification d'image a appliquer sur l'image)
+  -un String opt1 
+  (qui sert de premier paramettre a l'algorithme )
+  -un String opt2
+  (qui sert de deuxieme paramettre a l'algorithme si l'algorithme a besoin d'un dexieme paramettre)
+  la fonction GetImage renvoie des erreur :
+  si la requete n'est pas bonne elle renvoi un code d'erreur 400
+  si les options ne correspondent pas au parametre de la fonction choisi
+  elle renvoi aussi un code  d'erreur 400
+  si la fonction choisie ne fonctionne pas elle renvoie un code d'erreur 500
+  elle renvoi si l'image n'est pas trouver un code d'erreur 404
+  et si la fonction compile correctement elle renvoi un code 200 .
+  */
   @RequestMapping(value = "/images/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
   public ResponseEntity<?> getImage(
   @PathVariable("id") long id,
@@ -86,6 +106,7 @@ public class ImageController {
 
     switch (algorithm) {
       case "increaseLuminosity":
+      
       if(!(-255<=Integer.parseInt(opt1, 10) && Integer.parseInt(opt1, 10)<=255)){
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
@@ -93,7 +114,7 @@ public class ImageController {
       try {
       ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
       } catch (Exception e) {
-        e.printStackTrace();
+        e.printStackTrace(); les erreur 
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
       }
       break;
