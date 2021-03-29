@@ -22,7 +22,7 @@
             <td>OS</td>
             <td align="center">Ubuntu</br>20.10</td>
             <td align="center">value</td>
-            <td align="center">Debian</br>8.3.0-6</td>
+            <td align="center">Debian</br>Buster</td>
         </tr>
     </tbody>
 </table>
