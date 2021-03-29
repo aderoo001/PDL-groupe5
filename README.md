@@ -8,8 +8,6 @@
 
 **Environement de travail:**
 
-*** Export HTML ***
-*******************
 <table>
     <thead>
         <tr>
