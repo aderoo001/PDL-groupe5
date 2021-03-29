@@ -1,9 +1,7 @@
 # PDL-groupe5
 
-### Test
+**OS compatible(s) avec le serveur:**<br>
+-Ubuntu 20.04.2.0
 
-version OS:
-max: Ubuntu 20.04.2.0
-
-version firefox:
-max: 87.0
+**Navigateur(s) compatible(s) avec le client:**<br>
+-Mozilla Firefox (testé en 87.0)
