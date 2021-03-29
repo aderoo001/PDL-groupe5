@@ -10,6 +10,8 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
 import net.imglib2.view.IntervalView;
 import net.imglib2.view.Views;
 
+import java.util.ArrayList;
+
 //import java.util.ArrayList;
 //import java.util.List;
 
@@ -62,9 +64,6 @@ de l’image représentée dans l’espace HSV.
 */
     public static void HistoHSV(Img<UnsignedByteType> input, String choix) {
         int SorV = 0;
-        if (choix.equals("saturation")) {//convolution sur la saturation
-            SorV = 0;
-        }
         if (choix.equals("value")) {//convolution sur la value
             SorV = 1;
         }
@@ -326,61 +325,24 @@ La convolution sera appliquée sur la version en niveaux de gris de l’image.
         int[] rgb = new int[3];
 
         int[] tab = histogrammeCumule(img, SorV);
-//        float bottom = 0;
-//        float top = 100;
+        for (int i = 0; i < 101; i++) {
+            tab[i] = tab[i] * 100 / tab[100];
+        }
 
         LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
                 (r, g, b) -> {
                     rgbToHsv(r.get(), g.get(), b.get(), hsv);
-                    for (float val: hsv
-                         ) {
-                        System.out.println(val);
-                    }
-
                     if (SorV == 0) {
-                        hsvToRgb(hsv[0], (float) (tab[Math.round(hsv[1])*100]*100)/100, hsv[2], rgb);
+                        hsvToRgb(hsv[0], (float) tab[Math.round(hsv[1] * 100)], hsv[2], rgb);
                     }
                     if (SorV == 1) {
-//                        System.out.println((tab[Math.round(hsv[2])*100]*100)/100);
-                        hsvToRgb(hsv[0], hsv[1], (float) (tab[Math.round(hsv[2])*100]*100)/100, rgb);
+                        hsvToRgb(hsv[0], hsv[1], (float) tab[Math.round(hsv[2] * 100)], rgb);
                     }
-
-//                    float val = hsv[SorV + 1];
-//
-//                    if (tab[(int) val] > top) {
-//                        val = top;
-//                    } else {
-//                        if (tab[(int) val] < bottom) {
-//                            val = bottom;
-//                        } else {
-//                            val = tab[(int) val];
-//                        }
-//                    }
-
                     r.set(rgb[0]);
                     g.set(rgb[1]);
                     b.set(rgb[2]);
                 }
         );
-    }
-
-    public static int[] LUT_histoHSV(Img<UnsignedByteType> img, int SorV) {
-        int[] tab = new int[101];
-        for (int i = 0; i < 101; i++) tab[i] = 0;
-        int[] C = histogrammeCumule(img, SorV);
-
-        for (int i = 0; i < 101; i++) {
-            int new_color = (C[i] * 100) / 100;
-            System.out.println(new_color);
-            if (new_color > 100) {
-                tab[i] = 100;
-            } else tab[i] = Math.max(new_color, 0);
-        }
-        for (int val: tab
-             ) {
-            System.out.println(val);
-        }
-        return tab;
     }
 
     public static int[] histogrammeCumule(Img<UnsignedByteType> img, int SorV) {

@@ -32,7 +32,6 @@
     <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v1 - front-besoin10">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageChanger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +187,7 @@
       <workItem from="1616174409713" duration="3436000" />
       <workItem from="1616954672403" duration="295000" />
       <workItem from="1616970354409" duration="662000" />
+      <workItem from="1617010617501" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="innit commit">
       <created>1615213335713</created>
