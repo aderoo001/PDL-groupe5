@@ -25,143 +25,161 @@ import java.util.Optional;
 @RestController
 public class ImageController {
 
-    private final ImageDao imageDao;
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
-    @Autowired
-    private ObjectMapper mapper;
+  @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
+  @Autowired
+  private ObjectMapper mapper;
 
-    @Autowired
-    public ImageController(ImageDao imageDao) {
-        this.imageDao = imageDao;
+  private final ImageDao imageDao;
+
+  @Autowired
+  public ImageController(ImageDao imageDao) {
+    this.imageDao = imageDao;
+  }
+
+  /*
+  la fonction GetImage 
+  prend des information dans un URL 
+  et modifie une image presente dans l'ImageDao 
+  que l'on trouve grace a son Id
+  elle prend en paramettre :
+  -un entier id (pour retrouver l'Image a modifier)
+  -un String algorithm 
+  (pour trouver l'algorithme de modification d'image a appliquer sur l'image)
+  -un String opt1 
+  (qui sert de premier paramettre a l'algorithme )
+  -un String opt2
+  (qui sert de deuxieme paramettre a l'algorithme si l'algorithme a besoin d'un dexieme paramettre)
+  la fonction GetImage renvoie des erreur :
+  si la requete n'est pas bonne elle renvoi un code d'erreur 400
+  si les options ne correspondent pas au parametre de la fonction choisi
+  elle renvoi aussi un code  d'erreur 400
+  si la fonction choisie ne fonctionne pas elle renvoie un code d'erreur 500
+  elle renvoi si l'image n'est pas trouver un code d'erreur 404
+  et si la fonction compile correctement elle renvoi un code 200 .
+  */
+  @RequestMapping(value = "/images/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+  public ResponseEntity<?> getImage(
+  @PathVariable("id") long id,
+  @RequestParam(value = "algorithm", defaultValue = "") String algorithm,
+  @RequestParam(value = "opt1",defaultValue = "null") String opt1,
+  @RequestParam(value = "opt2",defaultValue = "null") String opt2
+  ) {
+
+    Optional<Image> image = this.imageDao.retrieve(id);
+
+    SCIFIOImgPlus<UnsignedByteType> input = null;
+    byte[] tab = null;
+    if (image.isPresent()) {
+
+      //Conversion byte[] -> SCIFIOImgPlus<UnsignedByteType>
+      
+      try{
+        input = ImageConverter.imageFromJPEGBytes(image.get().getData());
+      }catch (Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }else{
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    switch (algorithm) {
+      case "increaseLuminosity":
+      
+      if(!(-255<=Integer.parseInt(opt1, 10) && Integer.parseInt(opt1, 10)<=255)){
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
 
-    @RequestMapping(value = "/images/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<?> getImage(
-            @PathVariable("id") long id,
-            @RequestParam(value = "algorithm", defaultValue = "") String algorithm,
-            @RequestParam(value = "opt1", defaultValue = "null") String opt1,
-            @RequestParam(value = "opt2", defaultValue = "null") String opt2
-    ) {
+      try {
+      ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
+      } catch (Exception e) {
+        e.printStackTrace(); les erreur 
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+      break;
 
-        System.out.println(algorithm.compareTo("increaseLuminosity"));
-        //System.out.println("increaseLuminosity".getClass());
-        System.out.println(algorithm);
-
-        Optional<Image> image = this.imageDao.retrieve(id);
-
-        SCIFIOImgPlus<UnsignedByteType> input = null;
-        byte[] tab = null;
-        if (image.isPresent()) {
-
-            //Conversion byte[] -> SCIFIOImgPlus<UnsignedByteType>
-
-            try {
-                input = ImageConverter.imageFromJPEGBytes(image.get().getData());
-                System.out.println("no error 1 ");
-            } catch (Exception e) {
-                System.out.println("error 1 catch");
-            }
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-        }
-
-        switch (algorithm) {
-            case "increaseLuminosity":
-                //?algorithm=increaseLuminosity&opt1=[0,255]
-                System.out.println(Integer.parseInt(opt1, 10));
-                if (!(0 < Integer.parseInt(opt1, 10) && Integer.parseInt(opt1, 10) < 255)) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
-
-                try {
-                    ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
-                    System.out.println("no error editLuminosityRGB ");
-                } catch (Exception e) {
-                    System.out.println("error editLuminosityRGB  catch");
-
-                }
-                break;
-
-            case "histogram":
-                //?algorithm=histogram&opt1=[value,saturation]
-
-                System.out.println(opt1);
-        /*if(!(opt1 == "value" || opt1 == "saturation" ) ){
-          System.out.println("errooooooorrrr");
+      case "histogram":
+        if(!(opt1.equals("value") ||opt1.equals("saturation") ) ){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
           
-        }*/
+        }
+        try{
+          ImageChanger.HistoHSV(input,opt1);
+        }catch(Exception e){
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+         break;
 
-                try {
-                    ImageChanger.HistoHSV(input, opt1);
-                    System.out.println("no error histograme ");
-                } catch (Exception e) {
-                    System.out.println("error histograme  catch");
-                }
+      case "color":
+        if(!(0<= Float.parseFloat(opt1) ) ){
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-                break;
+        try{
+          ImageChanger.Colored(input,Float.parseFloat(opt1));
+        }catch(Exception e){
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-            case "color":
-                //?algorithm=color&opt1=[red,green,blue]
+      case "blur":
+        if (!(0 <= Integer.parseInt(opt2, 10))
+                || !(opt1.equals("M")
+                || opt1.equals("G"))) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-                System.out.println(opt1);
-                if (!(0 <= Float.parseFloat(opt1))) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
+        try {
+            int size = Integer.parseInt(opt2, 10);
+            int[][] kernel = ImageChanger.gaussien();
+            if (opt1.equals("M")) {
+                kernel = ImageChanger.average(size);
+            }
+            switch (image.get().getFormat()) {
+                case "jpeg":
+                    ImageChanger.blured(input, input, kernel, 3);
+                    break;
+                case "tif":
+                    ImageChanger.blured(input, input, kernel, 1);
+                    break;
+            }
+        } catch (Exception e) {
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        break;
 
-                try {
-                    ImageChanger.Colored(input, Float.parseFloat(opt1));
-                    System.out.println("no error color ");
-                } catch (Exception e) {
-                    System.out.println("error color catch");
-                }
 
-                break;
+      case "outline":
+        try {
+            switch (image.get().getFormat()) {
+                case "jpeg":
+                    assert input != null;
+                    ImageChanger.Outline(input, 3);
+                    break;
+                case "tif":
+                    assert input != null;
+                    ImageChanger.Outline(input, 1);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        break;
 
-            case "blur":
-                //?algorithm=blur&opt1=[0,1]&opt2=[0,+∞[
+      case "grayLevel":
+        try{
+        ImageChanger.FromRGBtoG(input);
+        
+        }catch(Exception e){
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      break;
 
-                System.out.println(Integer.parseInt(opt1, 10));
-                System.out.println(Integer.parseInt(opt2, 10));
-                if (!(0 <= Integer.parseInt(opt2, 10)) || !(opt1.equals("M") || opt1.equals("G"))) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
-
-                try {
-                    ImageChanger.Blured(input, opt1, Integer.parseInt(opt2, 10));
-                    System.out.println("no error blur ");
-                } catch (Exception e) {
-                    System.out.println("error blur catch");
-                }
-
-                break;
-
-            case "outline":
-                //?algorithm=outline
-
-                try {
-                    ImageChanger.Outline(input);
-                    System.out.println("no error outline ");
-                } catch (Exception e) {
-                    System.out.println("error outline  catch");
-                }
-
-                break;
-
-            case "grayLevel":
-                //?algorithm=grayLevel
-
-                try {
-                    ImageChanger.FromRGBtoG(input);
-                    System.out.println("no error GrayLevel");
-                } catch (Exception e) {
-                    System.out.println("error GrayLevel  catch");
-                }
-                break;
-
-            case "":
+      case "":
 
                 break;
 
@@ -181,6 +199,17 @@ public class ImageController {
                 .body(tab);
         //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+      try{
+        tab = ImageConverter.imageToJPEGBytes(input);
+      } catch (Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+      return ResponseEntity.ok()
+              .contentType(MediaType.IMAGE_JPEG)
+              .body(tab);
+  }
+
 
     @RequestMapping(value = "/images/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteImage(@PathVariable("id") long id) {
