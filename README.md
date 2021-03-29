@@ -11,7 +11,7 @@
 <table>
     <thead>
         <tr>
-            <th>header 1</th>
+            <th>\</th>
             <th>Maxime</th>
             <th>Jules</th>
             <th>Alexis</th>
