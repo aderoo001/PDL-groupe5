@@ -1,6 +1,7 @@
 package pdl.backend;
 
 import net.imglib2.Cursor;
+import net.imglib2.RandomAccess;
 import net.imglib2.img.Img;
 import net.imglib2.loops.LoopBuilder;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
@@ -22,17 +23,17 @@ public class ImageChanger{
         final Cursor<UnsignedByteType> inC = input.localizingCursor();
         final Cursor<UnsignedByteType> outC = output.localizingCursor();
         while (inC.hasNext()) {
-        inC.fwd();
-        outC.fwd();
-        if (inC.get().get() +delta >=255) {
-            outC.get().set(255);
-            
-        } else {
-            if(inC.get().get() +delta <=0){
-                outC.get().set(0);
-            }
-            else{
-                outC.get().set(inC.get().get() + delta);
+            inC.fwd();
+            outC.fwd();
+            if (inC.get().get() + delta >= 255) {
+                outC.get().set(255);
+
+            } else {
+                if (inC.get().get() + delta <= 0) {
+                    outC.get().set(0);
+                } else {
+                    outC.get().set(inC.get().get() + delta);
+                }
             }
         }
     }
@@ -226,7 +227,7 @@ public class ImageChanger{
 
                 double tmp = Math.sqrt(
                         meanH*meanH + meanV*meanV
-                );
+                )%255;
 
                 for (int chan = 0; chan < depth; chan++) {
                     if (depth > 1) r1.setPosition(chan, 2);
@@ -294,38 +295,13 @@ public class ImageChanger{
         final IntervalView<UnsignedByteType> inputB = Views.hyperSlice(img, 2, 2);
         float[] hsv = new float[3];
         int[] rgb = new int[3];
-
         int[] tab = histogrammeCumule(img, SorV);
-//        float bottom = 0;
-//        float top = 100;
 
         LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
                 (r, g, b) -> {
                     rgbToHsv(r.get(), g.get(), b.get(), hsv);
-                    for (float val: hsv
-                         ) {
-                        System.out.println(val);
-                    }
-                    if (SorV == 0) {
-                        hsvToRgb(hsv[0], (float) (tab[Math.round(hsv[1])*100]*100)/100, hsv[2], rgb);
-                    }
-                    if (SorV == 1) {
-//                        System.out.println((tab[Math.round(hsv[2])*100]*100)/100);
-                        hsvToRgb(hsv[0], hsv[1], (float) (tab[Math.round(hsv[2])*100]*100)/100, rgb);
-                    }
-
-//                    float val = hsv[SorV + 1];
-//
-//                    if (tab[(int) val] > top) {
-//                        val = top;
-//                    } else {
-//                        if (tab[(int) val] < bottom) {
-//                            val = bottom;
-//                        } else {
-//                            val = tab[(int) val];
-//                        }
-//                    }
-
+                    hsv[SorV+1] = (float) (tab[Math.round(hsv[SorV+1]*100)])/tab[100];
+                    hsvToRgb(hsv[0], hsv[1], hsv[2], rgb);
                     r.set(rgb[0]);
                     g.set(rgb[1]);
                     b.set(rgb[2]);
@@ -376,7 +352,6 @@ public class ImageChanger{
         LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
                 (r, g, b) -> {
                     rgbToHsv(r.get(), g.get(), b.get(), hsv);
-
                     float color = hsv[SorV + 1] * 100;//devient sois le S ou le V de la valeur HSV de limage
 //color=[0,100]
                     tab[Math.round(color)] = tab[Math.round(color)] + 1;

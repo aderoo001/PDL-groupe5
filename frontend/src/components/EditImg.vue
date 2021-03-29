@@ -1,17 +1,41 @@
 <template>
+
   <div class="edt-bg">
-    <img ref="img" alt="" v-bind:src="imageUrl">
-    <div class="edt-metadata">
-      <h4>Metadata :</h4>
-      <p v-for="(data, name) in $parent.image" :key="data">{{ name }} : {{ data }} </p>
+    <div v-if="!thumbNav"
+         v-on:click="thumbNav = true;"
+         class="edt-btn edt-btn-left edt-btn-right">
+      Show
     </div>
+    <div class="edt-thumbnail-nav"
+         v-if="thumbNav">
+      <div class="edt-metadata">
+        <div v-on:click="thumbNav = false;"
+           class="edt-btn edt-btn-left edt-btn-right"
+           style="margin-left: 15vw">
+          Hide
+        </div>
+        <h4 style="color: white;">Metadata :</h4>
+        <p v-for="(data, name) in image" :key="data"
+           style="color: white;">
+          {{ name }} : {{ data }}
+        </p>
+      </div>
+      <div class="edt-thumbnail-list">
+        <div class="edt-thumbnail" v-for="img in $parent.httpApi.response" :key="img">
+          <img v-bind:src="img.url"
+               v-on:click="image = img; imageUrl = img.url;"
+               style="max-width: 15vw; max-height: 20vh; z-index: 15" alt="">
+        </div>
+      </div>
+    </div>
+    <img class="edt-img" ref="img" alt="" v-bind:src="imageUrl" style="z-index: 10;">
     <div style="position: fixed; bottom: 0; width: 100%;">
       <div class="edt-navbar">
         <div class="edt-navbar-in">
           <div class="edt-filter">
             <label>
               <select v-model="algorithm">
-                <option value="" v-on:click="processImage">-----</option>
+                <option value="" v-on:click="processImage" selected>-----</option>
                 <option value="increaseLuminosity">Luminosité</option>
                 <option value="histogram">Égalisation</option>
                 <option value="color">Colorisation</option>
@@ -23,8 +47,17 @@
           </div>
           <div class="edt-opt">
             <div v-if="algorithm === 'increaseLuminosity'" class="edt-range">
+<!--              <div style=-->
+<!--                       "position: fixed;-->
+<!--                       z-index: -10;-->
+<!--                       top: 0;-->
+<!--                       left: 0;-->
+<!--                       width: 100vw;-->
+<!--                       height: 100vh;-->
+<!--                       border: solid;"-->
+<!--                   v-on:mouseover.once="processImage"></div>-->
               <div>
-                <span style="position: absolute; left: 0">-256</span>
+                <span style="position: absolute; left: 0">-255</span>
                 <span>0</span>
                 <span style="position: absolute; right: 0">255</span>
               </div>
@@ -32,7 +65,7 @@
                 <label>
                   <input ref="increaseLuminosity"
                          max="255"
-                         min="-256"
+                         min="-255"
                          type="range"
                          value="0"
                          v-on:mouseup="processImage">
@@ -41,6 +74,15 @@
             </div>
 
             <div v-if="algorithm === 'histogram'">
+<!--              <div style=-->
+<!--                       "position: fixed;-->
+<!--                       z-index: -10;-->
+<!--                       top: 0;-->
+<!--                       left: 0;-->
+<!--                       width: 100vw;-->
+<!--                       height: 100vh;-->
+<!--                       border: solid;"-->
+<!--                   v-on:mouseover.once="processImage"></div>-->
               <label>
                 <select ref="histogram" v-on:change="processImage">
                   <option value="saturation">Saturation</option>
@@ -51,6 +93,15 @@
 
 
             <div v-if="algorithm === 'color'" class="edt-range">
+<!--              <div style=-->
+<!--                       "position: fixed;-->
+<!--                       z-index: -10;-->
+<!--                       top: 0;-->
+<!--                       left: 0;-->
+<!--                       width: 100vw;-->
+<!--                       height: 100vh;-->
+<!--                       border: solid;"-->
+<!--                   v-on:mouseover.once="processImage"></div>-->
               <div>
                 <span style="position: absolute; left: 0">0</span>
                 <span>180</span>
@@ -69,6 +120,15 @@
             </div>
 
             <div v-if="algorithm === 'blur'">
+<!--              <div style=-->
+<!--                       "position: fixed;-->
+<!--                       z-index: -10;-->
+<!--                       top: 0;-->
+<!--                       left: 0;-->
+<!--                       width: 100vw;-->
+<!--                       height: 100vh;-->
+<!--                       border: solid;"-->
+<!--                   v-on:mouseover.once="processImage"></div>-->
               <label>
                 <select ref="blur_1"
                         style="margin-right: 5px;">
@@ -79,6 +139,7 @@
               <label>
                 <input ref="blur_2"
                        min="0"
+                       max="15"
                        type="number"
                        value="0"
                        class="edt-number-input"
@@ -88,8 +149,8 @@
           </div>
           <div class="edt-btn-grp">
             <div class="edt-btn edt-btn-left"
-                 v-on:click="deleteImage">
-              Del
+                 v-on:click="$parent.impImg = true; print();">
+              Add
             </div>
 
             <div class="edt-btn"
@@ -98,8 +159,8 @@
             </div>
 
             <div class="edt-btn edt-btn-right edt-btn-danger"
-                 v-on:click="close">
-              Exit
+                 v-on:click="deleteImage">
+              Del
             </div>
           </div>
         </div>
@@ -113,81 +174,44 @@ export default {
   name: "EditImg",
   data() {
     return {
+      thumbNav: true,
       httpApi: this.$parent.httpApi,
+      image: this.$parent.image,
       imageUrl: this.$parent.image.url,
-      imageId: this.$parent.image.id,
       algorithm: 'none',
       img64b: '',
     }
   },
   methods: {
-    sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
     close() {
       this.$emit('update', false);
     },
-    makeUrl(algorithm = '', opt1 = '', opt2 = '') {
-      let url = this.imageUrl.split("?")[0];
-      if (algorithm !== '') {
-        url += "?algorithm="
-            + algorithm;
-      }
-      if (opt1 !== '' && algorithm !== '') {
-        url += "&opt1="
-            + opt1;
-      }
-      if (opt2 !== '' && algorithm !== '') {
-        url += "&opt2="
-            + opt2;
+    addUrlParameter(url = this.imageUrl, name, value) {
+      if (value === 'none') return url;
+      if (name === '' || value === '') return url;
+      if (url.includes('?')) {
+        url += '&' + name + '=' + value;
+      } else {
+        url += '?' + name + '=' + value;
       }
       return url;
     },
     processImage() {
+      this.imageUrl = this.imageUrl.split("?")[0];
+      this.imageUrl = this.addUrlParameter(undefined,'algorithm', this.algorithm );
       switch (this.algorithm) {
-        case "":
-          this.imageUrl = this.makeUrl();
-          break;
         case "increaseLuminosity":
-          this.imageUrl =
-              this.makeUrl(
-                  this.algorithm,
-                  this.$refs.increaseLuminosity.value
-              );
+          this.imageUrl = this.addUrlParameter(undefined, 'incLumDelta', this.$refs.increaseLuminosity.value);
           break;
         case "histogram":
-          this.imageUrl =
-              this.makeUrl(
-                  this.algorithm,
-                  this.$refs.histogram.value
-              );
+          this.imageUrl = this.addUrlParameter(undefined,'histAlgoType', this.$refs.histogram.value );
           break;
         case "color":
-          this.imageUrl =
-              this.makeUrl(
-                  this.algorithm,
-                  this.$refs.color.value
-              );
+          this.imageUrl = this.addUrlParameter(undefined,'colorDelta', this.$refs.color.value );
           break;
         case "blur":
-          this.imageUrl =
-              this.makeUrl(
-                  this.algorithm,
-                  this.$refs.blur_1.value,
-                  this.$refs.blur_2.value*2+1
-              );
-          break;
-        case "outline":
-          this.imageUrl =
-              this.makeUrl(
-                  this.algorithm
-              );
-          break;
-        case "grayLevel":
-          this.imageUrl =
-              this.makeUrl(
-                  this.algorithm
-              );
+          this.imageUrl = this.addUrlParameter(undefined,'blurAlgoType', this.$refs.blur_1.value );
+          this.imageUrl = this.addUrlParameter(undefined,'blurIntensity', this.$refs.blur_2.value*2+1 );
           break;
       }
     },
@@ -203,13 +227,13 @@ export default {
     deleteImage() {
       this.$parent.httpApi.response.forEach(
           value => {
-            if (value.id !== this.imageId) this.$parent.image = value;
+            if (value.id !== this.image.id) this.$parent.image = value;
           });
-      this.httpApi.deleteImage(this.imageId);
-      this.$parent.update('editImg', false);
+      this.httpApi.deleteImage(this.image.id);
+      this.$parent.update();
     },
     print() {
-      console.log(this.$parent.image);
+      console.log(this.$parent.impImg);
     },
   },
 }
@@ -229,19 +253,16 @@ a {
   text-decoration: inherit;
 }
 
-img {
+.edt-img {
+  z-index: 0;
   position: absolute;
   margin: auto;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  max-height: 100vh;
-  max-width: 100vw;
-}
-
-img:hover + .edt-metadata {
-  opacity: unset !important;
+  max-height: 80vh;
+  max-width: 80vw;
 }
 
 input {
@@ -262,7 +283,6 @@ select {
 }
 
 .edt-navbar {
-  /*opacity: 0%;*/
   background-color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -271,12 +291,9 @@ select {
   margin: 0 auto;
 }
 
-.edt-navbar:hover {
-  opacity: unset;
-}
-
 .edt-navbar-in {
   position: absolute;
+  z-index: 20;
   margin: auto;
   top: 0;
   right: 0;
@@ -353,22 +370,43 @@ select {
 }
 
 .edt-metadata {
-  opacity: 0;
   padding: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: white;
-  border-bottom-left-radius: 10px;
-  text-align: justify;
-}
-
-.edt-metadata:hover {
-  opacity: unset !important;
+  text-align: left;
+  border-bottom: solid 1px #141d26;
+  height: 25vh;
+  overflow: hidden;
 }
 
 .edt-range {
   font-size: 10px;
   max-width: 200px;
+}
+
+.edt-thumbnail-nav {
+  position: fixed;
+  z-index: 20;
+  background-color: rgba(0,0,0,0.40);
+  height: 100vh;
+  width: 19vw;
+}
+
+.edt-thumbnail-list {
+  z-index: 15;
+  width: 19vw;
+  max-height: 75vh;
+  overflow: scroll;
+}
+
+.edt-thumbnail {
+  padding-inline: 1vw;
+  padding-block: 2vh;
+  display: block;
+  width: 15vw;
+  height: 20vh;
+}
+
+.edt-thumbnail:hover {
+  opacity: 70%;
+  cursor: pointer;
 }
 </style>
