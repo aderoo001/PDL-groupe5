@@ -19,6 +19,16 @@ import net.imglib2.view.ExtendedRandomAccessibleInterval;
 public class ImageChanger{
 
 //besoin 14:
+    //besoin 14:
+    /**
+     * public static void EditLuminosityRGB(Img<UnsignedByteType> input, Img<UnsignedByteType> output, int delta)
+     * 
+     * change the brightness of each pixel by integer delta and that on each RGB channels.
+     * 
+     * @param input the input image from which we will take the data of each pixel.
+     * @param output the output image from which we will change the data of each pixel.
+
+    */
     public static void EditLuminosityRGB(Img<UnsignedByteType> input, Img<UnsignedByteType> output, int delta) {
         final Cursor<UnsignedByteType> inC = input.localizingCursor();
         final Cursor<UnsignedByteType> outC = output.localizingCursor();
@@ -39,6 +49,15 @@ public class ImageChanger{
     }
 
     //new besoin
+    /**
+     * public static void FromRGBtoG(Img<UnsignedByteType> input)
+     * 
+     * change the value of each pixel by taking the values ​​
+     * of the RGB channels in order to transform the color image into a gray image .
+     * 
+     * @param input the input image from which we will take the data of each pixel.
+
+    */
     public static void FromRGBtoG(Img<UnsignedByteType> input) {
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(input, 2, 0);
         final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(input, 2, 1);
@@ -64,6 +83,15 @@ public class ImageChanger{
     L’égalisation sera apliquée au choix sur le canal S ou V 
     de l’image représentée dans l’espace HSV.
      */
+    /**
+     * public static void HistoHSV(Img<UnsignedByteType> input,String choice)
+     * 
+     * change the image on here saturation or on here​​ value depends on the parameter choice
+     * 
+     * @param input the input image from which we will take the data of each pixel.
+     * @param choice the input image from which we will take the data of each pixel.
+
+    */
     public static void HistoHSV(Img<UnsignedByteType> input, String choix) {
         int SorV = 0;
         if (choix.equals("saturation")) {//convolution sur la saturation
@@ -80,6 +108,15 @@ public class ImageChanger{
     L’utilisateur peut choisir la teinte de tous les pixels 
     de l’image sélectionnée de façon à obtenir un effet de filtre coloré.
     td3 derneire partie
+    */
+    /**
+     * public static void Colored(Img<UnsignedByteType> img,float deg)
+     * 
+     * change the image on here tint by the parameter deg
+     * 
+     * @param input the input image from which we will take the data of each pixel.
+     * @param deg the degre you want on your image;
+
     */
     public static void Colored(Img<UnsignedByteType> img, float deg) {
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
@@ -101,23 +138,6 @@ public class ImageChanger{
 
     }
 
-    //besoin 17 :
-    /*
-    L’utilisateur peut appliquer un flou à l’image sélectionnée. 
-    Il peut définir le filtre appliqué (moyen ou gaussien) et 
-    choisir le niveau de flou. 
-    La convolution est appliquée sur les trois canaux R, G et B.
-     */
-    public static void Blured(Img<UnsignedByteType> input, String choix, int size) {
-        if (choix.equals("M")) {//filtre moyen.
-
-        }
-        if (choix.equals("G")) {
-
-        }
-
-    }
-
 
     //besoin 18 :
     /*
@@ -126,12 +146,33 @@ public class ImageChanger{
     Le résultat sera issu d’une convolution par le filtre de Sobel. 
     La convolution sera appliquée sur la version en niveaux de gris de l’image.
      */
+    /**
+     * public static void Outline(Img<UnsignedByteType> input,int depth)
+     * 
+     * call convolution Gray
+     * 
+     * @param input the input image from which we will take the data of each pixel.
+     * @param depth jsp sad;
+
+    */
     public static void Outline(Img<UnsignedByteType> input,
                                int depth){
         convolution_Gray(input, depth);
     }
 
 
+    /**
+     * public static void rgbToHsv(int r, int g, int b, float[] hsv)
+     * 
+     * trasform the RGB data TO HSV data 
+     * 
+     * @param r the data of the R channel
+     * @param g the data of the G channel
+     * @param b the data of the RBchannel
+     * @param hsv an array in wich we will put the obtain data of the function
+     * 
+
+    */
     public static void rgbToHsv(int r, int g, int b, float[] hsv) {
 
         float R = r / 255f;
@@ -175,6 +216,16 @@ public class ImageChanger{
         hsv[2] = v;
     }
 
+    /**
+     * public static void convolution_Gray(final Img<UnsignedByteType> output,int depth)
+     * 
+     * apply two convolution to the input image with two differeny kernel
+     * to obtain an image with only the Outline visible
+     * 
+     * @param input the input image from which we will take the data of each pixel.
+     * @param depth jsp sad;
+
+    */
     public static void convolution_Gray(final Img<UnsignedByteType> output,
                                         int depth) {
         if (depth > 1) FromRGBtoG(output);
@@ -238,6 +289,18 @@ public class ImageChanger{
         }
     }
 
+    /**
+     * public static void hsvToRgb(float h, float s, float V, int[] rgb)
+     * 
+     * trasform the hsv data TO RGB data 
+     * 
+     * @param h the data of the tint
+     * @param s the data of the saturation 
+     * @param v the data of the Value
+     * @param rgb an array in wich we will put the obtain data of the function
+     * 
+
+    */
     public static void hsvToRgb(float h, float s, float V, int[] rgb) {
         int ti = (int) (h / 60) % 6;
 
@@ -289,6 +352,16 @@ public class ImageChanger{
     }
 
     //*********************************************************************************** */
+    /**
+     * public static void aplanir_histograme_HSV(Img<UnsignedByteType> img, int SorV) 
+     * 
+     * take the cumulated histograme and use it to change the image (img).
+     * 
+     * @param img the input image from which we will take the data of each pixel.
+     * @param SorV an int who can choose on what the image will be change either the saturation or the value .
+     * 
+     * 
+     */
     public static void aplanir_histograme_HSV(Img<UnsignedByteType> img, int SorV) {//3.3
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
         final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(img, 2, 1);
@@ -314,6 +387,16 @@ public class ImageChanger{
         );
     }
 
+    /**
+     * public static int[] LUT_histoHSV(Img<UnsignedByteType> img, int SorV) 
+     * 
+     * take the cumulated histograme and use it to build a LUT .
+     * 
+     * @param img the input image from which we will take the data of each pixel.
+     * @param SorV an int who can choose on what the LUT will be either the saturation or the value .
+     * 
+     * @return the aray of int who represent the LUT of the histograme
+     */
     public static int[] LUT_histoHSV(Img<UnsignedByteType> img, int SorV) {
         int[] tab = new int[101];
         for (int i = 0; i < 101; i++) tab[i] = 0;
@@ -333,6 +416,16 @@ public class ImageChanger{
         return tab;
     }
 
+     /**
+     * public static int[] histogrammeCumule(Img<UnsignedByteType> img, int SorV)
+     * 
+     * take the histograme and use it to build a cumulated histogram .
+     * 
+     * @param img the input image from which we will take the data of each pixel.
+     * @param SorV an int who can choose on what the cumulated histograme will be either the saturation or the value .
+     * 
+     * @return the aray of int who represent the cumulated histograme
+     */
     public static int[] histogrammeCumule(Img<UnsignedByteType> img, int SorV) {
         int[] tab = histogramme(img, SorV);
         int[] C = new int[101];
@@ -346,6 +439,16 @@ public class ImageChanger{
         return C;
     }
 
+    /**
+     * public static int[] histogramme(Img<UnsignedByteType> img, int SorV)
+     * 
+     * take data on all channels to build an histogram of either the value or the saturation of the data in HSV shape
+     * 
+     * @param img the input image from which we will take the data of each pixel.
+     * @param SorV an int who can choose on what the histograme will be either the saturation or the value
+     * 
+     * @return the aray of int who represent the histograme
+     */
     public static int[] histogramme(Img<UnsignedByteType> img, int SorV) {
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
         final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(img, 2, 1);
@@ -368,7 +471,15 @@ public class ImageChanger{
     }
 
 
-    //sert pour outline
+    /**
+     * public static void convolution_Gray(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output, int[][] kernel)
+     * 
+     * apply a convolution on a grayscale image 
+     * 
+     * @param input the input image from which we will take the data of each pixel.
+     * @param output the output image from which we will change the data of each pixel.
+     * @param kernel the kernel to apply to the image 
+     */
     public static void convolution_Gray(final Img<UnsignedByteType> input, final Img<UnsignedByteType> output, int[][] kernel) {
         int size=kernel.length;
         int n= (size/2);
@@ -430,7 +541,14 @@ public class ImageChanger{
         }
     }
 
-    //  fonction pour créé ou appeler les  Kernels
+    /**
+     * public static int[][] average(int size)
+     * 
+     * creat a kernel with only 1 in it.
+     * 
+     * @param size the size of the kernel you whant.
+     * @return an array of size * size with only 1 in it .
+     */
     public static int[][] average(int size) {
         int[][] kernel = new int[size][size];
         for (int x = 0; x < size; x++) {
@@ -441,6 +559,13 @@ public class ImageChanger{
         return kernel;
     }
 
+    /**
+     * public static int[][] gaussien()
+     * 
+     * creat a gaussien kernel
+     * 
+     * @return an array of 5x5 with the gaussien kernel .
+     */
     public static int[][] gaussien() {
         int[][] kernel = {
             {1, 2, 3, 2, 1},
@@ -454,11 +579,21 @@ public class ImageChanger{
     
     /*Besoin 17:*/
     /**
-     *L’utilisateur peut appliquer un flou à l’image sélectionnée.
-      Il peut définir le filtre appliqué (moyen ou gaussien) et 
-      choisir le niveau de flou.
-      La convolution est appliquée sur les trois canaux R, G et B.
-     * / */
+    * void blured(
+        final Img<UnsignedByteType> input,
+        final Img<UnsignedByteType> output,
+        int[][] kernel,
+        int depth)
+    * 
+    *  add the values ​​of the kernel
+    * 
+    * @param input the input image from which we will take the data of each pixel.
+    * @param output the output image from which we will change the data of each pixel.
+    * @param kernel an array of int
+    * @param depth jsp
+    * 
+
+    */
     public static void blured(
             final Img<UnsignedByteType> input,
             final Img<UnsignedByteType> output,
@@ -512,6 +647,16 @@ public class ImageChanger{
         }
     }
 
+    /**
+     * public static int kernelcount(int[][] kernel)
+     * 
+     *  add the values ​​of the kernel
+     * 
+     * @param kernel an array of int
+     * 
+     * @return return the addition of all the value of the kernel
+
+    */
     public static int kernelcount(int[][] kernel){
         int size=kernel.length;
 
