@@ -18,8 +18,6 @@ import net.imglib2.view.ExtendedRandomAccessibleInterval;
 
 public class ImageChanger{
 
-//besoin 14:
-    //besoin 14:
     /**
      * public static void EditLuminosityRGB(Img<UnsignedByteType> input, Img<UnsignedByteType> output, int delta)
      * 
@@ -48,7 +46,6 @@ public class ImageChanger{
         }
     }
 
-    //new besoin
     /**
      * public static void FromRGBtoG(Img<UnsignedByteType> input)
      * 
@@ -77,12 +74,7 @@ public class ImageChanger{
         );
     }
 
-    //besoin 15 :
-    /*
-    L’utilisateur peut appliquer une égalisation d’histogramme à l’image sélectionnée.
-    L’égalisation sera apliquée au choix sur le canal S ou V 
-    de l’image représentée dans l’espace HSV.
-     */
+  
     /**
      * public static void HistoHSV(Img<UnsignedByteType> input,String choice)
      * 
@@ -103,12 +95,7 @@ public class ImageChanger{
         aplanir_histograme_HSV(input, SorV);
     }
 
-    //besoin 16 :
-    /*
-    L’utilisateur peut choisir la teinte de tous les pixels 
-    de l’image sélectionnée de façon à obtenir un effet de filtre coloré.
-    td3 derneire partie
-    */
+   
     /**
      * public static void Colored(Img<UnsignedByteType> img,float deg)
      * 
@@ -137,15 +124,7 @@ public class ImageChanger{
 
 
     }
-
-
-    //besoin 18 :
-    /*
-    L’utilisateur peut appliquer un détecteur de 
-    contour à l’image sélectionnée. 
-    Le résultat sera issu d’une convolution par le filtre de Sobel. 
-    La convolution sera appliquée sur la version en niveaux de gris de l’image.
-     */
+    
     /**
      * public static void Outline(Img<UnsignedByteType> input,int depth)
      * 
@@ -350,8 +329,6 @@ public class ImageChanger{
                 break;
         }
     }
-
-    //*********************************************************************************** */
     /**
      * public static void aplanir_histograme_HSV(Img<UnsignedByteType> img, int SorV) 
      * 
@@ -461,8 +438,7 @@ public class ImageChanger{
                 (r, g, b) -> {
                     rgbToHsv(r.get(), g.get(), b.get(), hsv);
 
-                    float color = hsv[SorV + 1] * 100;//devient sois le S ou le V de la valeur HSV de limage
-//color=[0,100]
+                    float color = hsv[SorV + 1] * 100;
                     tab[Math.round(color)] = tab[Math.round(color)] + 1;
 
                 }
