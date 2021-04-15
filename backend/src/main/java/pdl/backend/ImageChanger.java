@@ -131,7 +131,7 @@ public class ImageChanger{
      * call convolution Gray
      * 
      * @param input the input image from which we will take the data of each pixel.
-     * @param depth jsp sad;
+     * @param depth define the number of dimention of the Image 3 for RGB Image 1 for gray leveled Image;
 
     */
     public static void Outline(Img<UnsignedByteType> input,
@@ -202,7 +202,7 @@ public class ImageChanger{
      * to obtain an image with only the Outline visible
      * 
      * @param input the input image from which we will take the data of each pixel.
-     * @param depth jsp sad;
+     * @param depth  define the number of dimention of the Image 3 for RGB Image 1 for gray leveled Image;
 
     */
     public static void convolution_Gray(final Img<UnsignedByteType> output,
@@ -350,12 +350,8 @@ public class ImageChanger{
         LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
                 (r, g, b) -> {
                     rgbToHsv(r.get(), g.get(), b.get(), hsv);
-                    if (SorV == 0) {
-                        hsvToRgb(hsv[0], (float) (tab[Math.round(hsv[1])*100]*100)/100, hsv[2], rgb);
-                    }
-                    if (SorV == 1) {
-                        hsvToRgb(hsv[0], hsv[1], (float) (tab[Math.round(hsv[2])*100]*100)/100, rgb);
-                    }
+                    hsv[SorV+1] = (float) (tab[Math.round(hsv[SorV+1]*100)])/tab[100];
+                    hsvToRgb(hsv[0], hsv[1], hsv[2], rgb);
 
                     r.set(rgb[0]);
                     g.set(rgb[1]);
@@ -365,35 +361,6 @@ public class ImageChanger{
     }
 
     /**
-     * public static int[] LUT_histoHSV(Img<UnsignedByteType> img, int SorV) 
-     * 
-     * take the cumulated histograme and use it to build a LUT .
-     * 
-     * @param img the input image from which we will take the data of each pixel.
-     * @param SorV an int who can choose on what the LUT will be either the saturation or the value .
-     * 
-     * @return the aray of int who represent the LUT of the histograme
-     */
-    public static int[] LUT_histoHSV(Img<UnsignedByteType> img, int SorV) {
-        int[] tab = new int[101];
-        for (int i = 0; i < 101; i++) tab[i] = 0;
-        int[] C = histogrammeCumule(img, SorV);
-
-        for (int i = 0; i < 101; i++) {
-            int new_color = (C[i] * 100) / 100;
-            System.out.println(new_color);
-            if (new_color > 100) {
-                tab[i] = 100;
-            } else tab[i] = Math.max(new_color, 0);
-        }
-        for (int val: tab
-             ) {
-            System.out.println(val);
-        }
-        return tab;
-    }
-
-     /**
      * public static int[] histogrammeCumule(Img<UnsignedByteType> img, int SorV)
      * 
      * take the histograme and use it to build a cumulated histogram .
@@ -445,6 +412,7 @@ public class ImageChanger{
         );
         return tab;
     }
+    
 
 
     /**
