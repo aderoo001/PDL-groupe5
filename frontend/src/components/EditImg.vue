@@ -36,26 +36,17 @@
             <label>
               <select v-model="algorithm">
                 <option value="" v-on:click="processImage" selected>-----</option>
-                <option value="increaseLuminosity">Luminosité</option>
-                <option value="histogram">Égalisation</option>
-                <option value="color">Colorisation</option>
-                <option value="blur">Flou</option>
+                <option value="increaseLuminosity" v-on:click="processImage">Luminosité</option>
+                <option value="histogram" v-on:click="processImage">Égalisation</option>
+                <option value="color" v-on:click="processImage">Colorisation</option>
+                <option value="blur" v-on:click="processImage">Flou</option>
                 <option value="outline" v-on:click="processImage">Contour</option>
                 <option value="grayLevel" v-on:click="processImage">Lv Gris</option>
               </select>
             </label>
           </div>
           <div class="edt-opt">
-            <div v-if="algorithm === 'increaseLuminosity'" class="edt-range">
-<!--              <div style=-->
-<!--                       "position: fixed;-->
-<!--                       z-index: -10;-->
-<!--                       top: 0;-->
-<!--                       left: 0;-->
-<!--                       width: 100vw;-->
-<!--                       height: 100vh;-->
-<!--                       border: solid;"-->
-<!--                   v-on:mouseover.once="processImage"></div>-->
+            <div v-show="algorithm === 'increaseLuminosity'" class="edt-range">
               <div>
                 <span style="position: absolute; left: 0">-255</span>
                 <span>0</span>
@@ -73,16 +64,7 @@
               </div>
             </div>
 
-            <div v-if="algorithm === 'histogram'">
-<!--              <div style=-->
-<!--                       "position: fixed;-->
-<!--                       z-index: -10;-->
-<!--                       top: 0;-->
-<!--                       left: 0;-->
-<!--                       width: 100vw;-->
-<!--                       height: 100vh;-->
-<!--                       border: solid;"-->
-<!--                   v-on:mouseover.once="processImage"></div>-->
+            <div v-show="algorithm === 'histogram'">
               <label>
                 <select ref="histogram" v-on:change="processImage">
                   <option value="saturation">Saturation</option>
@@ -92,16 +74,7 @@
             </div>
 
 
-            <div v-if="algorithm === 'color'" class="edt-range">
-<!--              <div style=-->
-<!--                       "position: fixed;-->
-<!--                       z-index: -10;-->
-<!--                       top: 0;-->
-<!--                       left: 0;-->
-<!--                       width: 100vw;-->
-<!--                       height: 100vh;-->
-<!--                       border: solid;"-->
-<!--                   v-on:mouseover.once="processImage"></div>-->
+            <div v-show="algorithm === 'color'" class="edt-range" v-on:load="processImage">
               <div>
                 <span style="position: absolute; left: 0">0</span>
                 <span>180</span>
@@ -119,21 +92,12 @@
               </div>
             </div>
 
-            <div v-if="algorithm === 'blur'">
-<!--              <div style=-->
-<!--                       "position: fixed;-->
-<!--                       z-index: -10;-->
-<!--                       top: 0;-->
-<!--                       left: 0;-->
-<!--                       width: 100vw;-->
-<!--                       height: 100vh;-->
-<!--                       border: solid;"-->
-<!--                   v-on:mouseover.once="processImage"></div>-->
+            <div v-show="algorithm === 'blur'">
               <label>
                 <select ref="blur_1"
                         style="margin-right: 5px;">
-                  <option value="M">Moyen</option>
-                  <option value="G">Gaussien</option>
+                  <option value="M" v-on:click="processImage">Moyen</option>
+                  <option value="G" v-on:click="processImage">Gaussien</option>
                 </select>
               </label>
               <label>
@@ -183,6 +147,9 @@ export default {
     }
   },
   methods: {
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
     close() {
       this.$emit('update', false);
     },
@@ -393,6 +360,7 @@ select {
 .edt-thumbnail-list {
   z-index: 15;
   width: 19vw;
+  height : 75vh;
   max-height: 75vh;
   overflow: scroll;
 }
