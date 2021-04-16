@@ -25,16 +25,16 @@ public class Image {
         return name;
     }
 
+    //setters
+    public void setName(final String name) {
+        this.name = name;
+    }
+
     public String getFormat() {
         return format;
     }
 
     public byte[] getData() {
         return data;
-    }
-
-    //setters
-    public void setName(final String name) {
-        this.name = name;
     }
 }

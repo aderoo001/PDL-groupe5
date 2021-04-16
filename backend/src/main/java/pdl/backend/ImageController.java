@@ -22,8 +22,6 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
 
-import pdl.ImageProcessing.*;
-
 
 @RestController
 public class ImageController {
@@ -56,16 +54,16 @@ public class ImageController {
                 e.printStackTrace();
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
+
+            algorithmSelector.selector(input, image.get().getFormat(), parameters);
+
+            try {
+                tab = ImageConverter.imageToJPEGBytes(input);
+            } catch (Exception e) {
+                System.out.println("getImage: error, conversion failed");
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        algorithmSelector.selector(input, image, parameters);
-
-        try {
-            tab = ImageConverter.imageToJPEGBytes(input);
-        } catch (Exception e) {
-            System.out.println("getImage: error, conversion failed");
         }
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
@@ -86,12 +84,11 @@ public class ImageController {
     public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
                                       RedirectAttributes redirectAttributes) throws IOException {
         Image image = new Image(file.getOriginalFilename(), file.getBytes(), FilenameUtils.getExtension(file.getOriginalFilename()));
-        if(image.getFormat().equals("jpeg") || image.getFormat().equals("tif")){
+        if (image.getFormat().equals("jpeg") || image.getFormat().equals("tif")) {
             this.imageDao.create(image);
             redirectAttributes.addAttribute("id", image.getId());
             return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        else{
+        } else {
             return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
     }
@@ -128,12 +125,11 @@ public class ImageController {
                 e.printStackTrace();
             }
 
-            if(img.getFormat().equals("jpeg")){
-                String msg = Integer.toString(height)+'*'+Integer.toString(width)+"*3";
+            if (img.getFormat().equals("jpeg")) {
+                String msg = Integer.toString(height) + '*' + width + "*3";
                 n.put("size", msg);
-            }
-            else{
-                String msg = Integer.toString(height)+'*'+Integer.toString(width)+"*1";
+            } else {
+                String msg = Integer.toString(height) + '*' + width + "*1";
                 n.put("size", msg);
             }
 
@@ -150,9 +146,9 @@ public class ImageController {
     //pour test ; curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data   '{"algorithmList":{ "algorithm" : "grayLevel" }, { "algorithm" : "blur", "opt1" : "M", "opt2": "5"}' "http://localhost:8080/images/custom/1"
     @RequestMapping(value = "/images/custom/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<?> runCustomAlgorithm(@PathVariable("id") long id, @RequestBody CustomImageProcessingAlgo customAlgo){
+    public ResponseEntity<?> runCustomAlgorithm(@PathVariable("id") long id, @RequestBody CustomImageProcessingAlgo customAlgo) {
         //Map<String,String>[] algorithmList = customAlgo.getAlgorithmList();
-        Map<String,String> algorithmList = customAlgo.getAlgorithmList();
+        Map<String, String> algorithmList = customAlgo.getAlgorithmList();
 
         Optional<Image> image = this.imageDao.retrieve(id);
 
@@ -166,21 +162,21 @@ public class ImageController {
                 e.printStackTrace();
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
+
+            /*
+            for(int i=0; i<algorithmList.length; i++){
+                algorithmSelector.selector(input, image, algorithmList[i]);
+            }
+            */
+            algorithmSelector.selector(input, image.get().getFormat(), algorithmList);
+
+            try {
+                tab = ImageConverter.imageToJPEGBytes(input);
+            } catch (Exception e) {
+                System.out.println("runCustomAlgorithm: error, conversion failed");
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        /*
-        for(int i=0; i<algorithmList.length; i++){
-            algorithmSelector.selector(input, image, algorithmList[i]);
-        }
-        */
-        algorithmSelector.selector(input, image, algorithmList);
-
-        try {
-            tab = ImageConverter.imageToJPEGBytes(input);
-        } catch (Exception e) {
-            System.out.println("runCustomAlgorithm: error, conversion failed");
         }
 
         return ResponseEntity.ok()

@@ -1,29 +1,21 @@
-package pdl.ImageProcessing ;
+package pdl.ImageProcessing;
 
-import net.imglib2.Cursor;
-import net.imglib2.RandomAccess;
 import net.imglib2.img.Img;
 import net.imglib2.loops.LoopBuilder;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
 import net.imglib2.view.IntervalView;
 import net.imglib2.view.Views;
-import static java.lang.StrictMath.pow;
 
-import net.imglib2.algorithm.neighborhood.Neighborhood;
-import net.imglib2.algorithm.neighborhood.RectangleShape;
-import net.imglib2.view.ExtendedRandomAccessibleInterval;
+public class Color {
 
-public class Color{
-    
     /**
      * public static void Colored(Img<UnsignedByteType> img,float deg)
-     * 
+     * <p>
      * change the image on here tint by the parameter deg
-     * 
-     * @param input the input image from which we will take the data of each pixel.
+     *
+     * @param img the input image from which we will take the data of each pixel.
      * @param deg the degre you want on your image;
-
-    */
+     */
     public static void Colored(Img<UnsignedByteType> img, float deg) {
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
         final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(img, 2, 1);
@@ -46,16 +38,14 @@ public class Color{
 
     /**
      * public static void rgbToHsv(int r, int g, int b, float[] hsv)
-     * 
-     * trasform the RGB data TO HSV data 
-     * 
-     * @param r the data of the R channel
-     * @param g the data of the G channel
-     * @param b the data of the RBchannel
+     * <p>
+     * trasform the RGB data TO HSV data
+     *
+     * @param r   the data of the R channel
+     * @param g   the data of the G channel
+     * @param b   the data of the RBchannel
      * @param hsv an array in wich we will put the obtain data of the function
-     * 
-
-    */
+     */
     public static void rgbToHsv(int r, int g, int b, float[] hsv) {
 
         float R = r / 255f;
@@ -101,16 +91,14 @@ public class Color{
 
     /**
      * public static void hsvToRgb(float h, float s, float V, int[] rgb)
-     * 
-     * trasform the hsv data TO RGB data 
-     * 
-     * @param h the data of the tint
-     * @param s the data of the saturation 
-     * @param v the data of the Value
+     * <p>
+     * trasform the hsv data TO RGB data
+     *
+     * @param h   the data of the tint
+     * @param s   the data of the saturation
+     * @param v   the data of the Value
      * @param rgb an array in wich we will put the obtain data of the function
-     * 
-
-    */
+     */
     public static void hsvToRgb(float h, float s, float V, int[] rgb) {
         int ti = (int) (h / 60) % 6;
 

@@ -2,16 +2,16 @@
 
   <div class="edt-bg">
     <div v-if="!thumbNav"
-         v-on:click="thumbNav = true;"
-         class="edt-btn edt-btn-left edt-btn-right">
+         class="edt-btn edt-btn-left edt-btn-right"
+         v-on:click="thumbNav = true;">
       Show
     </div>
-    <div class="edt-thumbnail-nav"
-         v-if="thumbNav">
+    <div v-if="thumbNav"
+         class="edt-thumbnail-nav">
       <div class="edt-metadata">
-        <div v-on:click="thumbNav = false;"
-           class="edt-btn edt-btn-left edt-btn-right"
-           style="margin-left: 15vw">
+        <div class="edt-btn edt-btn-left edt-btn-right"
+             style="margin-left: 15vw"
+             v-on:click="thumbNav = false;">
           Hide
         </div>
         <h4 style="color: white;">Metadata :</h4>
@@ -21,21 +21,21 @@
         </p>
       </div>
       <div class="edt-thumbnail-list">
-        <div class="edt-thumbnail" v-for="img in $parent.httpApi.response" :key="img">
-          <img v-bind:src="img.url"
-               v-on:click="image = img; imageUrl = img.url;"
-               style="max-width: 15vw; max-height: 20vh; z-index: 15" alt="">
+        <div v-for="img in $parent.httpApi.response" :key="img" class="edt-thumbnail">
+          <img alt=""
+               style="max-width: 15vw; max-height: 20vh; z-index: 15"
+               v-bind:src="img.url" v-on:click="image = img; imageUrl = img.url;">
         </div>
       </div>
     </div>
-    <img class="edt-img" ref="img" alt="" v-bind:src="imageUrl" style="z-index: 10;">
+    <img ref="img" alt="" class="edt-img" style="z-index: 10;" v-bind:src="imageUrl">
     <div style="position: fixed; bottom: 0; width: 100%;">
       <div class="edt-navbar">
         <div class="edt-navbar-in">
           <div class="edt-filter">
             <label>
               <select v-model="algorithm">
-                <option value="" v-on:click="processImage" selected>-----</option>
+                <option selected value="" v-on:click="processImage">-----</option>
                 <option value="increaseLuminosity" v-on:click="processImage">Luminosité</option>
                 <option value="histogram" v-on:click="processImage">Égalisation</option>
                 <option value="color" v-on:click="processImage">Colorisation</option>
@@ -102,18 +102,18 @@
               </label>
               <label>
                 <input ref="blur_2"
-                       min="0"
+                       class="edt-number-input"
                        max="15"
+                       min="0"
                        type="number"
                        value="0"
-                       class="edt-number-input"
                        v-on:change="processImage">
               </label>
             </div>
           </div>
           <div class="edt-btn-grp">
             <div class="edt-btn edt-btn-left"
-                 v-on:click="$parent.impImg = true; print();">
+                 v-on:click="$parent.impImg = true;">
               Add
             </div>
 
@@ -146,9 +146,6 @@ export default {
       img64b: '',
     }
   },
-  mounted() {
-    this.imageUrl = this.$parent.image.url;
-  },
   methods: {
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -168,20 +165,20 @@ export default {
     },
     processImage() {
       this.imageUrl = this.imageUrl.split("?")[0];
-      this.imageUrl = this.addUrlParameter(undefined,'algorithm', this.algorithm );
+      this.imageUrl = this.addUrlParameter(undefined, 'algorithm', this.algorithm);
       switch (this.algorithm) {
         case "increaseLuminosity":
           this.imageUrl = this.addUrlParameter(undefined, 'incLumDelta', this.$refs.increaseLuminosity.value);
           break;
         case "histogram":
-          this.imageUrl = this.addUrlParameter(undefined,'histAlgoType', this.$refs.histogram.value );
+          this.imageUrl = this.addUrlParameter(undefined, 'histAlgoType', this.$refs.histogram.value);
           break;
         case "color":
-          this.imageUrl = this.addUrlParameter(undefined,'colorDelta', this.$refs.color.value );
+          this.imageUrl = this.addUrlParameter(undefined, 'colorDelta', this.$refs.color.value);
           break;
         case "blur":
-          this.imageUrl = this.addUrlParameter(undefined,'blurAlgoType', this.$refs.blur_1.value );
-          this.imageUrl = this.addUrlParameter(undefined,'blurIntensity', this.$refs.blur_2.value*2+1 );
+          this.imageUrl = this.addUrlParameter(undefined, 'blurAlgoType', this.$refs.blur_1.value);
+          this.imageUrl = this.addUrlParameter(undefined, 'blurIntensity', this.$refs.blur_2.value * 2 + 1);
           break;
       }
     },
@@ -355,7 +352,7 @@ select {
 .edt-thumbnail-nav {
   position: fixed;
   z-index: 20;
-  background-color: rgba(0,0,0,0.40);
+  background-color: rgba(0, 0, 0, 0.40);
   height: 100vh;
   width: 19vw;
 }
@@ -363,7 +360,7 @@ select {
 .edt-thumbnail-list {
   z-index: 15;
   width: 19vw;
-  height : 75vh;
+  height: 75vh;
   max-height: 75vh;
   overflow: scroll;
 }

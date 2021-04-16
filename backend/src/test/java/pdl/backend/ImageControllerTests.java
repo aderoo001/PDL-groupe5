@@ -7,24 +7,17 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.nio.file.Files;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import java.util.ArrayList;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.core.io.ClassPathResource;
-import java.nio.file.Files;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -81,18 +74,18 @@ public class ImageControllerTests {
     @Order(4)
     //test besoin 5, 201 created
     public void createImageShouldReturnSuccess() throws Exception {
-		System.out.println("--- Test createImageShouldReturnSuccess ---");
+        System.out.println("--- Test createImageShouldReturnSuccess ---");
         final ClassPathResource imgFile = new ClassPathResource("images/reconnues/aube.jpeg");
         byte[] fileContent;
         fileContent = Files.readAllBytes(imgFile.getFile().toPath());
         MockMultipartFile tmp = new MockMultipartFile("file", "mock.jpeg", "image/jpeg", fileContent);
-		try {
+        try {
             this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(tmp)).andExpect(status().isCreated());
-			System.out.println("Ok ✓");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			throw new Exception(e);
-		}
+            System.out.println("Ok ✓");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new Exception(e);
+        }
     }
 
     @Test
@@ -104,13 +97,13 @@ public class ImageControllerTests {
         byte[] fileContent;
         fileContent = Files.readAllBytes(imgFile.getFile().toPath());
         MockMultipartFile tmp = new MockMultipartFile("file", "mock.txt", "text/plain", fileContent);
-		try {
+        try {
             this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(tmp)).andExpect(status().isUnsupportedMediaType());
-			System.out.println("Ok ✓");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			throw new Exception(e);
-		}
+            System.out.println("Ok ✓");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new Exception(e);
+        }
     }
 
     @Test

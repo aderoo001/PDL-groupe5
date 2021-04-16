@@ -27,7 +27,7 @@ public class ImageDao implements Dao<Image> {
 
             for (int i = 0; i < fileCount; i++) {
                 final ClassPathResource imgFile = new ClassPathResource("images/" + dir.list()[i]);
-                if(FilenameUtils.getExtension(imgFile.getFilename()).equals("jpeg") || FilenameUtils.getExtension(imgFile.getFilename()).equals("tif")){
+                if (FilenameUtils.getExtension(imgFile.getFilename()).equals("jpeg") || FilenameUtils.getExtension(imgFile.getFilename()).equals("tif")) {
                     byte[] fileContent;
 
                     fileContent = Files.readAllBytes(imgFile.getFile().toPath());
