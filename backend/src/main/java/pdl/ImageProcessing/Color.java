@@ -96,7 +96,7 @@ public class Color {
      *
      * @param h   the data of the tint
      * @param s   the data of the saturation
-     * @param v   the data of the Value
+     * @param V   the data of the Value
      * @param rgb an array in wich we will put the obtain data of the function
      */
     public static void hsvToRgb(float h, float s, float V, int[] rgb) {
