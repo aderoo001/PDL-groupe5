@@ -12,15 +12,15 @@ public class Outline {
     /**
      * public static void Outline(final Img<UnsignedByteType> output,int depth)
      * <p>
-     * apply two convolution to the input image with two differeny kernel
-     * to obtain an image with only the Outline visible
+     * apply two convolutions to the input image with two different kernel
+     * to obtain an image with only the outline visible.
      *
      * @param output the input image from which we will take the data of each pixel.
-     * @param depth  number of dimention of the image 3 for an RGB Image and 1 for a Gray leveled image;
+     * @param depth  number of dimension of the image, 3 for an RGB Image and 1 for a Gray leveled image.
      */
     public static void Process(final Img<UnsignedByteType> output,
                                int depth) {
-        if (depth > 1) FromRGBtoG(output);
+        if (depth > 1) ColorModelConverter.RGBtoGray(output);
         Img<UnsignedByteType> input = output.copy();
 
         int[][] kernel_H1 = {
@@ -80,32 +80,5 @@ public class Outline {
 
             }
         }
-    }
-
-    /**
-     * public static void FromRGBtoG(Img<UnsignedByteType> input)
-     * <p>
-     * change the value of each pixel by taking the values ​​
-     * of the RGB channels in order to transform the color image into a gray image .
-     *
-     * @param input the input image from which we will take the data of each pixel.
-     */
-    public static void FromRGBtoG(Img<UnsignedByteType> input) {
-        final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(input, 2, 0);
-        final IntervalView<UnsignedByteType> inputG = Views.hyperSlice(input, 2, 1);
-        final IntervalView<UnsignedByteType> inputB = Views.hyperSlice(input, 2, 2);
-
-        LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
-                (r, g, b) -> {
-                    //new color
-                    int sum = ((r.get() * 30) + (g.get() * 59) + (b.get() * 11)) / 100;
-
-
-                    //set
-                    r.set(sum);
-                    g.set(sum);
-                    b.set(sum);
-                }
-        );
     }
 }

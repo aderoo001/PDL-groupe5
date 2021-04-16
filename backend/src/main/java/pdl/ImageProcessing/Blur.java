@@ -17,7 +17,7 @@ public class Blur {
      * int[][] kernel,
      * int depth)
      * <p>
-     * add the values ​​of the kernel.
+     * apply the kernel to the image, to apply a blur effect.
      *
      * @param input  the input image from which we will take the data of each pixel.
      * @param output the output image from which we will change the data of each pixel.
@@ -69,7 +69,7 @@ public class Blur {
                         if (j < size) j++;
                         if (j == size) j = 0;
                     }
-                    mean = mean / (kernelcount(kernel));
+                    mean = mean / (kernelSum(kernel));
                     r1.get().set(mean);
 
                 }
@@ -78,14 +78,14 @@ public class Blur {
     }
 
     /**
-     * public static int kernelcount(int[][] kernel)
+     * public static int kernelSum(int[][] kernel)
      * <p>
      * add the values ​​of the kernel.
      *
      * @param kernel an array of int.
      * @return return the addition of all the value of the kernel.
      */
-    public static int kernelcount(int[][] kernel) {
+    public static int kernelSum(int[][] kernel) {
         int size = kernel.length;
 
         int count = 0;
