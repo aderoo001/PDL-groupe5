@@ -18,7 +18,7 @@ public class Histogram {
      */
     public static void aplanir_histogram_HSV(Img<UnsignedByteType> img, String Choice) {//3.3
         int SorV_ = 0;
-        if (Choice == "value") {
+        if (Choice.equals("value")) {
             SorV_ = 1;
         }
         final int SorV = SorV_;
@@ -100,7 +100,7 @@ public class Histogram {
      *
      * @param h   the data of the tint
      * @param s   the data of the saturation
-     * @param v   the data of the Value
+     * @param V   the data of the Value
      * @param rgb an array in wich we will put the obtain data of the function
      */
     public static void hsvToRgb(float h, float s, float V, int[] rgb) {

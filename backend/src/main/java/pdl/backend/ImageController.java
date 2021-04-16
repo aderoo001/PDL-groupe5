@@ -55,7 +55,7 @@ public class ImageController {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
-            algorithmSelector.selector(input, image.get().getFormat(), parameters);
+            AlgorithmSelector.selector(input, image.get().getFormat(), parameters);
 
             try {
                 tab = ImageConverter.imageToJPEGBytes(input);
@@ -165,10 +165,10 @@ public class ImageController {
 
             /*
             for(int i=0; i<algorithmList.length; i++){
-                algorithmSelector.selector(input, image, algorithmList[i]);
+                AlgorithmSelector.selector(input, image, algorithmList[i]);
             }
             */
-            algorithmSelector.selector(input, image.get().getFormat(), algorithmList);
+            pdl.backend.AlgorithmSelector.selector(input, image.get().getFormat(), algorithmList);
 
             try {
                 tab = ImageConverter.imageToJPEGBytes(input);

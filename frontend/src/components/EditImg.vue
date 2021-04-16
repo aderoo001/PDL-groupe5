@@ -73,7 +73,6 @@
               </label>
             </div>
 
-
             <div v-show="algorithm === 'color'" class="edt-range" v-on:load="processImage">
               <div>
                 <span style="position: absolute; left: 0">0</span>

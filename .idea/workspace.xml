@@ -29,19 +29,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="fix">
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="youpi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Blur.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Blur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Color.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Histogram.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Histogram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Histograme.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Luminosity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Luminosity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Outline.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Outline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/CustomImageProcessingAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/CustomImageProcessingAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageChanger.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/algorithmSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/algorithmSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/algorithmSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/AlgorithmSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -351,7 +347,28 @@
       <option name="project" value="LOCAL" />
       <updated>1618577143488</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="youpi">
+      <created>1618579892164</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1618579892164</updated>
+    </task>
+    <task id="LOCAL-00015" summary="youpi">
+      <created>1618579915571</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1618579915571</updated>
+    </task>
+    <task id="LOCAL-00016" summary="youpi">
+      <created>1618579925417</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1618579925417</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,7 +413,8 @@
     <MESSAGE value="v2-update-demande" />
     <MESSAGE value="last" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="youpi" />
+    <option name="LAST_COMMIT_MESSAGE" value="youpi" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1748" y="253" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616776220980">
@@ -412,29 +430,29 @@
     </state>
     <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617181677849" />
     <state x="2222" y="378" key="FileChooserDialogImpl/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618419115915" />
-    <state width="1166" height="219" key="GridCell.Tab.0.bottom" timestamp="1618579700804">
+    <state width="1165" height="219" key="GridCell.Tab.0.bottom" timestamp="1618580644699">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1166" height="219" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618579700804" />
+    <state width="1165" height="219" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644699" />
     <state width="1169" height="299" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1166" height="219" key="GridCell.Tab.0.center" timestamp="1618579700804">
+    <state width="1165" height="219" key="GridCell.Tab.0.center" timestamp="1618580644699">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1166" height="219" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618579700804" />
+    <state width="1165" height="219" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644699" />
     <state width="1169" height="299" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1166" height="219" key="GridCell.Tab.0.left" timestamp="1618579700804">
+    <state width="1165" height="219" key="GridCell.Tab.0.left" timestamp="1618580644698">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1166" height="219" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618579700804" />
+    <state width="1165" height="219" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644698" />
     <state width="1169" height="299" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1166" height="219" key="GridCell.Tab.0.right" timestamp="1618579700804">
+    <state width="1165" height="219" key="GridCell.Tab.0.right" timestamp="1618580644699">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1166" height="219" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618579700804" />
+    <state width="1165" height="219" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644699" />
     <state width="1169" height="299" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
     <state width="939" height="356" key="GridCell.Tab.1.bottom" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
@@ -456,11 +474,11 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
-    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618577145038">
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618579927219">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617013485432" />
-    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618577145038" />
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618579927219" />
     <state x="1923" y="277" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520891984" />
     <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618579199059">
       <screen x="1368" y="0" width="1920" height="1080" />

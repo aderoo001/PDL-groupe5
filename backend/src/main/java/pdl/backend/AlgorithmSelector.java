@@ -8,7 +8,7 @@ import pdl.ImageProcessing.*;
 
 import java.util.Map;
 
-public class algorithmSelector {
+public class AlgorithmSelector {
 
     public static ResponseEntity<?> selector(SCIFIOImgPlus<UnsignedByteType> input, String format, Map<String, String> parameters) {
         if (parameters.containsKey("algorithm")) {
