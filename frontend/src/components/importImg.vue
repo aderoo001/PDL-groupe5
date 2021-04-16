@@ -37,7 +37,7 @@ export default {
       if (this.file !== '') {
         this.$parent.httpApi.postImage(this.file);
       }
-      this.$parent.update('impImg', false);
+      this.$parent.update();
     },
   },
 }
@@ -45,6 +45,7 @@ export default {
 
 <style scoped>
 .imp-bg {
+  z-index: 25;
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
@@ -58,6 +59,7 @@ export default {
 }
 
 .imp-box {
+  z-index: 25;
   position: fixed;
   left: 33%;
   cursor: auto;
