@@ -230,7 +230,7 @@ public class ImageChanger{
         final int iw = (int) input.max(0);
         final int ih = (int) output.max(1);
     
-        for (int x = 0; x <= iw; ++x) {
+        for (int x = 0; x <= iw; ++x) { 
             for (int y = 0; y <= ih; ++y) {
                 r.setPosition(x, 0);
                 r.setPosition(y, 1);

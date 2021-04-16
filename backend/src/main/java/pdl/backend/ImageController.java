@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
 
+import pdl.ImageProcessing.*;
+
 
 @RestController
 public class ImageController {
@@ -87,7 +89,7 @@ public class ImageController {
                 }
 
                 try {
-                    ImageChanger.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
+                    Luminosity.EditLuminosityRGB(input, input, Integer.parseInt(opt1, 10));
                 } catch (Exception e) {
                     e.printStackTrace();
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,7 +100,7 @@ public class ImageController {
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                 }
                 try {
-                    ImageChanger.HistoHSV(input, opt1);
+                    Histograme.aplanir_histograme_HSV(input, opt1);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -109,7 +111,7 @@ public class ImageController {
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                 }
                 try {
-                    ImageChanger.Colored(input, Float.parseFloat(opt1));
+                    Color.Colored(input, Float.parseFloat(opt1));
                 } catch (Exception e) {
                     e.printStackTrace();
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -123,16 +125,16 @@ public class ImageController {
                 }
                 try {
                     int size = Integer.parseInt(opt2, 10);
-                    int[][] kernel = ImageChanger.gaussien();
+                    int[][] kernel = Blur.gaussien();
                     if (opt1.equals("M")) {
-                        kernel = ImageChanger.average(size);
+                        kernel = Blur.average(size);
                     }
                     switch (image.get().getFormat()) {
                         case "jpeg":
-                            ImageChanger.blured(input, input, kernel, 3);
+                            Blur.blured(input, input, kernel, 3);
                             break;
                         case "tif":
-                            ImageChanger.blured(input, input, kernel, 1);
+                            Blur.blured(input, input, kernel, 1);
                             break;
                     }
                 } catch (Exception e) {
@@ -145,11 +147,11 @@ public class ImageController {
                     switch (image.get().getFormat()) {
                         case "jpeg":
                             assert input != null;
-                            ImageChanger.Outline(input, 3);
+                            Outline.Outline(input, 3);
                             break;
                         case "tif":
                             assert input != null;
-                            ImageChanger.Outline(input, 1);
+                            Outline.Outline(input, 1);
                             break;
                     }
                 } catch (Exception e) {
@@ -159,7 +161,7 @@ public class ImageController {
                 break;
             case "grayLevel":
                 try {
-                    ImageChanger.FromRGBtoG(input);
+                    Outline.FromRGBtoG(input);
 
                 } catch (Exception e) {
                     e.printStackTrace();
