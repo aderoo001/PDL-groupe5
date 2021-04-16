@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
-import java.util.ArrayList;
 
 
 @RestController
@@ -42,11 +41,6 @@ public class ImageController {
             @PathVariable("id") long id,
             @RequestParam Map<String, String> parameters
     ) {
-
-        //temporaire -> containskey/contains value
-        if(parameters.isEmpty()==true){
-            parameters.put("algorithm", "");
-        }
 
         Optional<Image> image = this.imageDao.retrieve(id);
 
@@ -69,7 +63,7 @@ public class ImageController {
         try {
             tab = ImageConverter.imageToJPEGBytes(input);
         } catch (Exception e) {
-            System.out.println("error 2 catch");
+            System.out.println("getImage: error, conversion failed");
         }
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
@@ -151,11 +145,11 @@ public class ImageController {
     }
 
 
-    //pour test ; curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data   '{"algorithmList":{ "algorithm" : "grayLevel" }}' "http://localhost:8080/images/custom/1"
+    //pour test ; curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data   '{"algorithmList":{ "algorithm" : "grayLevel" }, { "algorithm" : "blur", "opt1" : "M", "opt2": "5"}' "http://localhost:8080/images/custom/1"
     @RequestMapping(value = "/images/custom/{id}", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> runCustomAlgorithm(@PathVariable("id") long id, @RequestBody CustomImageProcessingAlgo customAlgo){
-        System.out.println("cc début");
+        //Map<String,String>[] algorithmList = customAlgo.getAlgorithmList();
         Map<String,String> algorithmList = customAlgo.getAlgorithmList();
 
         Optional<Image> image = this.imageDao.retrieve(id);
@@ -174,23 +168,19 @@ public class ImageController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        System.out.println("cc avant selector");
         /*
         for(int i=0; i<algorithmList.length; i++){
-            System.out.println("cc pendant selector");
-            algorithmSelector.selector(input, image, algorithmList);
+            algorithmSelector.selector(input, image, algorithmList[i]);
         }
         */
         algorithmSelector.selector(input, image, algorithmList);
-        System.out.println("cc après selector");
 
         try {
             tab = ImageConverter.imageToJPEGBytes(input);
         } catch (Exception e) {
-            System.out.println("error 2 catch");
+            System.out.println("runCustomAlgorithm: error, conversion failed");
         }
 
-        System.out.println("cc avant return");
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(tab);

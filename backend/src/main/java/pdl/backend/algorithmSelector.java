@@ -25,105 +25,107 @@ import java.util.Optional;
 public class algorithmSelector{
 
     public static ResponseEntity<?> selector(SCIFIOImgPlus<UnsignedByteType> input, Optional<Image> image, Map<String, String> parameters){
-        switch (parameters.get("algorithm")) {
-            case "increaseLuminosity":
-                int incLumDelta = Integer.parseInt(parameters.get("opt1"), 10);
-                if (!(-255 <= incLumDelta && incLumDelta <= 255)) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
-
-                try {
-                    ImageChanger.EditLuminosityRGB(input, input, incLumDelta);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-                break;
-
-            case "histogram":
-                String histAlgoType = parameters.get("opt1");
-                if (!(histAlgoType.equals("value") || histAlgoType.equals("saturation"))) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
-                try {
-                    ImageChanger.HistoHSV(input, histAlgoType);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-                break;
-
-            case "color":
-                float colorDelta = Float.parseFloat(parameters.get("opt1"));
-                if (!(0 <= colorDelta)) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
-                try {
-                    ImageChanger.Colored(input, colorDelta);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-                break;
-
-            case "blur":
-                int blurIntensity = Integer.parseInt(parameters.get("opt2"), 10);
-                String blurAlgoType = parameters.get("opt1");
-                if (!(0 <= blurIntensity) || !(blurAlgoType.equals("M") || blurAlgoType.equals("G"))) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
-                try {
-                    int size = blurIntensity;
-                    int[][] kernel = ImageChanger.gaussien();
-                    if (blurAlgoType.equals("M")) {
-                        kernel = ImageChanger.average(size);
+        if(parameters.containsKey("algorithm")==true){
+            switch (parameters.get("algorithm")) {
+                case "increaseLuminosity":
+                    int incLumDelta = Integer.parseInt(parameters.get("incLumDelta"), 10);
+                    if (!(-255 <= incLumDelta && incLumDelta <= 255)) {
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
-                    switch (image.get().getFormat()) {
-                        case "jpeg":
-                            ImageChanger.blured(input, input, kernel, 3);
-                            break;
-                        case "tif":
-                            ImageChanger.blured(input, input, kernel, 1);
-                            break;
+    
+                    try {
+                        ImageChanger.EditLuminosityRGB(input, input, incLumDelta);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-                break;
-
-            case "outline":
-                try {
-                    switch (image.get().getFormat()) {
-                        case "jpeg":
-                            assert input != null;
-                            ImageChanger.Outline(input, 3);
-                            break;
-                        case "tif":
-                            assert input != null;
-                            ImageChanger.Outline(input, 1);
-                            break;
+                    break;
+    
+                case "histogram":
+                    String histAlgoType = parameters.get("histAlgoType");
+                    if (!(histAlgoType.equals("value") || histAlgoType.equals("saturation"))) {
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-                break;
-
-            case "grayLevel":
-                try {
-                    ImageChanger.FromRGBtoG(input);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-                break;
-                
-            case "":
-                break;
-            default:
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    try {
+                        ImageChanger.HistoHSV(input, histAlgoType);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                    }
+                    break;
+    
+                case "color":
+                    float colorDelta = Float.parseFloat(parameters.get("colorDelta"));
+                    if (!(0 <= colorDelta)) {
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    }
+                    try {
+                        ImageChanger.Colored(input, colorDelta);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                    }
+                    break;
+    
+                case "blur":
+                    int blurIntensity = Integer.parseInt(parameters.get("blurIntensity"), 10);
+                    String blurAlgoType = parameters.get("blurAlgoType");
+                    if (!(0 <= blurIntensity) || !(blurAlgoType.equals("M") || blurAlgoType.equals("G"))) {
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    }
+                    try {
+                        int size = blurIntensity;
+                        int[][] kernel = ImageChanger.gaussien();
+                        if (blurAlgoType.equals("M")) {
+                            kernel = ImageChanger.average(size);
+                        }
+                        switch (image.get().getFormat()) {
+                            case "jpeg":
+                                ImageChanger.blured(input, input, kernel, 3);
+                                break;
+                            case "tif":
+                                ImageChanger.blured(input, input, kernel, 1);
+                                break;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                    }
+                    break;
+    
+                case "outline":
+                    try {
+                        switch (image.get().getFormat()) {
+                            case "jpeg":
+                                assert input != null;
+                                ImageChanger.Outline(input, 3);
+                                break;
+                            case "tif":
+                                assert input != null;
+                                ImageChanger.Outline(input, 1);
+                                break;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                    }
+                    break;
+    
+                case "grayLevel":
+                    try {
+                        ImageChanger.FromRGBtoG(input);
+    
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                    }
+                    break;
+                    
+                case "":
+                    break;
+                default:
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
