@@ -29,15 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="besoin.tex">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/GrayLevelProcessing.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageChanger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/besoins.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/besoins.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/besoins.tex" beforeDir="false" afterPath="$PROJECT_DIR$/besoins.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-    </list>
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="last" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +69,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../InitR" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -209,7 +201,7 @@
         <item itemvalue="JUnit.ImageControllerTests" />
         <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
         <item itemvalue="npm.serve" />
-        <item itemvalue="npm.serve" />
+        <item itemvalue="JUnit.ImageControllerTests" />
       </list>
     </recent_temporary>
   </component>
@@ -234,6 +226,12 @@
       <workItem from="1617015434895" duration="105000" />
       <workItem from="1617015549011" duration="136000" />
       <workItem from="1617015750737" duration="1529000" />
+      <workItem from="1617026364891" duration="2480000" />
+      <workItem from="1617181567862" duration="103000" />
+      <workItem from="1618229160210" duration="3951000" />
+      <workItem from="1618409439053" duration="11440000" />
+      <workItem from="1618495954485" duration="16002000" />
+      <workItem from="1618562352651" duration="2433000" />
     </task>
     <task id="LOCAL-00001" summary="innit commit">
       <created>1615213335713</created>
@@ -298,7 +296,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617013483709</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="last">
+      <created>1618520889064</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1618520889064</updated>
+    </task>
+    <task id="LOCAL-00011" summary="last">
+      <created>1618572248246</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1618572248246</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,7 +352,9 @@
     <MESSAGE value="v1-front polished" />
     <MESSAGE value="v1-besoin8-front polished" />
     <MESSAGE value="besoin.tex" />
-    <option name="LAST_COMMIT_MESSAGE" value="besoin.tex" />
+    <MESSAGE value="v2-update-demande" />
+    <MESSAGE value="last" />
+    <option name="LAST_COMMIT_MESSAGE" value="last" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1748" y="253" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616776220980">
@@ -351,26 +365,35 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1973" y="291" width="530" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616695872538" />
-    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl" timestamp="1617015683881">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state x="2222" y="378" width="430" height="486" key="FileChooserDialogImpl" timestamp="1618419115915">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
-    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617015683881" />
-    <state width="1173" height="272" key="GridCell.Tab.0.bottom" timestamp="1617016482726">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617181677849" />
+    <state x="2222" y="378" key="FileChooserDialogImpl/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618419115915" />
+    <state width="1168" height="299" key="GridCell.Tab.0.bottom" timestamp="1618565443595">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
-    <state width="1173" height="272" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617016482726" />
-    <state width="1173" height="272" key="GridCell.Tab.0.center" timestamp="1617016482726">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state width="1172" height="272" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
+    <state width="1168" height="299" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618565443595" />
+    <state width="1169" height="299" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
+    <state width="1168" height="299" key="GridCell.Tab.0.center" timestamp="1618565443595">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
-    <state width="1173" height="272" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617016482726" />
-    <state width="1173" height="272" key="GridCell.Tab.0.left" timestamp="1617016482726">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state width="1172" height="272" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
+    <state width="1168" height="299" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618565443595" />
+    <state width="1169" height="299" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
+    <state width="1168" height="299" key="GridCell.Tab.0.left" timestamp="1618565443595">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
-    <state width="1173" height="272" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617016482726" />
-    <state width="1173" height="272" key="GridCell.Tab.0.right" timestamp="1617016482726">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state width="1172" height="272" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
+    <state width="1168" height="299" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618565443595" />
+    <state width="1169" height="299" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
+    <state width="1168" height="299" key="GridCell.Tab.0.right" timestamp="1618565443595">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
-    <state width="1173" height="272" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617016482726" />
+    <state width="1172" height="272" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
+    <state width="1168" height="299" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618565443595" />
+    <state width="1169" height="299" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
     <state width="939" height="356" key="GridCell.Tab.1.bottom" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -391,14 +414,17 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
-    <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1617013485432">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618572252227">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617013485432" />
-    <state x="2030" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617013439312">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state x="1923" y="277" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618572252227" />
+    <state x="1923" y="277" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520891984" />
+    <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618409467154">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
-    <state x="2030" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617013439312" />
+    <state x="2030" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617026404923" />
+    <state x="2118" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618409467154" />
     <state x="1377" y="100" width="1726" height="883" key="dock-window-1" timestamp="1616697824152">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>

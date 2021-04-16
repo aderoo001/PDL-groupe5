@@ -227,7 +227,7 @@ public class ImageChanger{
 
                 double tmp = Math.sqrt(
                         meanH*meanH + meanV*meanV
-                );
+                )%255;
 
                 for (int chan = 0; chan < depth; chan++) {
                     if (depth > 1) r1.setPosition(chan, 2);
@@ -300,13 +300,8 @@ public class ImageChanger{
         LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
                 (r, g, b) -> {
                     rgbToHsv(r.get(), g.get(), b.get(), hsv);
-                    if (SorV == 0) {
-                        hsvToRgb(hsv[0], (float) (tab[Math.round(hsv[1])*100]*100)/100, hsv[2], rgb);
-                    }
-                    if (SorV == 1) {
-                        hsvToRgb(hsv[0], hsv[1], (float) (tab[Math.round(hsv[2])*100]*100)/100, rgb);
-                    }
-
+                    hsv[SorV+1] = (float) (tab[Math.round(hsv[SorV+1]*100)])/tab[100];
+                    hsvToRgb(hsv[0], hsv[1], hsv[2], rgb);
                     r.set(rgb[0]);
                     g.set(rgb[1]);
                     b.set(rgb[2]);
@@ -357,7 +352,6 @@ public class ImageChanger{
         LoopBuilder.setImages(inputR, inputG, inputB).forEachPixel(
                 (r, g, b) -> {
                     rgbToHsv(r.get(), g.get(), b.get(), hsv);
-
                     float color = hsv[SorV + 1] * 100;//devient sois le S ou le V de la valeur HSV de limage
 //color=[0,100]
                     tab[Math.round(color)] = tab[Math.round(color)] + 1;
