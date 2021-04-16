@@ -28,7 +28,7 @@ public class Blur{
     * @param input the input image from which we will take the data of each pixel.
     * @param output the output image from which we will change the data of each pixel.
     * @param kernel an array of int
-    * @param depth jsp
+    * @param depth number of dimention of the image 3 for an RGB Image and 1 for a Gray leveled image;
     * 
 
     */

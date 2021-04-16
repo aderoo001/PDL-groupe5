@@ -22,7 +22,7 @@ public class Outline{
      * to obtain an image with only the Outline visible
      * 
      * @param input the input image from which we will take the data of each pixel.
-     * @param depth jsp sad;
+     * @param depth number of dimention of the image 3 for an RGB Image and 1 for a Gray leveled image;
 
     */
     public static void Outline(final Img<UnsignedByteType> output,
