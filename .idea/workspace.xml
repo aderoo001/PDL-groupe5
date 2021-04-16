@@ -29,10 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="last">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
-    </list>
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="last" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -234,7 +231,7 @@
       <workItem from="1618229160210" duration="3951000" />
       <workItem from="1618409439053" duration="11440000" />
       <workItem from="1618495954485" duration="16002000" />
-      <workItem from="1618562352651" duration="2132000" />
+      <workItem from="1618562352651" duration="2433000" />
     </task>
     <task id="LOCAL-00001" summary="innit commit">
       <created>1615213335713</created>
@@ -306,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618520889064</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="last">
+      <created>1618572248246</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1618572248246</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -410,10 +414,11 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
-    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618520891984">
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618572252227">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617013485432" />
+    <state x="1923" y="277" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618572252227" />
     <state x="1923" y="277" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520891984" />
     <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618409467154">
       <screen x="1368" y="0" width="1920" height="1080" />
