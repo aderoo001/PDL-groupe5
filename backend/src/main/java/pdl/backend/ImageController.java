@@ -143,7 +143,6 @@ public class ImageController {
     }
 
 
-    //pour test ; curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data   '{"algorithmList":{ "algorithm" : "grayLevel" }, { "algorithm" : "blur", "opt1" : "M", "opt2": "5"}' "http://localhost:8080/images/custom/1"
     @RequestMapping(value = "/images/custom/{id}", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> runCustomAlgorithm(@PathVariable("id") long id, @RequestBody CustomImageProcessingAlgo customAlgo) {

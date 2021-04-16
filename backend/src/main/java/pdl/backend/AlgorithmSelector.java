@@ -20,7 +20,7 @@ public class AlgorithmSelector {
                     }
 
                     try {
-                        Luminosity.EditLuminosityRGB(input, input, incLumDelta);
+                        Luminosity.EditLuminosity(input, input, incLumDelta);
                     } catch (Exception e) {
                         e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -33,7 +33,7 @@ public class AlgorithmSelector {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     try {
-                        Histogram.aplanir_histogram_HSV(input, histAlgoType);
+                        Histogram.HistogramEqualization(input, histAlgoType);
                     } catch (Exception e) {
                         e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,7 +98,7 @@ public class AlgorithmSelector {
 
                 case "grayLevel":
                     try {
-                        Outline.FromRGBtoG(input);
+                        ColorModelConverter.RGBtoGray(input);
 
                     } catch (Exception e) {
                         e.printStackTrace();

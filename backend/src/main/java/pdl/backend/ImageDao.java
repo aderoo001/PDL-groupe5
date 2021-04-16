@@ -19,7 +19,6 @@ public class ImageDao implements Dao<Image> {
     public ImageDao() {
         File dir = new File("src/main/resources/images");
 
-        //check if file exists
         try {
             if (!dir.exists()) throw new NullPointerException();
 
