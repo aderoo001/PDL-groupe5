@@ -11,10 +11,10 @@ public class Color {
     /**
      * public static void Colored(Img<UnsignedByteType> img,float deg)
      * <p>
-     * change the image on here tint by the parameter deg
+     * change the image tint by the deg parameter.
      *
      * @param img the input image from which we will take the data of each pixel.
-     * @param deg the degre you want on your image;
+     * @param deg the degree you want on your image;
      */
     public static void Colored(Img<UnsignedByteType> img, float deg) {
         final IntervalView<UnsignedByteType> inputR = Views.hyperSlice(img, 2, 0);
@@ -32,19 +32,17 @@ public class Color {
                     b.set((int) rgb[2]);
                 }
         );
-
-
     }
 
     /**
      * public static void rgbToHsv(int r, int g, int b, float[] hsv)
      * <p>
-     * trasform the RGB data TO HSV data
+     * transform the RGB data to HSV data.
      *
-     * @param r   the data of the R channel
-     * @param g   the data of the G channel
-     * @param b   the data of the RBchannel
-     * @param hsv an array in wich we will put the obtain data of the function
+     * @param r   the data of the R channel.
+     * @param g   the data of the G channel.
+     * @param b   the data of the B channel.
+     * @param hsv an array in which we will put the obtain data of the function.
      */
     public static void rgbToHsv(int r, int g, int b, float[] hsv) {
 
@@ -55,13 +53,13 @@ public class Color {
         float Max = 0;
         float Min = 0;
         float Moy = 0;
-        //**********min max */
+
         Max = Math.max(R, Math.max(G, B));
         Min = Math.min(R, Math.min(G, B));
 
         Moy = Max - Min;
         float t = 0;
-        //**** t *//*
+
         if (Min == Max) {
             t = 0;
         } else {
@@ -75,15 +73,16 @@ public class Color {
                 t = (60 * ((R - G) / Moy) + 240);
             }
         }
-        //S
+
         float S;
         if (Max == 0)
             S = 0;
         else {
             S = 1 - (Min / Max);
         }
+
         float v = Max;
-        //v = v *100 /255;
+
         hsv[0] = t;
         hsv[1] = S;
         hsv[2] = v;

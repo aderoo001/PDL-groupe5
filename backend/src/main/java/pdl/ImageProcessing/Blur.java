@@ -17,12 +17,12 @@ public class Blur {
      * int[][] kernel,
      * int depth)
      * <p>
-     * add the values ​​of the kernel
+     * add the values ​​of the kernel.
      *
      * @param input  the input image from which we will take the data of each pixel.
      * @param output the output image from which we will change the data of each pixel.
-     * @param kernel an array of int
-     * @param depth  number of dimention of the image 3 for an RGB Image and 1 for a Gray leveled image;
+     * @param kernel an array of int.
+     * @param depth  the image number of dimensions, 3 for an RGB Image and 1 for a Gray leveled image.
      */
     public static void blured(
             final Img<UnsignedByteType> input,
@@ -80,10 +80,10 @@ public class Blur {
     /**
      * public static int kernelcount(int[][] kernel)
      * <p>
-     * add the values ​​of the kernel
+     * add the values ​​of the kernel.
      *
-     * @param kernel an array of int
-     * @return return the addition of all the value of the kernel
+     * @param kernel an array of int.
+     * @return return the addition of all the value of the kernel.
      */
     public static int kernelcount(int[][] kernel) {
         int size = kernel.length;
@@ -101,10 +101,10 @@ public class Blur {
     /**
      * public static int[][] average(int size)
      * <p>
-     * creat a kernel with only 1 in it.
+     * create a kernel with only 1 in it.
      *
-     * @param size the size of the kernel you whant.
-     * @return an array of size * size with only 1 in it .
+     * @param size the size of the kernel you want.
+     * @return an array of size * size with only 1 in it.
      */
     public static int[][] average(int size) {
         int[][] kernel = new int[size][size];
@@ -119,9 +119,9 @@ public class Blur {
     /**
      * public static int[][] gaussien()
      * <p>
-     * creat a gaussien kernel
+     * create a gaussien kernel.
      *
-     * @return an array of 5x5 with the gaussien kernel .
+     * @return an array of 5x5 with the gaussien kernel.
      */
     public static int[][] gaussien() {
         int[][] kernel = {
