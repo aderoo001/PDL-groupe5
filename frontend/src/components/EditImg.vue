@@ -146,6 +146,9 @@ export default {
       img64b: '',
     }
   },
+  mounted() {
+    this.imageUrl = this.$parent.image.url;
+  },
   methods: {
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
