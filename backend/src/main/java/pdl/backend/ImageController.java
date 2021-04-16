@@ -56,6 +56,7 @@ public class ImageController {
 
             ResponseEntity<?> tmp = AlgorithmSelector.selector(input, image.get().getFormat(), parameters);
             if (!tmp.equals(new ResponseEntity<>(HttpStatus.OK))) return tmp;
+            
             try {
                 tab = ImageConverter.imageToJPEGBytes(input);
             } catch (Exception e) {
