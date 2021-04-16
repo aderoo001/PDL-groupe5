@@ -32,7 +32,7 @@ public class ImageControllerTests {
     //test besoin 4, images par défaut présentes ?
     public void getImageListShouldReturnCorrectValues() throws Exception {
         System.out.println("--- Test getImageList ---");
-        String tmp = "[{'id':0,'name':'test.jpeg','size':50362,'format':'jpeg','url':'http://localhost:8080/images/0'},{'id':1,'name':'cheval2.jpeg','size':50424,'format':'jpeg','url':'http://localhost:8080/images/1'}]";
+        String tmp = "[{'id':0,'name':'cheval2.jpeg','format':'jpeg','size':'264*191*3','url':'http://localhost:8080/images/0'},{'id':1,'name':'face.tif','format':'tif','size':'640*424*1','url':'http://localhost:8080/images/1'}]";
         try {
             this.mockMvc.perform(get("/images")).andExpect(content().json(tmp));
             System.out.println("Ok ✓");
@@ -98,7 +98,8 @@ public class ImageControllerTests {
         fileContent = Files.readAllBytes(imgFile.getFile().toPath());
         MockMultipartFile tmp = new MockMultipartFile("file", "mock.txt", "text/plain", fileContent);
         try {
-            this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(tmp)).andExpect(status().isUnsupportedMediaType());
+            this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(tmp))
+                    .andExpect(status().isUnsupportedMediaType());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -112,7 +113,8 @@ public class ImageControllerTests {
     public void deleteImageShouldReturnNotFound() throws Exception {
         System.out.println("--- Test deleteImageShouldReturnNotFound ---");
         try {
-            this.mockMvc.perform(delete("/images/50")).andExpect(status().isNotFound());
+            this.mockMvc.perform(delete("/images/50"))
+                    .andExpect(status().isNotFound());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -126,7 +128,8 @@ public class ImageControllerTests {
     public void deleteImageShouldReturnSucces() throws Exception {
         System.out.println("--- Test deleteImageShouldReturnSuccess ---");
         try {
-            this.mockMvc.perform(delete("/images/0")).andExpect(status().isOk());
+            this.mockMvc.perform(delete("/images/0"))
+                    .andExpect(status().isOk());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -142,7 +145,8 @@ public class ImageControllerTests {
         System.out.println("--- Test editLuminosityMinShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&opt1=-256")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&incLumDelta=-255"))
+                    .andExpect(status().isOk());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -156,7 +160,8 @@ public class ImageControllerTests {
         System.out.println("--- Test editLuminosityMaxShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&opt1=255")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&incLumDelta=255"))
+                    .andExpect(status().isOk());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -170,7 +175,8 @@ public class ImageControllerTests {
         System.out.println("--- Test histogramShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=histogram&opt1=value")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=histogram&histAlgoType=value"))
+                    .andExpect(status().isOk());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -184,7 +190,8 @@ public class ImageControllerTests {
         System.out.println("--- Test histogramShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=histogram&opt1=saturation")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=histogram&histAlgoType=saturation")).
+                    andExpect(status().isOk());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -198,7 +205,7 @@ public class ImageControllerTests {
         System.out.println("--- Test editColorShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=color&opt1=180")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=color&colorDelta=180")).andExpect(status().isOk());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -212,8 +219,8 @@ public class ImageControllerTests {
         System.out.println("--- Test editBlurShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=blur&opt1=0&opt2=13")).andExpect(status().isOk());
-            this.mockMvc.perform(get("/images/0?algorithm=blur&opt1=1&opt2=13")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=blur&blurAlgoType=0&blurIntensity=13"))
+                    .andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -227,7 +234,8 @@ public class ImageControllerTests {
         System.out.println("--- Test outlineShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=outline")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=outline"))
+                    .andExpect(status().isOk());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -271,7 +279,7 @@ public class ImageControllerTests {
         System.out.println("--- Test editLuminosityWithoutArgShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=editLuminosity")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=editLuminosity")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -285,7 +293,7 @@ public class ImageControllerTests {
         System.out.println("--- Test editLuminosityMinShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&opt1=-500")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&incLumDelta=-500")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -299,8 +307,7 @@ public class ImageControllerTests {
         System.out.println("--- Test editLuminosityMaxShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&opt1=500")).andExpect(status().isBadRequest());
-            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&opt1=100&opt2=lul")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&incLumDelta=500")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -310,11 +317,11 @@ public class ImageControllerTests {
 
     @Test
     @Order(1)
-    public void editLuminosityTooMuchArgsShouldReturnBadRequest() throws Exception {
-        System.out.println("--- Test editLuminosityTooMuchArgsShouldReturnBadRequest ---");
+    public void editLuminosityTooManyArgsShouldReturnBadRequest() throws Exception {
+        System.out.println("--- Test editLuminosityTooManyArgsShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&opt1=100&opt2=lul")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=increaseLuminosity&incLumDelta=100&opt2=lul")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -328,7 +335,8 @@ public class ImageControllerTests {
         System.out.println("--- Test histogramWithoutArgShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=histogram")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=histogram"))
+                    .andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -342,7 +350,7 @@ public class ImageControllerTests {
         System.out.println("--- Test histogramOutOfRangeShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=histogram&opt1=2")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=histogram&histAlgoType=2")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -356,7 +364,7 @@ public class ImageControllerTests {
         System.out.println("--- Test histogramWrongArgShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=histogram&opt1=zulul")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=histogram&histAlgoType=zulul")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -370,7 +378,7 @@ public class ImageControllerTests {
         System.out.println("--- Test histogramTooMuchArgsShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=histogram&opt1=0&opt2=lul")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=histogram&histAlgoType=0&opt2=lul")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -384,7 +392,7 @@ public class ImageControllerTests {
         System.out.println("--- Test colorWithoutArgShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=color")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=color")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -398,7 +406,8 @@ public class ImageControllerTests {
         System.out.println("--- Test colorMinShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=color&opt1=-1")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=color&colorDelta=-1"))
+                    .andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -412,7 +421,8 @@ public class ImageControllerTests {
         System.out.println("--- Test colorMaxShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=color&opt1=361")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=color&colorDelta=361"))
+                    .andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -426,7 +436,7 @@ public class ImageControllerTests {
         System.out.println("--- Test colorTooMuchArgsShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=color&opt1=180&opt2=lul")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=color&colorDelta=180&opt2=lul")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -440,7 +450,8 @@ public class ImageControllerTests {
         System.out.println("--- Test blurWithoutArgShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=blur")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=blur"))
+                    .andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -454,7 +465,8 @@ public class ImageControllerTests {
         System.out.println("--- Test blurOnlyOneArgShouldReturnSuccess ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=blur&opt1=0")).andExpect(status().isOk());
+            this.mockMvc.perform(get("/images/0?algorithm=blur&blurAlgoType=0"))
+                    .andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -468,7 +480,7 @@ public class ImageControllerTests {
         System.out.println("--- Test blurArg1WrongShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=blur&opt1=5&opt2=3")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=blur&blurAlgoType=50&blurIntensity=3")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -482,7 +494,7 @@ public class ImageControllerTests {
         System.out.println("--- Test blurArg2MinShouldReturnBadRequest ---");
 
         try {
-            this.mockMvc.perform(get("/images/0?algorithm=blur&opt1=0&opt2=-1")).andExpect(status().isBadRequest());
+            this.mockMvc.perform(get("/images/0?algorithm=blur&blurAlgoType=0&blurIntensity=-1")).andExpect(status().isBadRequest());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -526,7 +538,8 @@ public class ImageControllerTests {
         System.out.println("--- Test getImageWithIncreaseLuminosityShouldReturnNotFound ---");
 
         try {
-            this.mockMvc.perform(get("/images/50?algorithm=increaseLuminosity&opt1=10")).andExpect(status().isNotFound());
+            this.mockMvc.perform(get("/images/50?algorithm=increaseLuminosity&incLumDelta=10"))
+                    .andExpect(status().isNotFound());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -540,7 +553,8 @@ public class ImageControllerTests {
         System.out.println("--- Test getImageWithHistogramShouldReturnNotFound ---");
 
         try {
-            this.mockMvc.perform(get("/images/50?algorithm=histogram&opt1=value")).andExpect(status().isNotFound());
+            this.mockMvc.perform(get("/images/50?algorithm=histogram&histAlgoType=value"))
+                    .andExpect(status().isNotFound());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -554,7 +568,8 @@ public class ImageControllerTests {
         System.out.println("--- Test getImageWithColorShouldReturnNotFound ---");
 
         try {
-            this.mockMvc.perform(get("/images/50?algorithm=color&opt1=10")).andExpect(status().isNotFound());
+            this.mockMvc.perform(get("/images/50?algorithm=color&colorDelta=10"))
+                    .andExpect(status().isNotFound());
             System.out.println("Ok ✓");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -568,7 +583,7 @@ public class ImageControllerTests {
         System.out.println("--- Test getImageWithBlurShouldReturnNotFound ---");
 
         try {
-            this.mockMvc.perform(get("/images/50?algorithm=blur&opt1=0&opt2=3"))
+            this.mockMvc.perform(get("/images/50?algorithm=blur&blurAlgoType=0&blurIntensity=3"))
                     .andExpect(status().isNotFound());
             System.out.println("Ok ✓");
         } catch (Exception e) {
@@ -615,7 +630,7 @@ public class ImageControllerTests {
         System.out.println("--- Test getTiffWithHistogramShouldRetourn500 ---");
 
         try {
-            this.mockMvc.perform(get("/images/1?algorithm=color&opt1=saturation"))
+            this.mockMvc.perform(get("/images/1?algorithm=histogram&histAlgoType=saturation"))
                     .andExpect(status().isInternalServerError());
             System.out.println("Ok ✓");
         } catch (Exception e) {
@@ -630,7 +645,7 @@ public class ImageControllerTests {
         System.out.println("--- Test getTiffWithColorShouldRetourn500 ---");
 
         try {
-            this.mockMvc.perform(get("/images/1?algorithm=color&opt1=180"))
+            this.mockMvc.perform(get("/images/1?algorithm=color&colorDelta=180"))
                     .andExpect(status().isInternalServerError());
             System.out.println("Ok ✓");
         } catch (Exception e) {

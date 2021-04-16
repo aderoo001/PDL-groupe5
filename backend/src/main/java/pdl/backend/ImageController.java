@@ -51,16 +51,15 @@ public class ImageController {
             try {
                 input = ImageConverter.imageFromJPEGBytes(image.get().getData());
             } catch (Exception e) {
-                e.printStackTrace();
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
-            AlgorithmSelector.selector(input, image.get().getFormat(), parameters);
-
+            ResponseEntity<?> tmp = AlgorithmSelector.selector(input, image.get().getFormat(), parameters);
+            if (!tmp.equals(new ResponseEntity<>(HttpStatus.OK))) return tmp;
             try {
                 tab = ImageConverter.imageToJPEGBytes(input);
             } catch (Exception e) {
-                System.out.println("getImage: error, conversion failed");
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

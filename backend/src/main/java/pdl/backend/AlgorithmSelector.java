@@ -14,6 +14,8 @@ public class AlgorithmSelector {
         if (parameters.containsKey("algorithm")) {
             switch (parameters.get("algorithm")) {
                 case "increaseLuminosity":
+                    if (parameters.size() > 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    if (!parameters.containsKey("incLumDelta")) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     int incLumDelta = Integer.parseInt(parameters.get("incLumDelta"), 10);
                     if (!(-255 <= incLumDelta && incLumDelta <= 255)) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -22,12 +24,13 @@ public class AlgorithmSelector {
                     try {
                         Luminosity.EditLuminosity(input, input, incLumDelta);
                     } catch (Exception e) {
-                        e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                     break;
 
                 case "histogram":
+                    if (parameters.size() > 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    if (!parameters.containsKey("histAlgoType")) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     String histAlgoType = parameters.get("histAlgoType");
                     if (!(histAlgoType.equals("value") || histAlgoType.equals("saturation"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -35,25 +38,31 @@ public class AlgorithmSelector {
                     try {
                         Histogram.HistogramEqualization(input, histAlgoType);
                     } catch (Exception e) {
-                        e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                     break;
 
                 case "color":
+                    if (parameters.size() > 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    if (!parameters.containsKey("colorDelta")) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     float colorDelta = Float.parseFloat(parameters.get("colorDelta"));
-                    if (!(0 <= colorDelta)) {
+                    if (!(0 <= colorDelta) || !(360 > colorDelta)) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     try {
                         Color.Colored(input, colorDelta);
                     } catch (Exception e) {
-                        e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                     break;
 
                 case "blur":
+                    if (parameters.size() > 3)
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    if (!parameters.containsKey("blurIntensity"))
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    if (!parameters.containsKey("blurAlgoType"))
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     int blurIntensity = Integer.parseInt(parameters.get("blurIntensity"), 10);
                     String blurAlgoType = parameters.get("blurAlgoType");
                     if (!(0 <= blurIntensity) || !(blurAlgoType.equals("M") || blurAlgoType.equals("G"))) {
@@ -73,12 +82,12 @@ public class AlgorithmSelector {
                                 break;
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                     break;
 
                 case "outline":
+                    if (parameters.size() > 1) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     try {
                         switch (format) {
                             case "jpeg":
@@ -91,17 +100,16 @@ public class AlgorithmSelector {
                                 break;
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                     break;
 
                 case "grayLevel":
+                    if (parameters.size() > 1) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     try {
                         ColorModelConverter.RGBtoGray(input);
 
                     } catch (Exception e) {
-                        e.printStackTrace();
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                     break;
@@ -109,6 +117,6 @@ public class AlgorithmSelector {
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
