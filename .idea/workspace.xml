@@ -29,16 +29,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="youpi">
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v-2 youpi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Histogram.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/ImageProcessing/Histogram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/AlgorithmSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/AlgorithmSelector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/algorithmSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/AlgorithmSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EditImg.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +43,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="v-2-gestion_erreur" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,7 +90,7 @@
       <recent name="$PROJECT_DIR$/backend/src/main/resources/images" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="JUnit.ImageControllerTests">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -124,7 +119,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ImageControllerTests.getImageListShouldReturnSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImageControllerTests.blurArg1WrongShouldReturnBadRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
         <pattern>
@@ -134,7 +129,39 @@
       </extension>
       <option name="PACKAGE_NAME" value="pdl.backend" />
       <option name="MAIN_CLASS_NAME" value="pdl.backend.ImageControllerTests" />
-      <option name="METHOD_NAME" value="getImageListShouldReturnSuccess" />
+      <option name="METHOD_NAME" value="blurArg1WrongShouldReturnBadRequest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImageControllerTests.editLuminosityTooMuchArgsShouldReturnBadRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pdl.backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pdl.backend" />
+      <option name="MAIN_CLASS_NAME" value="pdl.backend.ImageControllerTests" />
+      <option name="METHOD_NAME" value="editLuminosityTooMuchArgsShouldReturnBadRequest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImageControllerTests.editLuminosityWithoutArgShouldReturnBadRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pdl.backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pdl.backend" />
+      <option name="MAIN_CLASS_NAME" value="pdl.backend.ImageControllerTests" />
+      <option name="METHOD_NAME" value="editLuminosityWithoutArgShouldReturnBadRequest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -193,6 +220,32 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="backend [clean,package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/backend" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="pdl.backend.BackendApplication" />
@@ -211,20 +264,23 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
       <item itemvalue="JUnit.ImageControllerTests" />
       <item itemvalue="Maven.[clean,install]" />
+      <item itemvalue="Maven.backend [clean,package]" />
       <item itemvalue="Maven.[--projects,backend,spring-boot:run]" />
       <item itemvalue="npm.serve" />
       <item itemvalue="Spring Boot.BackendApplication" />
+      <item itemvalue="JUnit.ImageControllerTests.editLuminosityTooMuchArgsShouldReturnBadRequest" />
+      <item itemvalue="JUnit.ImageControllerTests.blurArg1WrongShouldReturnBadRequest" />
+      <item itemvalue="JUnit.ImageControllerTests.editLuminosityWithoutArgShouldReturnBadRequest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.serve" />
         <item itemvalue="JUnit.ImageControllerTests" />
-        <item itemvalue="JUnit.ImageControllerTests.getImageListShouldReturnSuccess" />
+        <item itemvalue="JUnit.ImageControllerTests.editLuminosityWithoutArgShouldReturnBadRequest" />
+        <item itemvalue="JUnit.ImageControllerTests.blurArg1WrongShouldReturnBadRequest" />
+        <item itemvalue="JUnit.ImageControllerTests.editLuminosityTooMuchArgsShouldReturnBadRequest" />
         <item itemvalue="npm.serve" />
-        <item itemvalue="JUnit.ImageControllerTests" />
       </list>
     </recent_temporary>
   </component>
@@ -368,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618579925417</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="v-2 youpi">
+      <created>1618581202270</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1618581202270</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,13 +477,15 @@
     <MESSAGE value="last" />
     <MESSAGE value="fix" />
     <MESSAGE value="youpi" />
-    <option name="LAST_COMMIT_MESSAGE" value="youpi" />
+    <MESSAGE value="v-2 youpi" />
+    <option name="LAST_COMMIT_MESSAGE" value="v-2 youpi" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1748" y="253" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616776220980">
-      <screen x="1280" y="0" width="1920" height="1080" />
+    <state x="1758" y="205" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618584125887">
+      <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state x="1748" y="253" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616776220980" />
+    <state x="1758" y="205" key="#com.intellij.execution.impl.EditConfigurationsDialog/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618584125887" />
     <state x="1973" y="291" width="530" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616695872538">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -430,29 +495,29 @@
     </state>
     <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617181677849" />
     <state x="2222" y="378" key="FileChooserDialogImpl/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618419115915" />
-    <state width="1165" height="219" key="GridCell.Tab.0.bottom" timestamp="1618580644699">
+    <state width="1164" height="380" key="GridCell.Tab.0.bottom" timestamp="1618585167380">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1165" height="219" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644699" />
+    <state width="1164" height="380" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
     <state width="1169" height="299" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1165" height="219" key="GridCell.Tab.0.center" timestamp="1618580644699">
+    <state width="1164" height="380" key="GridCell.Tab.0.center" timestamp="1618585167380">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1165" height="219" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644699" />
+    <state width="1164" height="380" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
     <state width="1169" height="299" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1165" height="219" key="GridCell.Tab.0.left" timestamp="1618580644698">
+    <state width="1164" height="380" key="GridCell.Tab.0.left" timestamp="1618585167380">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1165" height="219" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644698" />
+    <state width="1164" height="380" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
     <state width="1169" height="299" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1165" height="219" key="GridCell.Tab.0.right" timestamp="1618580644699">
+    <state width="1164" height="380" key="GridCell.Tab.0.right" timestamp="1618585167380">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1165" height="219" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618580644699" />
+    <state width="1164" height="380" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
     <state width="1169" height="299" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
     <state width="939" height="356" key="GridCell.Tab.1.bottom" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
@@ -474,11 +539,11 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
-    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618579927219">
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618581203496">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617013485432" />
-    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618579927219" />
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618581203496" />
     <state x="1923" y="277" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520891984" />
     <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618579199059">
       <screen x="1368" y="0" width="1920" height="1080" />
