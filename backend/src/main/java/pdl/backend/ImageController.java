@@ -100,7 +100,7 @@ public class ImageController {
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                 }
                 try {
-                    Histograme.aplanir_histograme_HSV(input, opt1);
+                    Histogram.aplanir_histogram_HSV(input, opt1);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
