@@ -23,7 +23,7 @@
 % 4 - Gestion d'erreurs
 % 5 - Spécifications tests
 % 6 - Commentaires
-\newcommand{\besoin}[6]{%
+\newcommand{\besoin}[7]{%
 \refstepcounter{besoin}%
 \fbox{\parbox{\linewidth}{%
 \begin{center}
@@ -33,6 +33,7 @@
 \ifstrempty{#4}{}{\textbf{Gestion d'erreurs:} #4\par}
 \ifstrempty{#5}{}{\textbf{Tests:} #5\par}
 \ifstrempty{#6}{}{\textbf{Commentaire:} #6\par}
+\ifstrempty{#7}{}{\textbf{Rendu-2:} #7\par}
 }}
 }
 
@@ -103,6 +104,7 @@ Besoin~\ref{besoin:#1}%
     \end{enumerate}
     }
     {}
+    {}
 
     \besoin{server:manageImages}
     {Gérer les images présentes sur le serveur}
@@ -119,12 +121,15 @@ Besoin~\ref{besoin:#1}%
     {}
     {}
     {}
+    {}
 
     \besoin{server:processImage}
     {Appliquer un algorithme de traitement d'image}
     {
     Le serveur contient l'implémentation des algorithmes de traitement d'image proposés à l'utilisateur (voir partie \ref{tai}). Dans le premier rendu on attend une implémentation uniquement pour les images couleur.
     }
+    {}
+    {}
     {}
     {}
     {}
@@ -161,6 +166,7 @@ Besoin~\ref{besoin:#1}%
     le façon dont la taille est enregistré a changé, il aurait était peut-être plus intéressant de choisir
     le type d'algorithme selon le nombre de canaux présent dans sa taille.
     }
+    {}
 
     \besoin{comm:create}
     {Ajout d'image}
@@ -179,6 +185,7 @@ Besoin~\ref{besoin:#1}%
     }
     {}
     {}
+    {}
 
     \besoin{comm:retrieve}
     {Récupération d'images}
@@ -194,6 +201,18 @@ Besoin~\ref{besoin:#1}%
     }
     {}
     {}
+    {
+        On a apporté une modification à la fonction getImage présente dans
+        la classe ImageController. Dans sa version précedente nous avions
+        besoin des 3 paramètres: algorithm, opt1 et opt2. Maintenant nous
+        utilisons le type Map, qui contient toujours les mêmes informations mais
+        regroupés dans un objet facile d'utilisations et bien plus propres.
+        on a pu remplacer les nom opt1 et opt2, qui n'était pas très parlant,
+        par des nom d'options bien plus compréhensible.
+    }
+    {
+
+    }
 
 
     \besoin{comm:delete}
@@ -208,6 +227,8 @@ Besoin~\ref{besoin:#1}%
         \item[404 Not Found:] Aucune image existante avec l'identifiant \verb!id!.
     \end{description}
     }
+    {}
+    {}
     {}
     {}
 
@@ -241,6 +262,8 @@ Besoin~\ref{besoin:#1}%
     }
     {}
     {}
+    {}
+    {}
 
     \subsection{Client}
     Les actions que que peut effectuer l'utilisateur côté client induisent des requêtes envoyées au serveur. En cas d'échec d'une requête, le client doit afficher un message d'erreur explicatif.
@@ -255,6 +278,10 @@ Besoin~\ref{besoin:#1}%
     {
     Nous avons choisi de développer un carroussel.
     }
+    {
+        Une galerie d'image est maintenant display sur la droite, l'ancienne vue n'est
+        plus accessible.
+    }
 
     \besoin{client:selectImage}
     {Sélectionner une image et lui appliquer un effet}
@@ -267,6 +294,10 @@ Besoin~\ref{besoin:#1}%
     Les métadonnées s'affichent au survol de l'image.
     Une option à été ajouté pour pouvoir performer l'image avec l'algorithme de niveaux de gris.
     }
+    {
+        Les métadonée sont maintenant afficher en permanence. Les images sont
+        maintenants selectioné à partir des images affiché sur la gauche.
+    }
 
 
     \besoin{client:saveImage}
@@ -274,6 +305,7 @@ Besoin~\ref{besoin:#1}%
     {
     L'utilisateur peut sauvegarder dans son système de fichier l'image chargée, avant ou après lui avoir appliqué un traitement.
     }
+    {}
     {}
     {}
     {}
@@ -286,7 +318,7 @@ Besoin~\ref{besoin:#1}%
     {}
     {}
     {Pour des raisons de confort nous avons décidé de refresh la vue à chaque ajout sur le backend.}
-
+    {}
 
 
     \besoin{client:delete}
@@ -297,6 +329,7 @@ Besoin~\ref{besoin:#1}%
     {}
     {}
     {Pour des raisons de confort nous avons décidé de refresh la vue à chaque suppression sur le backend.}
+    {}
 
     \subsection{Traitement d'images}
     \label{tai}
@@ -304,6 +337,7 @@ Besoin~\ref{besoin:#1}%
     \besoin{tai:luminosity}
     {Réglage de la luminosité}
     {L'utilisateur peut augmenter ou diminuer la luminosité de l'image sélectionnée.}
+    {}
     {}
     {}
     {}
@@ -316,10 +350,14 @@ Besoin~\ref{besoin:#1}%
     {
     Ce besoin n'est pas effectif, il se trouve dans une errerur dans l'algorithme.
     }
+    {
+    Ce besoin est effictif à présent.
+    }
 
     \besoin{tai:setHue}
     {Filtre coloré}
     {L'utilisateur peut choisir la teinte de tous les pixels de l'image sélectionnée de façon à obtenir un effet de filtre coloré.}
+    {}
     {}
     {}
     {}
@@ -330,6 +368,7 @@ Besoin~\ref{besoin:#1}%
     {}
     {}
     {}
+    {}
 
     \besoin{tai:contour}
     {Filtre de contour}
@@ -337,12 +376,16 @@ Besoin~\ref{besoin:#1}%
     {}
     {}
     {}
+    {
+        La modification mentionné dans le mail à été ajouté.
+    }
 
     \besoin{tai:grayLevel}
     {Filtre de niveau de gris !!!Exclusive}
     {
     L'utilisateur peut appliquer un filtre pour performer l'image en niveaux de gris.
     }
+    {}
     {}
     {}
     {}
@@ -372,6 +415,7 @@ Besoin~\ref{besoin:#1}%
     {}
     {}
     {}
+    {}
 
     \besoin{bnf:clientCompatibility}
     {Compatibilité du client}
@@ -387,6 +431,7 @@ Besoin~\ref{besoin:#1}%
         \item Firefox
     \end{itemize}
     }
+    {}
     {}
     {}
     {}
@@ -407,8 +452,100 @@ Besoin~\ref{besoin:#1}%
     {}
     {}
     {}
+    {}
+
+    \subsection{Rendu version 2}
+
+    \besoin{bnf:Propreté des sources}
+    {Propreté des sources}
+    {}
+    {}
+    {}
+    {}
+    {
+    Nous avons redigé la documentation afin que le parcours des fonctions sois plus simple pour un utilisateur,
+    on a essayer d'organiser le code afin qu'ils sois plus orienté objet,
+    On a nettoyé le code: on a mis des noms plus adéquats au méthodes et
+    on a réduit la redondance de code en placant ces morceaux dans des classes appropriés ainsi que de nouveaux packages
+    }
+
+
+    \subsubsection{Backend}
+
+    \besoin{bnf:Liste d'algorithme}
+    {Liste d'algorithme}
+    {
+        Idée présente mais non implementée car non fonctionnelle.
+
+        Idée:
+        l'idée et de construire une méthode dans le ImageController qui avec une liste d'algorithmes passé en paramètres, éxécute ceux ci sur la même image.
+        L'intérêt est que si on souhaite ajouter un traitement d'image qui utilise des traitements déjà présent, on a pas besoin d'aller écrire quelque part dans le backend quelque ligne pour écrire une méthodes qui en appelle d'autres (mises à part rajouter l'option dans le frontend).
+        A termes il serais aussi possible de remplacer chaque appel qui passe par getImage vers cette fonction car la liste contenant une seule Map revient à faire la même chose.
+        On pourrais aussi proposé à l'utilisateur une option ou il peut enchainer lui mêmes les traitements qu"il souhaite.
+        Implémentation:
+        On a presque implémenté la fonction en question mais un problème fais qu'elle n'est pas fonctionnelle.
+        on peut la retrouver dans ImageController méthode runCustomAlgorithm.
+        On a eu l'idée d'utiliser un ArrayList<Map>String, String>> enregistré dans un JSON.
+        Nous nous sommes inspirés de cette ressources : https://www.baeldung.com/spring-mvc-send-json-parameters
+        C'est ce à quoi sers la class CustomImageProcessingAlgorithm
+        Malheureseument nous n'avons jamais réussi à faire marché l'idée de la liste.
+        On a essayé avec un type Map<String, String> mais en vain.
+        On c'est rabattu à une simple map (la version actuelle pour voir si l'idée était faisable, ce qui semble être le cas
+        On peut la tester avec la commande suivante:
+        curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data   '\{"algorithmList": \{"algorithm" : "grayLevel"\}\} ' "http://localhost:8080/images/custom/1"
+    }
+    {}
+    {}
+    {}
+    {}
+
+    \subsubsection{Traitement d'image}
+
+    \besoin{bnf:Preprocessing}
+    {
+        Preprocessing
+    }
+    {
+        Le principe du preprocessing est d'appliquer les différents filtres de
+        traitement d'images à l'image mais avec un coup en ressources plus
+        faible. Pour ce faire, on peut redimensionner les images plus petites
+        pour gagner en temps de calcul. A ce niveau, certains problèmes ce
+        posent, notamment lors de l'application du filtre de flou, le rendu n'est
+        pas représentatif du resultat attendu sur l'image originel.
+    }
+    {}
+    {}
+    {
+        Cet ajout n'a pas été implémenté, nous avons pensé à implémenter dans
+        un nouveau package une classe utilisant la méthode getScaleInstance de
+        la bibliothèque BufferedImage et appliquant nos traitements d'images
+        au résultat.
+    }
+    {}
+
+    \besoin{bnf:Parallelism}
+    {
+        Parallelism
+    }
+    {
+        Le parallelism a pour but d'améliorer les performances du serveur de
+        traitement d'images. On divise une image et on applique les différents
+        traitements d'images aux différentes parties de l'image fractionnée.
+    }
+    {}
+    {}
+    {
+        Cet ajout n'a pas été implémenté, cependant certaine piste de réflexion
+        ont été suivis. Certains problèmes se posent avec cette méthode pour appliquer
+        le parallélisme. Lors de l'application du flou, l'algorithme utilise les
+        voisins d'un pixel pour calculer la valeur du pixel. Cependant si on
+        découpe l'image, on ne dispose plus des voisins qui n'appartiennent
+        pas à la fraction.
+    }
+    {}
 
     Lien ssh: git@gitlab.emi.u-bordeaux.fr:aderoo001/PDL-groupe5.git
-    Tag: Version1_delamorkitutou
+    Tag:
+
 
 \end{document}

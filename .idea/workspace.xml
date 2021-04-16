@@ -29,11 +29,17 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v-2 youpi">
+    <list default="true" id="aacd1bc9-b75b-4d4b-abe6-ad7af8e1ca3d" name="Default Changelist" comment="v-2-all-test-passed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/AlgorithmSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/AlgorithmSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/pdl/backend/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/pdl/backend/ImageControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/about.b877f97f.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/app.565790b4.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/public/static/js/chunk-vendors.f4563980.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/besoins.aux" beforeDir="false" afterPath="$PROJECT_DIR$/besoins.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/besoins.log" beforeDir="false" afterPath="$PROJECT_DIR$/besoins.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/besoins.out" beforeDir="false" afterPath="$PROJECT_DIR$/besoins.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/besoins.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/besoins.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/besoins.tex" beforeDir="false" afterPath="$PROJECT_DIR$/besoins.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="backend-tu" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -431,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618581202270</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="v-2-all-test-passed">
+      <created>1618585292679</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1618585292679</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +491,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="youpi" />
     <MESSAGE value="v-2 youpi" />
-    <option name="LAST_COMMIT_MESSAGE" value="v-2 youpi" />
+    <MESSAGE value="v-2-all-test-passed" />
+    <option name="LAST_COMMIT_MESSAGE" value="v-2-all-test-passed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1758" y="205" width="1206" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618584125887">
@@ -495,29 +509,29 @@
     </state>
     <state x="2134" y="378" width="430" height="486" key="FileChooserDialogImpl/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617181677849" />
     <state x="2222" y="378" key="FileChooserDialogImpl/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618419115915" />
-    <state width="1164" height="380" key="GridCell.Tab.0.bottom" timestamp="1618585167380">
+    <state width="1305" height="158" key="GridCell.Tab.0.bottom" timestamp="1618585781372">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.bottom/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1164" height="380" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
+    <state width="1305" height="158" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585781372" />
     <state width="1169" height="299" key="GridCell.Tab.0.bottom/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1164" height="380" key="GridCell.Tab.0.center" timestamp="1618585167380">
+    <state width="1305" height="158" key="GridCell.Tab.0.center" timestamp="1618585781372">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.center/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1164" height="380" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
+    <state width="1305" height="158" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585781372" />
     <state width="1169" height="299" key="GridCell.Tab.0.center/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1164" height="380" key="GridCell.Tab.0.left" timestamp="1618585167380">
+    <state width="1305" height="158" key="GridCell.Tab.0.left" timestamp="1618585781372">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.left/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1164" height="380" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
+    <state width="1305" height="158" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585781372" />
     <state width="1169" height="299" key="GridCell.Tab.0.left/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
-    <state width="1164" height="380" key="GridCell.Tab.0.right" timestamp="1618585167380">
+    <state width="1305" height="158" key="GridCell.Tab.0.right" timestamp="1618585781372">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state width="1172" height="272" key="GridCell.Tab.0.right/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617029340110" />
-    <state width="1164" height="380" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585167380" />
+    <state width="1305" height="158" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585781372" />
     <state width="1169" height="299" key="GridCell.Tab.0.right/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520782371" />
     <state width="939" height="356" key="GridCell.Tab.1.bottom" timestamp="1616776792134">
       <screen x="1280" y="0" width="1920" height="1080" />
@@ -539,17 +553,17 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1773" y="199" width="930" height="686" key="Maven.ArtifactSearchDialog/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1616174490770" />
-    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618581203496">
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2" timestamp="1618585299280">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state x="1835" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617013485432" />
-    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618581203496" />
+    <state x="1923" y="277" width="806" height="530" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585299280" />
     <state x="1923" y="277" key="Vcs.Push.Dialog.v2/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618520891984" />
-    <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618579199059">
+    <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618585796260">
       <screen x="1368" y="0" width="1920" height="1080" />
     </state>
     <state x="2030" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1280.0.1920.1080/0.360.1280.720@1280.0.1920.1080" timestamp="1617026404923" />
-    <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618579199059" />
+    <state x="2118" y="457" width="416" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1368.0.1920.1080/3288.56.1280.1024/0.294.1368.768@1368.0.1920.1080" timestamp="1618585796260" />
     <state x="2118" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1368.0.1920.1080/3288.56.1280.1024/0.312.1368.768@1368.0.1920.1080" timestamp="1618409467154" />
     <state x="1377" y="100" width="1726" height="883" key="dock-window-1" timestamp="1616697824152">
       <screen x="1280" y="0" width="1920" height="1080" />
